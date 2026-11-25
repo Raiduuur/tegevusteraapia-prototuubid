@@ -1,0 +1,1084 @@
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tegevusteraapia Keskus — leia tegevusterapeut, koolitused ja vahendid</title>
+    <meta name="description" content="Eesti tegevusterapeutide ühine platvorm: kinnitatud terapeudid ja vabad ajad, üle-eestiline koolituskalender ning terapeutide soovitatud vahendid." />
+    <meta name="theme-color" content="#F6F3EC" />
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" />
+    <script type="module">class Xe{constructor(a){this.value=a}value;toString(){return this.value}}const Ea={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"};function Va(e){return e.replace(/[&<>"']/g,a=>Ea[a]??a)}function ea(e){return e==null||e===!1?"":e instanceof Xe?e.value:typeof e=="number"?String(e):typeof e=="string"?Va(e):e.map(ea).join("")}function n(e,...a){let i=e[0]??"";return a.forEach((t,s)=>{i+=ea(t)+(e[s+1]??"")}),new Xe(i)}function k(e,a=document){const i=a.querySelector(e);if(!i)throw new Error(`Elementi ei leitud: ${e}`);return i}function ye(e,a=document){return Array.from(a.querySelectorAll(e))}const w=new Date(2026,10,25),Pa=["P","E","T","K","N","R","L"],Aa=["pühapäev","esmaspäev","teisipäev","kolmapäev","neljapäev","reede","laupäev"],aa=["jaanuar","veebruar","märts","aprill","mai","juuni","juuli","august","september","oktoober","november","detsember"];function y(e){const a=String(e.getMonth()+1).padStart(2,"0"),i=String(e.getDate()).padStart(2,"0");return`${e.getFullYear()}-${a}-${i}`}function L(e){const[a,i,t]=e.split("-").map(Number);return new Date(a??2026,(i??1)-1,t??1)}function A(e,a){const i=new Date(e);return i.setDate(i.getDate()+a),i}function ia(e){const a=e.getDay();return a===0?7:a}function U(e){return Pa[e.getDay()]??""}function F(e){return Aa[e.getDay()]??""}function K(e){return`${String(e.getDate()).padStart(2,"0")}.${String(e.getMonth()+1).padStart(2,"0")}`}function Te(e){return`${e.getDate()}. ${aa[e.getMonth()]??""} ${e.getFullYear()}`}function ta(e){return aa[e.getMonth()]??""}const sa=A(w,7-ia(w));function $(e){const a=Math.floor(e/100),i=e%100,t=String(a).replace(/\B(?=(\d{3})+(?!\d))/g," ");return i===0?`${t} €`:`${t},${String(i).padStart(2,"0")} €`}function Ma(e){if(!/^[1-6]\d{10}$/.test(e))return!1;const a=e.split("").map(Number),i=a[0]??0,s=(i<=2?1800:i<=4?1900:2e3)+Number(e.slice(1,3)),l=Number(e.slice(3,5)),o=Number(e.slice(5,7)),d=new Date(s,l-1,o);if(d.getMonth()!==l-1||d.getDate()!==o)return!1;const p=[1,2,3,4,5,6,7,8,9,1],r=[3,4,5,6,7,8,9,1,2,3],c=g=>g.reduce((b,h,T)=>b+h*(a[T]??0),0);let u=c(p)%11;return u===10&&(u=c(r)%11,u===10&&(u=0)),u===a[10]}function Ca(e){if(!/^[1-6]\d{10}$/.test(e))return!1;const a=Number(e.slice(3,5)),i=Number(e.slice(5,7));return a>=1&&a<=12&&i>=1&&i<=31}const Ia=["diagnoos","autis","aspergeri","adhd","ath","aktiivsus- ja tähelepanuhäire","insult","infarkt","dementsus","alzheimer","parkinson","skleroos","depressioon","ärevushäire","epilepsia","tserebraalparalüüs","cp-","downi sündroom","düspraksia","düsleksia","vähk","kasvaja","trauma","murd","operatsioon","ravim","retsept","puue","puudeaste","haigus","sündroom"];function Na(e){const i=e.replace(/[\s.-]/g,"").match(/\d{11}/g)??[];for(const l of i)if(Ma(l)||Ca(l))return{kind:"isikukood",sample:`${l.slice(0,3)}••••••••`};const t=e.toLowerCase();for(const l of Ia){const o=new RegExp(`(?:^|[^a-zõäöüšž])(${l.replace(/[-]/g,"\\-")}[a-zõäöüšž]*)`,"i"),d=t.match(o);if(d?.[1])return{kind:"diagnoos",sample:d[1]}}const s=e.match(/\b[A-TV-Z]\d{2}(?:\.\d{1,2})?\b/);return s?{kind:"diagnoos",sample:s[0]}:null}const qa="Platvorm ei kogu terviseandmeid — diagnoosist ja murest räägite otse terapeudiga.";function Da(e){let a=2166136261;for(let i=0;i<e.length;i++)a^=e.charCodeAt(i),a=Math.imul(a,16777619);return a>>>0}function xa(e){return e.replace(/\(.*?\)/g,"").trim().split(/\s+/).map(a=>a[0]??"").join("").slice(0,2).toUpperCase()}function G(e,a,i){return`${e} ${e===1?a:i}`}function na(e=location.hash){const a=e.replace(/^#/,"")||"/",[i="/",t=""]=a.split("?");return{path:i.split("/").filter(Boolean),query:new URLSearchParams(t)}}function Ha(e){location.hash===e?window.dispatchEvent(new HashChangeEvent("hashchange")):location.hash=e}const C={lapsed:"Lapsed",taiskasvanud:"Täiskasvanud",eakad:"Eakad",omastehooldajad:"Omastehooldajad",asutused:"Asutused"},le={tasuline:"Tasuline",tervisekassa:"Tervisekassa partner",ska:"SKA partner"},Y=["Tallinn","Tartu","Pärnu","Narva","Rakvere","Viljandi"],Ke={Tallinn:"Harjumaa",Tartu:"Tartumaa",Pärnu:"Pärnumaa",Narva:"Ida-Virumaa",Rakvere:"Lääne-Virumaa",Viljandi:"Viljandimaa"},ce={solo:"Üksikspetsialist",praksis:"Väike praksis",kliinik:"Kliinik"};function la(e){return e.city?[e.city,...e.org?.branches.map(a=>a.city)??[]]:[]}const j=(e,a,i,t,s)=>({kind:e,name:a,minutes:i,priceCents:t*100,note:s}),Oa=[{id:"kadri-tamm",kind:"solo",name:"Kadri Tamm (näidis)",city:"Tallinn",area:"Kristiine",online:!1,homeVisits:null,homeCounties:[],groups:["lapsed","asutused"],funding:["tasuline","ska"],languages:["eesti","inglise"],kutse:{number:"214 873",level:7,validUntil:"03.2030"},bio:"Töötan peamiselt 3–10-aastaste lastega, kellel riietumine, söömine või kirjutamine võtab rohkem jõudu kui eakaaslastel. Esimesel kohtumisel vaatame koos, mis kodus ja lasteaias päriselt keeruline on, ja lepime kokku ühe asja, mida järgmiseks kuuks harjutada.",focus:["Peenmotoorika ja kirjutamisvalmidus","Riietumine ja söömine","Lasteaiarühma nõustamine"],services:[j("esmavisiit","Esmavisiit",60,65,"Vestlus lapsevanemaga ja tegevuse jälgimine."),j("korduv","Korduv kohtumine",45,50,"Harjutamine ja kodune kava.")],weekly:{2:["09:00","10:30"],4:["14:00","15:30"],5:["14:00","15:30"]},availableFrom:null,products:["pliiatsihoidja","naputangid","noopimislaud"],address:"Endla 16, Tallinn (näidis)",tasks:["kirjutamine","riietumine","soomine","keskkond","juhendamine"]},{id:"mart-saar",kind:"solo",name:"Mart Saar (näidis)",city:"Tartu",area:"Annelinn",online:!1,homeVisits:"Tartu linn ja Tartumaa",homeCounties:["Tartumaa"],groups:["taiskasvanud","eakad","omastehooldajad"],funding:["tasuline","tervisekassa"],languages:["eesti"],kutse:{number:"198 402",level:7,validUntil:"11.2028"},bio:"Aitan täiskasvanutel ja eakatel pärast haiglast kojutulekut taas ise hakkama saada: pesemine, söögitegemine, trepist käimine. Koduvisiidil vaatan üle vannitoa ja köögi ning kirjutan lähedastele lihtsa kohandamise kava.",focus:["Kodu kohandamine","Igapäevatoimingud pärast haiglat","Lähedaste juhendamine"],services:[j("esmavisiit","Esmavisiit",60,60,"Kabinetis, Annelinnas."),j("korduv","Korduv kohtumine",45,45,"Kabinetis või telefonitsi."),j("koduvisiit","Koduvisiit",75,80,"Sõit Tartu linnas on hinnas.")],weekly:{1:["10:00","13:00"],4:["10:00","12:00"],5:["09:00"]},availableFrom:null,products:["soogiriistad","kruus"],address:"Kaunase pst 11, Tartu (näidis)",tasks:["kook","pesemine","riietumine","haare","kodu","liikumine","vahendid","juhendamine"]},{id:"piret-lepik",kind:"solo",name:"Piret Lepik (näidis)",city:"Pärnu",area:"Kesklinn",online:!0,homeVisits:null,homeCounties:[],groups:["lapsed","omastehooldajad"],funding:["tasuline"],languages:["eesti","soome"],kutse:{number:"227 015",level:6,validUntil:"06.2031"},bio:"Minu juurde tullakse sageli siis, kui kooliminek on lähenemas ja kodus tekib küsimusi käe ja silma koostöö kohta. Pakun ka veebikohtumisi vanematele, kes elavad Pärnust kaugemal.",focus:["Kooliks valmistumine","Sensoorne töötlus igapäevas","Vanemate veebinõustamine"],services:[j("esmavisiit","Esmavisiit",60,55,"Kabinetis, Pärnu kesklinnas."),j("korduv","Korduv kohtumine",45,45,"Kabinetis."),j("veeb","Veebinõustamine",45,40,"Videokõne, link tuleb e-postiga.")],weekly:{2:["09:00","11:00"],3:["15:00"],4:["09:00"]},availableFrom:"2026-12-01",products:["plastiliin","toolehed"],address:"Rüütli 40, Pärnu (näidis)",tasks:["kirjutamine","keskkond","paevakava","juhendamine"]},{id:"anu-kivi",kind:"solo",name:"Anu Kivi (näidis)",city:"Narva",area:"Kreenholmi",online:!1,homeVisits:"Narva ja Narva-Jõesuu",homeCounties:["Ida-Virumaa"],groups:["eakad","omastehooldajad","asutused"],funding:["tasuline","ska"],languages:["eesti","vene"],kutse:{number:"205 336",level:6,validUntil:"09.2029"},bio:"Töötan eakate ja nende lähedastega ning nõustan hooldekodusid päevakava ja tegevuste koostamisel. Vastuvõtt ja koolitused toimuvad nii eesti kui vene keeles.",focus:["Eaka päevakava","Hooldekodu tegevuste nõustamine","Omastehooldaja juhendamine"],services:[j("esmavisiit","Esmavisiit",60,50,"Kabinetis või asutuses."),j("korduv","Korduv kohtumine",45,40,"Kabinetis."),j("koduvisiit","Koduvisiit",60,65,"Sõit Narvas on hinnas.")],weekly:{3:["10:00"],5:["09:00","11:00"],6:["10:00"]},availableFrom:null,products:["kruus","taimer"],address:"Kreenholmi 7, Narva (näidis)",tasks:["soomine","paevakava","kodu","juhendamine"]},{id:"liina-mets",kind:"solo",name:"Liina Mets (näidis)",city:"Rakvere",area:"Kesklinn",online:!1,homeVisits:"Lääne-Virumaa",homeCounties:["Lääne-Virumaa"],groups:["lapsed","asutused"],funding:["tasuline"],languages:["eesti"],kutse:{number:"231 908",level:6,validUntil:"02.2032"},bio:"Käin lasteaedades ja koolides Lääne-Virumaal ning võtan lapsi vastu Rakvere kabinetis. Laupäeviti on ajad peredele, kelle vanemad töötavad nädala sees.",focus:["Käeline tegevus 5–7-aastastel","Õpetaja nõustamine klassis","Laupäevased pereajad"],services:[j("esmavisiit","Esmavisiit",60,55,"Kabinetis, Rakvere kesklinnas."),j("korduv","Korduv kohtumine",45,45,"Kabinetis."),j("koduvisiit","Koduvisiit",60,70,"Lääne-Virumaal, sõit hinnas.")],weekly:{1:["13:00","14:30"],4:["16:00"],6:["10:00","11:30"]},availableFrom:null,products:["noopimislaud","taimer"],address:"Pikk 12, Rakvere (näidis)",tasks:["kirjutamine","riietumine","keskkond","paevakava"]},{id:"tiina-rebane",kind:"solo",name:"Tiina Rebane (näidis)",city:"Viljandi",area:"Kesklinn",online:!1,homeVisits:"Viljandimaa",homeCounties:["Viljandimaa"],groups:["eakad","omastehooldajad"],funding:["ska","tervisekassa"],languages:["eesti"],kutse:{number:"187 650",level:7,validUntil:"05.2027"},bio:"Olen töötanud hooldekodudes ja koduhoolduses. Aitan peredel otsustada, milliseid abivahendeid on kodus tegelikult vaja ja kuidas neid ohutult kasutada.",focus:["Abivahendite valik","Ohutu liikumine kodus","Hooldekodu tegevusjuhendajad"],services:[j("esmavisiit","Esmavisiit",60,55,"Kabinetis."),j("korduv","Korduv kohtumine",45,45,"Kabinetis."),j("koduvisiit","Koduvisiit",75,70,"Viljandimaal, sõit hinnas.")],weekly:{3:["10:00","13:00"],4:["13:00"]},availableFrom:"2026-12-02",products:["soogiriistad","kruus"],address:"Tallinna 5, Viljandi (näidis)",tasks:["pesemine","haare","kodu","liikumine","vahendid"]},{id:"kristjan-org",kind:"solo",name:"Kristjan Org (näidis)",city:null,area:"Ainult veebis",online:!0,homeVisits:null,homeCounties:[],groups:["taiskasvanud","omastehooldajad"],funding:["tasuline"],languages:["eesti","inglise","vene"],kutse:{number:"240 117",level:6,validUntil:"10.2031"},bio:"Kohtun klientidega videokõnes õhtuti ja laupäeval, et tööl käivad omastehooldajad ja täiskasvanud saaksid aja ilma vaba päeva võtmata.",focus:["Omastehooldaja koormus","Päevakava ja energia jaotamine","Tööle naasmine"],services:[j("veeb","Esmane veebikohtumine",60,55,"Videokõne, link tuleb e-postiga."),j("korduv","Korduv veebikohtumine",45,45,"Videokõne.")],weekly:{1:["18:00"],2:["18:00"],3:["18:00"],4:["18:00"],6:["10:00"]},availableFrom:null,products:["taimer"],address:"Videokõne",tasks:["paevakava","too","juhendamine"]},{id:"helen-pold",kind:"solo",name:"Helen Põld (näidis)",city:"Tallinn",area:"Mustamäe",online:!0,homeVisits:null,homeCounties:[],groups:["taiskasvanud","eakad"],funding:["tervisekassa","tasuline"],languages:["eesti","inglise"],kutse:{number:"176 224",level:7,validUntil:"01.2029"},bio:"Töötan täiskasvanutega, kes naasevad pärast pikemat haiguslehte tööle või õpivad uuesti tegema asju, mis varem käisid iseenesest. Koolitan ka teisi tegevusterapeute tegevusanalüüsi teemal.",focus:["Tööle naasmine","Igapäevatoimingud ja töökoht","Spetsialistide koolitamine"],services:[j("esmavisiit","Esmavisiit",60,60,"Kabinetis, Mustamäel."),j("korduv","Korduv kohtumine",45,48,"Kabinetis."),j("veeb","Veebinõustamine",45,45,"Videokõne.")],weekly:{1:["08:30"],3:["12:00"],5:["08:30","10:00"]},availableFrom:null,products:["soogiriistad","taimer"],address:"Akadeemia tee 3, Tallinn (näidis)",tasks:["kook","pesemine","riietumine","haare","too"]},{id:"vaikese-kae-keskus",kind:"praksis",name:"Väikese Käe Teraapiakeskus OÜ (näidis)",city:"Tallinn",area:"Nõmme",online:!0,homeVisits:"Tallinn ja Harjumaa",homeCounties:["Harjumaa"],groups:["lapsed","omastehooldajad","asutused"],funding:["tasuline","ska"],languages:["eesti","vene"],kutse:{number:"219 554",level:7,validUntil:"04.2030"},org:{regCode:"16 482 913",licence:null,verified:3,specialists:[{name:"Maarja Kuusk (näidis)",level:7,kutse:"219 554"},{name:"Jelena Ivanova (näidis)",level:6,kutse:"233 871"},{name:"Triin Paju (näidis)",level:6,kutse:"238 106"}],invited:0,branches:[]},bio:"Oleme kolm tegevusterapeuti ühes Nõmme majas. Ühine kalender näitab kõigi kolme vabu aegu, nii et esimese aja saate sellelt, kellel see kõige varem on. Käime ka peredes kodus ja Harjumaa lasteaedades.",focus:["Lapse riietumine, söömine ja kirjutamine","Lasteaiarühma nõustamine","Vastuvõtt eesti ja vene keeles"],services:[j("esmavisiit","Esmavisiit",60,60,"Kabinetis, Nõmmel."),j("korduv","Korduv kohtumine",45,48,"Kabinetis."),j("koduvisiit","Koduvisiit",75,75,"Tallinnas ja Harjumaal, sõit hinnas."),j("veeb","Veebinõustamine",45,45,"Videokõne, link tuleb e-postiga.")],weekly:{1:["09:00","12:30"],2:["15:00"],3:["09:00","11:00"],4:["16:00"],5:["10:00"]},availableFrom:null,products:["pliiatsihoidja","noopimislaud","taimer"],address:"Pärnu mnt 400, Tallinn (näidis)",tasks:["kirjutamine","riietumine","soomine","keskkond","paevakava","juhendamine"]},{id:"vabaduse-kliinik",kind:"kliinik",name:"Vabaduse Taastusravikliinik AS (näidis)",city:"Tallinn",area:"Kesklinn",online:!0,homeVisits:"Harjumaa ja Tartumaa",homeCounties:["Harjumaa","Tartumaa"],groups:["taiskasvanud","eakad","omastehooldajad","asutused"],funding:["tasuline","tervisekassa","ska"],languages:["eesti","vene","inglise"],kutse:{number:"171 309",level:7,validUntil:"12.2029"},org:{regCode:"10 734 256",licence:"L06231",verified:14,specialists:[{name:"Kersti Allik (näidis)",level:7,kutse:"171 309"},{name:"Andres Mägi (näidis)",level:7,kutse:"182 644"},{name:"Olga Smirnova (näidis)",level:6,kutse:"226 019"},{name:"Kätlin Rand (näidis)",level:6,kutse:"241 572"}],invited:0,branches:[{city:"Tartu",address:"Riia 35, Tartu (näidis)"},{city:"Pärnu",address:"Aisa 39, Pärnu (näidis)"}]},bio:"Taastusravikliinik Tallinnas, Tartus ja Pärnus. Tegevusterapeudid töötavad koos füsioterapeutide ja logopeedidega. Tervisekassa ja SKA rahastusega ajad on märgitud eraldi, tasulise aja saab broneerida siit.",focus:["Igapäevatoimingud pärast haiglat","Tööle naasmine","Kodu kohandamine ja abivahendid","Hooldekodu töötajate koolitus"],services:[j("esmavisiit","Esmavisiit",60,70,"Kliinikus, Tallinnas, Tartus või Pärnus."),j("korduv","Korduv kohtumine",45,55,"Kliinikus."),j("koduvisiit","Koduvisiit",75,90,"Harjumaal ja Tartumaal, sõit hinnas."),j("veeb","Veebinõustamine",45,50,"Videokõne, link tuleb e-postiga.")],weekly:{1:["08:00","11:00","14:00"],2:["09:30","13:00"],3:["08:00","15:30"],4:["10:00","12:30"],5:["08:00","11:00"]},availableFrom:null,products:["soogiriistad","kruus","taimer"],address:"Vabaduse väljak 9, Tallinn (näidis)",tasks:["kook","pesemine","riietumine","soomine","haare","too","kodu","liikumine","vahendid","paevakava","juhendamine"]}],O={lasteaiad:"Lasteaiad ja koolid",hooldekodud:"Hooldekodud",omastehooldajad:"Omastehooldajad",spetsialistid:"Spetsialistid"},Ra=[{id:"k-peenmotoorika",date:"2026-12-03",time:"10:00–16:00",title:"Peenmotoorika mängud lasteaiarühmas",city:"Tallinn",venue:"Endla 16, saal (näidis)",trainerId:"kadri-tamm",audience:["lasteaiad"],hours:8,ehis:!0,seats:16,taken:11,priceCents:8500,language:"eesti"},{id:"k-sensoorne",date:"2026-12-08",time:"15:00–18:15",title:"Sensoorne töötlus klassiruumis: õpetaja tööriistad",city:"Veebis",venue:"Videokoolitus, salvestus 14 päeva",trainerId:"liina-mets",audience:["lasteaiad"],hours:4,ehis:!0,seats:40,taken:23,priceCents:3500,language:"eesti"},{id:"k-kodu",date:"2026-12-10",time:"10:00–15:00",title:"Eaka kodu kohandamine kukkumiste ennetamiseks",city:"Tartu",venue:"Kaunase pst 11 (näidis)",trainerId:"mart-saar",audience:["hooldekodud","omastehooldajad"],hours:6,ehis:!1,seats:20,taken:18,priceCents:6e3,language:"eesti"},{id:"k-omastehooldaja",date:"2026-12-12",time:"11:00–14:15",title:"Omastehooldaja: turvaline ümberasetamine ja abivahendid kodus",city:"Pärnu",venue:"Rüütli 40 (näidis)",trainerId:"piret-lepik",audience:["omastehooldajad"],hours:4,ehis:!1,seats:14,taken:5,priceCents:2e3,language:"eesti"},{id:"k-dementsus",date:"2027-01-14",time:"09:30–16:00",title:"Elaniku päevakava ja tegevused hooldekodus",city:"Narva",venue:"Kreenholmi 7 (näidis)",trainerId:"anu-kivi",audience:["hooldekodud"],hours:8,ehis:!0,seats:18,taken:7,priceCents:7500,language:"eesti ja vene"},{id:"k-tegevusanaluus",date:"2027-01-21",time:"09:00–16:30, kaks päeva",title:"Tegevusanalüüs praktikas: vestlusest eesmärkideni",city:"Tallinn",venue:"Akadeemia tee 3 (näidis)",trainerId:"helen-pold",audience:["spetsialistid"],hours:16,ehis:!0,seats:12,taken:12,priceCents:24e3,language:"eesti"},{id:"k-kasi",date:"2027-01-28",time:"10:00–15:00",title:"Käeline tegevus ja kirjutamisvalmidus 5–7-aastastel",city:"Rakvere",venue:"Pikk 12 (näidis)",trainerId:"liina-mets",audience:["lasteaiad"],hours:6,ehis:!0,seats:20,taken:9,priceCents:6500,language:"eesti"},{id:"k-tegevusjuhendaja",date:"2027-02-04",time:"09:30–16:00, kolm päeva",title:"Tegevusjuhendaja töö hooldekodus: alused",city:"Viljandi",venue:"Tallinna 5 (näidis)",trainerId:"tiina-rebane",audience:["hooldekodud"],hours:24,ehis:!0,seats:15,taken:4,priceCents:29e3,language:"eesti"},{id:"k-ohtukool",date:"2027-02-11",time:"18:00–20:15",title:"Omastehooldaja õhtukool: oma jõu hoidmine",city:"Veebis",venue:"Videokoolitus",trainerId:"kristjan-org",audience:["omastehooldajad"],hours:3,ehis:!1,seats:60,taken:31,priceCents:0,language:"eesti"}],I=[{id:"pliiatsihoidja",name:"Kolmnurkne pliiatsihoidja, 6 tk",category:"Peenmotoorika",priceCents:790,stock:42,digital:!1,summary:"Pehmest silikoonist hoidja suunab sõrmed kolmikhaardesse. Sobib tavalisele ja paksule pliiatsile.",recommendedBy:"kadri-tamm",note:"Annan selle esimesena lapsele, kes hoiab pliiatsit rusikas. Kuus tükki jagub koju, lasteaeda ja vanaemale.",safety:{maker:"Therapy Tools GmbH, Saksamaa (näidis)",marks:"CE · EN 71-1, EN 71-3",age:"3+",warning:"Väikesed osad. Mitte alla 3-aastastele."},sku:"TK-PM-001"},{id:"naputangid",name:"Näputangide ja pintsettide komplekt, 4 osa",category:"Peenmotoorika",priceCents:1450,stock:18,digital:!1,summary:"Kaks suurust tange ja kaks pintsetti, mille vedru avab haarde ise. Harjutab pöidla ja nimetissõrme koostööd.",recommendedBy:"kadri-tamm",note:"Kodus sobib kõige paremini teemängu juurde: tõstame tangidega herneid ühest tassist teise.",safety:{maker:"Therapy Tools GmbH, Saksamaa (näidis)",marks:"CE · EN 71-1, EN 71-3",age:"3+",warning:"Kasutada täiskasvanu järelevalvel."},sku:"TK-PM-004"},{id:"plastiliin",name:"Teraapiaplastiliin, 4 tugevust × 85 g",category:"Peenmotoorika",priceCents:1890,stock:25,digital:!1,summary:"Värvi järgi eristuvad tugevused pehmest kõvani. Ei kuiva ega määri riideid.",recommendedBy:"piret-lepik",note:"Alustage kõige pehmemast. Viis minutit enne kodutöid sõtkumist rahustab ka kätt.",safety:{maker:"Plasto Therapy Oy, Soome (näidis)",marks:"CE · EN 71-3",age:"5+",warning:"Mitte süüa. Hoida karbis toatemperatuuril."},sku:"TK-PM-011"},{id:"noopimislaud",name:"Nööpimise, lukkude ja paelte harjutuslaud",category:"Igapäevatoimingud",priceCents:2400,stock:9,digital:!1,summary:"Kaasaskantav laud nelja kinnisega: nööp, tõmbelukk, takjakinnis ja kingapael.",recommendedBy:"liina-mets",note:"Harjutame laual, enne kui proovime sama oma jopega. Nii ei teki hommikul kiirustades pahandust.",safety:{maker:"Puidukoda OÜ, Eesti (näidis)",marks:"CE · EN 71-1, EN 71-2, EN 71-3",age:"3+",warning:"Pael võib keerduda. Kasutada järelevalvel."},sku:"TK-IT-002"},{id:"kruus",name:"Kahe sangaga kaanega kruus, 250 ml",category:"Igapäevaelu abivahendid",priceCents:1240,stock:31,digital:!1,summary:"Kerge kruus suurte sangadega ja tilaga kaanega. Libisemiskindel põhi.",recommendedBy:"anu-kivi",note:"Sobib inimesele, kelle käed väsivad või värisevad. Kaas jääb lauale jätmisel peale.",safety:{maker:"CareWare AB, Rootsi (näidis)",marks:"Toidukontaktmaterjal (EÜ) nr 1935/2004 · ei ole meditsiiniseade",age:"Täiskasvanud",warning:"Mitte mikrolaineahju kaanega."},sku:"TK-IA-007"},{id:"soogiriistad",name:"Paksendatud käepidemega söögiriistad, 3 tk",category:"Igapäevaelu abivahendid",priceCents:2990,stock:14,digital:!1,summary:"Nuga, kahvel ja lusikas pehme paksu käepidemega, mida saab soojas vees soovitud nurga alla painutada.",recommendedBy:"mart-saar",note:"Kui haare on nõrk, on paksem käepide esimene asi, mida kodus proovida, enne kui midagi kallimat ostate.",safety:{maker:"CareWare AB, Rootsi (näidis)",marks:"Toidukontaktmaterjal (EÜ) nr 1935/2004 · ei ole meditsiiniseade",age:"Täiskasvanud",warning:"Nuga on terav."},sku:"TK-IA-012"},{id:"taimer",name:"Visuaalne taimer, 60 minutit",category:"Päevakava",priceCents:2100,stock:20,digital:!1,summary:"Värviline ketas näitab järelejäänud aega ilma numbreid lugemata. Vaikne, ilma tiksumiseta.",recommendedBy:"anu-kivi",note:"Aitab nii lapsel kui ka eakal näha, kui kaua tegevus veel kestab. Panen selle lauale kohe kohtumise alguses.",safety:{maker:"TimeTools BV, Holland (näidis)",marks:"CE · RoHS · patarei AA kaasas",age:"3+",warning:"Patareipesa on kruviga suletud."},sku:"TK-PK-003"},{id:"toolehed",name:"Töölehed „Lõika, kleebi, joonista“, 40 lk (PDF)",category:"Töölehed",priceCents:900,stock:999,digital:!0,summary:"Eestikeelsed töölehed 5–7-aastastele: lõikamine joont mööda, kleepimine ja eeljoonistamine. Prinditav A4.",recommendedBy:"piret-lepik",note:"Koostasin need oma kabineti jaoks. Iga lehe all on lapsevanemale üks lause, millele tähelepanu pöörata.",safety:{maker:"Digisisu, koostaja Piret Lepik (näidis)",marks:"Digisisu, füüsilist toodet ei saadeta",age:"5–7",warning:"Taganemisõigus lõpeb allalaadimise algusega, kui olete sellega eraldi nõustunud."},sku:"TK-DL-001"}],Z=[{id:"omniva",name:"Omniva pakiautomaat",priceCents:399,lockers:["Tallinn, Kristiine keskus","Tartu, Lõunakeskus","Pärnu, Kaubamajakas","Narva, Astri keskus","Rakvere, Põhjakeskus","Viljandi, Uku keskus"]},{id:"smartposti",name:"SmartPosti pakiautomaat",priceCents:379,lockers:["Tallinn, Mustamäe Rimi","Tartu, Eeden","Pärnu, Port Artur 2","Narva, Fama keskus","Rakvere, Vaala keskus"]},{id:"dpd",name:"DPD Pickup pakiautomaat",priceCents:369,lockers:["Tallinn, Ülemiste keskus","Tartu, Tasku","Pärnu, Kaubamajakas","Viljandi, Centrum"]},{id:"venipak",name:"Venipak pakiautomaat",priceCents:349,lockers:["Tallinn, Järve keskus","Tartu, Annelinna keskus","Narva, Kerese keskus"]}],Ba=["Swedbank","SEB","LHV","Coop Pank","Luminor"],_=12,D={baas:"Baaskonto 0 €/kuu",profi:"Profi-konto 24 €/kuu",praksis:"Väikese praksise konto 69 €/kuu",kliinik:"Kliiniku konto 189 €/kuu"},oa=["09:00","10:30","13:00","14:30","16:00"];class Fa{bookings=[];cart=[];registrations=new Map;trainings=[...Ra];therapists=[...Oa];account=null;listeners=new Set;on(a){return this.listeners.add(a),()=>this.listeners.delete(a)}emit(){this.listeners.forEach(a=>a())}therapist(a){return this.therapists.find(i=>i.id===a)}product(a){return I.find(i=>i.id===a)}addToCart(a,i){const t=this.cart.find(s=>s.productId===a);t?(t.qty+=1,i&&!t.ref&&(t.ref=i)):this.cart.push({productId:a,qty:1,ref:i}),this.emit()}setQty(a,i){if(i<=0)this.cart=this.cart.filter(t=>t.productId!==a);else{const t=this.cart.find(s=>s.productId===a);t&&(t.qty=Math.min(i,20))}this.emit()}cartCount(){return this.cart.reduce((a,i)=>a+i.qty,0)}seatsLeft(a){return Math.max(0,a.seats-a.taken-(this.registrations.get(a.id)??0))}register(a,i){this.registrations.set(a,(this.registrations.get(a)??0)+i),this.emit()}book(a){const i={...a,id:`B-${String(4180+this.bookings.length+1)}`,createdAt:new Date};return this.bookings.push(i),this.emit(),i}}const v=new Fa,Ua=28;function Ja(e,a,i){return e.joinedNow?!1:Da(`${e.id}|${a}|${i}`)%3===0}function ee(e,a=A(w,1),i=Ua){const t=[],s=e.availableFrom;for(let l=0;l<i;l++){const o=A(a,l),d=y(o);if(s&&d<s)continue;const p=e.weekly[ia(o)]??[];for(const r of p)Ja(e,d,r)||v.bookings.some(c=>c.therapistId===e.id&&c.date===d&&c.time===r)||t.push({date:o,time:r})}return t}function ae(e){return ee(e)[0]??null}function _a(e){const a=ae(e);return a!==null&&y(a.date)<=y(sa)}const M={place:"koik",group:"koik",funding:"koik",thisWeek:!1};function da(e,a){return!(a.place==="veeb"&&!e.online||a.place==="kodu"&&!e.homeVisits||a.place!=="koik"&&a.place!=="veeb"&&a.place!=="kodu"&&!la(e).includes(a.place)||a.group!=="koik"&&!e.groups.includes(a.group)||a.funding!=="koik"&&!e.funding.includes(a.funding)||a.thisWeek&&!_a(e))}function Wa(e){return[...e].sort((a,i)=>{const t=ae(a),s=ae(i);if(!t&&!s)return a.name.localeCompare(i.name,"et");if(!t)return 1;if(!s)return-1;const l=`${y(t.date)} ${t.time}`,o=`${y(s.date)} ${s.time}`;return l<o?-1:l>o?1:0})}function ra(e,a="sm"){return n`<figure class="portrait portrait-${a}" aria-hidden="${a==="sm"?"true":"false"}">
+    <span class="portrait-initials">${xa(e.name)}</span>
+    ${a==="lg"?n`<figcaption>${e.kind==="solo"?"Foto lisandub terapeudi kontolt":"Logo lisandub keskuse kontolt"}</figcaption>`:""}
+  </figure>`}function Se(e,a="sm"){return n`<figure class="pframe pframe-${a}" aria-hidden="true">
+    <span class="pframe-cat">${e.category}</span>
+    <span class="pframe-sku">${e.sku}</span>
+    ${a==="lg"?n`<figcaption>Foto lisandub e-poest</figcaption>`:""}
+  </figure>`}function de(e,a=!1){if(e.org){const i=e.kind==="kliinik"?n`Kinnitatud · Äriregister ja Terviseameti tegevusluba${a&&e.org.licence?n`<span class="mono"> · nr ${e.org.licence} (näidis)</span>`:""}`:n`Kinnitatud · Äriregister, spetsialistid Smart-ID ja Kutseregistriga`;return n`<span class="verified"><span class="verified-seal" aria-hidden="true"></span><span>${i}</span></span>`}return n`<span class="verified">
+    <span class="verified-seal" aria-hidden="true"></span>
+    <span>Kinnitatud · Smart-ID &amp; Kutseregister (tase ${e.kutse.level})${a?n`<span class="mono"> · nr ${e.kutse.number}</span>`:""}</span>
+  </span>`}function ua(e){const a=[];e.city?a.push(`${e.city}, ${e.area}`):a.push(e.area);const i=e.org?.branches.map(t=>t.city)??[];return i.length&&a.push(`ka ${i.join(" ja ")}`),e.online&&e.city&&a.push("ka veebis"),e.homeVisits&&a.push(`koduvisiit: ${e.homeVisits}`),a.join(" · ")}function we(e){if(!e.org)return ce.solo;const a=e.org.verified;if(e.kind==="kliinik"){const i=1+e.org.branches.length;return`${ce.kliinik} · ${a} kinnitatud ${a===1?"spetsialist":"spetsialisti"}${i>1?` · ${i} asukohta`:""}`}return`${ce.praksis} · ${a} kinnitatud ${a===1?"tegevusterapeut":"tegevusterapeuti"}`}const H={display:"5555 0123",tel:"+37255550123",hours:"E–R kell 9–17"};function ca(){return n`<a class="call-link" href="tel:${H.tel}">Helista meile <span class="mono">${H.display}</span></a>`}function pa(e){return e.groups.map(a=>C[a]).join(", ")}function Ga(e){return e.funding.map(a=>le[a]).join(" · ")}function Ya(e){return e?`${U(e.date)} ${K(e.date)} kell ${e.time}`:"Vabu aegu järgmise 4 nädala jooksul ei ole"}function za(e){const a=Math.min(...e.services.map(i=>i.priceCents));return`alates ${$(a)}`}function Le(e,a,i){const t=document.createElement("dialog");return t.className="dialog",t.setAttribute("aria-label",e),t.innerHTML=n`<div class="dialog-head">
+      <p class="dialog-title">${e}</p>
+      <button type="button" class="link-btn" data-close>Sulge</button>
+    </div>
+    <div class="dialog-body">${a}</div>`.value,document.body.append(t),t.addEventListener("click",s=>{const l=s.target;(l===t||l.closest("[data-close]"))&&t.close()}),t.addEventListener("close",()=>t.remove()),t.showModal(),i?.(t),t}function N(e){const a=k("[data-guard-msg]",e),i=k("[type=submit]",e),t=()=>{let s="";for(const l of ye("[data-guard]",e)){const o=Na(l.value);if(l.setAttribute("aria-invalid",o?"true":"false"),o&&!s){const d=l.dataset.guard??"väljal";s=o.kind==="isikukood"?`Väljal „${d}“ on isikukood (${o.sample}). Kustutage see — broneerimiseks pole seda vaja.`:`Väljal „${d}“ on terviseinfo („${o.sample}“). Kustutage see.`}}return s?(a.hidden=!1,a.innerHTML=n`<strong>${qa}</strong> ${s}`.value,i.disabled=!0):(a.hidden=!0,i.disabled=!1),!s};return e.addEventListener("input",t),t}const q=n`<div class="guard" role="alert" data-guard-msg hidden></div>`;function f(e,a,i={}){const t=i.hint?`${e}-hint`:"";return n`<div class="field">
+    <label for="${e}">${a}${i.required===!1?n` <span class="opt">(valikuline)</span>`:""}</label>
+    ${i.hint?n`<p class="hint" id="${t}">${i.hint}</p>`:""}
+    ${i.type==="textarea"?n`<textarea id="${e}" name="${e}" rows="3" ${i.guard?n`data-guard="${a}"`:""} ${t?n`aria-describedby="${t}"`:""}>${i.value??""}</textarea>`:n`<input id="${e}" name="${e}" type="${i.type??"text"}" ${i.required===!1?"":"required"}
+            ${i.autocomplete?n`autocomplete="${i.autocomplete}"`:""}
+            ${i.pattern?n`pattern="${i.pattern}"`:""}
+            ${i.inputmode?n`inputmode="${i.inputmode}"`:""}
+            ${i.min?n`min="${i.min}"`:""}
+            ${i.max?n`max="${i.max}"`:""}
+            ${i.value!==void 0?n`value="${i.value}"`:""}
+            ${i.guard?n`data-guard="${a}"`:""} ${t?n`aria-describedby="${t}"`:""} />`}
+  </div>`}function Q(e,a,i,t){return n`<fieldset class="choices">
+    <legend>${a}</legend>
+    <div class="choices-row">
+      ${i.map(s=>n`<label class="choice"><input type="radio" name="${e}" value="${s.value}" ${s.value===t?"checked":""} /><span>${s.label}</span></label>`)}
+    </div>
+  </fieldset>`}function P(e){const a={};return new FormData(e).forEach((i,t)=>{typeof i=="string"&&(a[t]=i.trim())}),a}function ie(e){return`${e}-${String(1e4+Math.floor(Math.random()*89999))}`}const ma=[{id:"laps",label:"Lapsele",groups:["lapsed"]},{id:"ise",label:"Endale",groups:["taiskasvanud","eakad"]},{id:"eakas",label:"Eakale lähedasele",groups:["eakad"]},{id:"hooldaja",label:"Endale kui hooldajale",groups:["omastehooldajad"]},{id:"asutus",label:"Lasteaiale, koolile või hooldekodule",groups:["asutused"]}],ka=[{id:"laps-pliiats",who:"laps",label:"Lapsel on raske pliiatsit hoida või kääridega lõigata.",result:"Tegevusteraapias proovib laps eri viise pliiatsi hoidmiseks ja kääridega lõikamiseks.",tools:["Jäme pliiats","Käärid, mis avanevad ise","Pliiatsihoidik"],tags:["kirjutamine"],trainings:[]},{id:"laps-riided",who:"laps",label:"Lapsel on raske jopet kinni panna või paelu siduda.",result:"Tegevusteraapias harjutab laps luku kinnipanemist ja paelte sidumist väikeste sammude kaupa.",tools:["Suur luku tõmbeaas","Elastsed kingapaelad","Paelte sidumise harjutuskaart"],tags:["riietumine"],trainings:[]},{id:"laps-lusikas",who:"laps",label:"Lapsel on raske lusikaga ise süüa.",result:"Tegevusteraapias proovitakse lapsega eri lusikaid ja viise, kuidas lusikat hoida.",tools:["Jämeda varrega lusikas","Libisemiskindel lauamatt","Kõrgema servaga taldrik"],tags:["soomine"],trainings:[]},{id:"laps-myra",who:"laps",label:"Lapsel on müras raske mängida või õppida.",result:"Tegevusteraapias proovitakse, kuidas sättida kohta ja tegevust nii, et laps saaks mängus või õppimises kaasa lüüa.",tools:["Pildikaart pausi küsimiseks","Lauasirm","Mürasummutavad kõrvaklapid"],tags:["keskkond"],trainings:[]},{id:"laps-yleminek",who:"laps",label:"Lapsel on raske mängu lõpetada ja järgmise asja juurde minna.",result:"Tegevusteraapias harjutab laps ühe tegevuse lõpetamist ja järgmise alustamist piltide või kindla järjekorra abil.",tools:["Piltidega päevakava","Liivakell","Kahe pildiga kaart „Kõigepealt ja siis“"],tags:["paevakava"],trainings:[]},{id:"ise-kook",who:"ise",label:"Pärast haigust või õnnetust on mul raske süüa teha.",result:"Tegevusteraapias harjutate köögitoiminguid endale sobival viisil ja proovite vajadusel teistsuguseid köögivahendeid.",tools:["Purgiavaja","Libisemiskindel alus","Jämeda käepidemega köögivahend"],tags:["kook"],trainings:[]},{id:"ise-pesemine",who:"ise",label:"Mul on raske pesta või riidesse panna.",result:"Tegevusteraapias proovite pesemiseks või riietumiseks eri võtteid ja vahendeid.",tools:["Pika varrega pesukäsn","Vahend soki jalgapanekuks","Pika varrega kingalusikas"],tags:["pesemine","riietumine"],trainings:[]},{id:"ise-haare",who:"ise",label:"Mul on raske purke avada või asju kindlalt käes hoida.",result:"Tegevusteraapias proovite eri viise asjadest kinni haarata ning vahendeid, millega saab keerata või avada.",tools:["Purgiavaja","Libisemiskindel matt","Jämeda varrega lusikas"],tags:["haare"],trainings:[]},{id:"ise-too",who:"ise",label:"Mul on raske tööasju teha või tööle tagasi minna.",result:"Tegevusterapeut vaatab teiega tööülesanded läbi ning proovib koos teiega muudatusi töökohas või tööpäevas.",tools:["Tööpäeva plaan ühel lehel","Jalgealune","Pauside meeldetuletus"],tags:["too"],trainings:[]},{id:"ise-paev",who:"ise",label:"Mul on raske päeva planeerida ja asju tehtud saada.",result:"Tegevusteraapias valite ühe igapäevase ülesande ja harjutate selle tegemist väikeste sammude kaupa.",tools:["Päevaplaan ühel lehel","Tahvel meeldetuletusteks","Lihtne taimer"],tags:["paevakava"],trainings:[]},{id:"eakas-vannituba",who:"eakas",label:"Mu lähedane kardab vannitoas kukkuda.",result:"Tegevusterapeut vaatab koos teie lähedasega üle, kuidas ta vannituba kasutab ja mida võiks seal muuta.",tools:["Vannitoa ülevaatuse leht","Dušitool","Seinale kinnitatav käepide"],tags:["kodu"],trainings:["omastehooldajad"],visitFirst:!0},{id:"eakas-pysti",who:"eakas",label:"Mu lähedasel on raske toolilt või voodist püsti saada.",result:"Tegevusteraapias proovib teie lähedane eri viise istuma ja püsti saamiseks oma tooli või voodi juures.",tools:["Kindlate käetugedega tool","Istekõrguse mõõtmise leht","Öölamp"],tags:["liikumine"],trainings:["omastehooldajad"],visitFirst:!0},{id:"eakas-kook",who:"eakas",label:"Mu lähedasel on raske ise süüa teha või laua taga süüa.",result:"Tegevusteraapias proovitakse koos teie lähedasega, kuidas köögis asju paigutada ning milliseid söögi- või köögivahendeid kasutada.",tools:["Kaanega tass","Libisemiskindel lauamatt","Purgiavaja"],tags:["kook","soomine"],trainings:["omastehooldajad"]},{id:"eakas-meelest",who:"eakas",label:"Mu lähedasel läheb meelest, mida ta pidi tegema.",result:"Tegevusteraapias proovib teie lähedane igapäevatoimingute meelespidamiseks nähtavaid meeldetuletusi ja kindlat järjekorda.",tools:["Suure kirjaga kalender","Tahvel meeldetuletusteks","Piltidega juhis"],tags:["paevakava"],trainings:["omastehooldajad"]},{id:"eakas-haiglast",who:"eakas",label:"Mu lähedane tuleb haiglast koju ja vajab kodus abi.",result:"Tegevusterapeut vaatab teie lähedasega üle, millised kodused toimetused vajavad harjutamist või muudatusi kodus.",tools:["Kodu ülevaatuse leht","Pika varrega kingalusikas","Öölamp"],tags:["kodu"],trainings:["omastehooldajad"],visitFirst:!0},{id:"hooldaja-voodi",who:"hooldaja",label:"Mul on raske aidata lähedast voodist toolile.",result:"Tegevusterapeut näitab teile ja teie lähedasele, kuidas proovida voodist toolile liikumist teie kodus.",tools:["Voodi ja tooli kõrguse mõõtmise leht","Küsimuste leht kodukülastuseks"],tags:["liikumine"],trainings:["omastehooldajad"],visitFirst:!0},{id:"hooldaja-pesemine",who:"hooldaja",label:"Ma ei tea, kuidas aidata lähedast pesemisel või riietumisel.",result:"Tegevusteraapias vaatate koos üle, mida lähedane saab ise teha ja milliste toimingute juures on tal abi vaja.",tools:["Piltidega juhis","Nimekiri riiete valmispanekuks","Pika varrega pesukäsn"],tags:["pesemine","riietumine","juhendamine"],trainings:["omastehooldajad"]},{id:"hooldaja-kodu",who:"hooldaja",label:"Ma ei tea, mida kodus ümber tõsta või juurde panna.",result:"Tegevusterapeut vaatab teiega üle, kuidas lähedane kodus liigub ja kus peaksid vajalikud asjad olema.",tools:["Kodu ülevaatuse leht","Öölamp","Libisemiskindel alus"],tags:["kodu"],trainings:["omastehooldajad"],visitFirst:!0},{id:"hooldaja-vahend",who:"hooldaja",label:"Ma ei tea, millist vahendit lähedane vajab.",result:"Tegevusterapeut vaatab koos teiega, milline toiming on raske ja millist vahendit tasub selle juures proovida.",tools:["Küsimuste leht vahendi proovimiseks","Purgiavaja","Jämeda varrega lusikas"],tags:["vahendid"],trainings:["omastehooldajad"]},{id:"hooldaja-paev",who:"hooldaja",label:"Ma ei oska lähedase päeva nii seada, et ta saaks ise rohkem kaasa teha.",result:"Tegevusteraapias jagate ühe päevatoimingu sammudeks ja vaatate, millised neist saab lähedane ise teha.",tools:["Piltidega päevakava","Suure kirjaga kell","Tegevuste nimekiri"],tags:["paevakava","juhendamine"],trainings:["omastehooldajad"]},{id:"asutus-pliiats",who:"asutus",label:"Soovime aidata lastel paremini pliiatsi ja kääridega toime tulla.",result:"Tegevusterapeut näitab teie töötajatele, kuidas kirjutamist ja lõikamist lastega harjutada.",tools:["Jäme pliiats","Käärid, mis avanevad ise","Lõikamise harjutusleht"],tags:["kirjutamine","juhendamine"],trainings:["lasteaiad"]},{id:"asutus-larm",who:"asutus",label:"Mõnel lapsel on lärmis raske rühmas kaasa teha.",result:"Tegevusterapeut vaatab teiega üle rühmaruumi ja proovib, kuidas muuta tegevuses osalemist lihtsamaks.",tools:["Piltidega päevakava","Lauasirm","Pildikaart pausi küsimiseks"],tags:["keskkond"],trainings:["lasteaiad"]},{id:"asutus-elanikud",who:"asutus",label:"Soovime, et elanikud saaksid ise rohkem süüa või riidesse panna.",result:"Tegevusterapeut vaatab töötajatega üle söömise ja riietumise ning näitab, millistes sammudes saab elanik ise kaasa teha.",tools:["Libisemiskindel lauamatt","Jämeda varrega lusikas","Pika varrega kingalusikas"],tags:["soomine","riietumine","juhendamine"],trainings:["hooldekodud"]},{id:"asutus-ruumid",who:"asutus",label:"Mõnes ruumis on raske liikuda või vajalikke asju kätte saada.",result:"Tegevusterapeut käib teiega ruumid läbi ja soovitab, kuhu panna mööbel ja sageli kasutatavad asjad.",tools:["Ruumi ülevaatuse leht","Suure kirjaga uksesildid","Sahtlisildid"],tags:["kodu"],trainings:["hooldekodud"],visitFirst:!0},{id:"asutus-koolitus",who:"asutus",label:"Soovime töötajatele koolitust selle kohta, kuidas inimest igapäevastes asjades aidata.",result:"Tegevusterapeut harjutab teie töötajatega, kuidas aidata inimest pesemisel, riietumisel või söömisel.",tools:["Tegevuste harjutuskaardid","Päevaplaan ühel lehel","Suure kirjaga juhised"],tags:["juhendamine"],trainings:["hooldekodud","lasteaiad"]}],X={id:"ei-tea",label:"Ei oska öelda, vajan nõu",result:"Tegevusterapeut aitab teil valida ühe igapäevase asja, millest alustada.",tools:["Päevaplaan ühel lehel","Leht, kuhu märkida, mis on raske"]},Za={laps:[],ise:[],eakas:["omastehooldajad"],hooldaja:["omastehooldajad"],asutus:["lasteaiad","hooldekodud"]};function Ee(e,a){return e==="kohale"?"Lähen kohale":e==="koju"?a==="asutus"?"Terapeut tuleb meie juurde":"Terapeut tuleb koju":e==="video"?"Sobib videokõne":"Näita kõiki võimalusi"}const Qa=["kohale","koju","video","koik"],he=[{name:"Tallinn",county:"Harjumaa"},{name:"Harku vald",county:"Harjumaa"},{name:"Keila",county:"Harjumaa"},{name:"Maardu",county:"Harjumaa"},{name:"Rae vald",county:"Harjumaa"},{name:"Saue vald",county:"Harjumaa"},{name:"Viimsi vald",county:"Harjumaa"},{name:"Kärdla",county:"Hiiumaa"},{name:"Hiiumaa vald",county:"Hiiumaa"},{name:"Narva",county:"Ida-Virumaa"},{name:"Narva-Jõesuu",county:"Ida-Virumaa"},{name:"Jõhvi vald",county:"Ida-Virumaa"},{name:"Kohtla-Järve",county:"Ida-Virumaa"},{name:"Jõgeva",county:"Jõgevamaa"},{name:"Paide",county:"Järvamaa"},{name:"Haapsalu",county:"Läänemaa"},{name:"Rakvere",county:"Lääne-Virumaa"},{name:"Tapa vald",county:"Lääne-Virumaa"},{name:"Põlva",county:"Põlvamaa"},{name:"Pärnu",county:"Pärnumaa"},{name:"Häädemeeste vald",county:"Pärnumaa"},{name:"Rapla",county:"Raplamaa"},{name:"Kuressaare",county:"Saaremaa"},{name:"Saaremaa vald",county:"Saaremaa"},{name:"Muhu vald",county:"Saaremaa"},{name:"Tartu",county:"Tartumaa"},{name:"Tartu vald",county:"Tartumaa"},{name:"Elva vald",county:"Tartumaa"},{name:"Kambja vald",county:"Tartumaa"},{name:"Valga",county:"Valgamaa"},{name:"Viljandi",county:"Viljandimaa"},{name:"Mulgi vald",county:"Viljandimaa"},{name:"Võru",county:"Võrumaa"}];function Xa(e){const a=l=>l.toLocaleLowerCase("et").replace(/\s+linn$/,"").replace(/\s+/g," ").trim(),i=a(e);if(!i)return null;const t=he.find(l=>a(l.name)===i);if(t)return t;const s=he.filter(l=>a(l.name).startsWith(i));return s.length===1?s[0]??null:null}const ei={Pliiatsihoidik:"pliiatsihoidja","Jämeda varrega lusikas":"soogiriistad","Jämeda käepidemega köögivahend":"soogiriistad","Kaanega tass":"kruus",Liivakell:"taimer","Lihtne taimer":"taimer","Pauside meeldetuletus":"taimer","Paelte sidumise harjutuskaart":"noopimislaud","Suur luku tõmbeaas":"noopimislaud","Lõikamise harjutusleht":"toolehed"};function ne(){return{screen:1,who:null,task:null,meet:null,placeText:"",place:null,showAll:!1,pick:null,name:"",channel:"tel",phone:"",email:"",done:null}}function re(e,a){if(a==="kohale")return e.city?e.services.find(i=>i.kind==="esmavisiit")??e.services.find(i=>i.kind!=="veeb"&&i.kind!=="koduvisiit"):void 0;if(a==="koju")return e.homeCounties.length?e.services.find(i=>i.kind==="koduvisiit"):void 0;if(e.online)return e.services.find(i=>i.kind==="veeb")??(e.city?void 0:e.services[0])}function Ie(e,a,i){if(!re(e,a))return null;if(a==="kohale"){const t=i?la(e).find(s=>Ke[s]===i.county)??null:e.city;return t?{mode:a,city:t}:null}return a==="koju"?i&&e.homeCounties.includes(i.county)?{mode:a,city:null}:null:{mode:a,city:null}}function ai(e,a,i){if(a!=="koik")return Ie(e,a,a==="video"?null:i);for(const t of["kohale","koju","video"]){const s=Ie(e,t,i);if(s)return s}return null}function te(e){return ka.find(a=>a.id===e.task)}function Ve(e,a=e.meet){const i=ma.find(d=>d.id===e.who);if(!i||!a)return[];const t=te(e),s=[];for(const d of v.therapists){if(!i.groups.some(c=>d.groups.includes(c))||t&&!t.tags.some(c=>d.tasks.includes(c)))continue;const p=ai(d,a,e.place),r=p?re(d,p.mode):void 0;!p||!r||s.push({t:d,mode:p.mode,city:p.city,service:r,slot:ae(d)})}const l=t?.visitFirst===!0&&a==="koik",o=d=>d?`${y(d.date)} ${d.time}`:"~";return s.sort((d,p)=>{if(l&&d.mode==="video"!=(p.mode==="video"))return d.mode==="video"?1:-1;const r=o(d.slot),c=o(p.slot);return r!==c?r<c?-1:1:d.t.name.localeCompare(p.t.name,"et")})}function ii(e){const a=te(e),i=a?a.trainings:e.who?Za[e.who]:[];return i.length?v.trainings.filter(t=>t.date>y(w)&&t.audience.some(s=>i.includes(s))).filter(t=>e.meet==="video"?t.city==="Veebis":e.place&&(e.meet==="kohale"||e.meet==="koik")?t.city==="Veebis"||Ke[t.city]===e.place.county:!0).sort((t,s)=>t.date<s.date?-1:t.date>s.date?1:0):[]}function va(e){return e.charAt(0).toUpperCase()+e.slice(1)}function ue(e,a){const i=L(e);return`${va(F(i))}, ${i.getDate()}. ${ta(i)} kell ${a}`}function ti(e){return e.length<2?e.join(""):`${e.slice(0,-1).join(", ")} ja ${e[e.length-1]??""}`}function si(e,a){return e.mode==="kohale"?`${e.city??""} · Kohapeal`:e.mode==="koju"?`${a.place?.name??""} · ${Ee("koju",a.who)}`:"Videokõne"}function ga(e,a,i){if(a.mode==="video")return"Videokõne, link tuleb koos kinnitusega";if(a.mode==="koju")return i==="asutus"?"Teie asutuses":"Teie kodus";const t=e.org?.branches.find(s=>s.city===a.city);return t?t.address:e.address}function ni(e){return e.meet?e.meet==="video"?"Videokõne":e.meet==="koik"?e.place?`${e.place.name} · Kõik võimalused`:"Kõik võimalused":`${e.place?.name??""} · ${e.meet==="kohale"?"Kohapeal":Ee("koju",e.who)}`:""}function ha(e){return typeof e=="number"?`${e}. samm 3-st`:e==="tulemused"?"Teile sobivad võimalused":e==="broneeri"?"Aja broneerimine":"Aeg on broneeritud"}function Ne(e){return typeof e=="number"?`Abi leidmine — ${e}. samm`:e==="tulemused"?"Abi leidmine — tulemused":e==="broneeri"?"Abi leidmine — broneerimine":"Abi leidmine — aeg on broneeritud"}function W(e,a,i,t,s=""){return n`<label class="finder-option${s}"><input type="radio" name="${e}" value="${a}" ${t?"checked":""} /><span>${i}</span></label>`}function Pe(e){return n`<legend class="finder-legend"><h2 class="finder-q" id="f-q" tabindex="-1">${e}</h2></legend>`}const Ae=n`<p class="error finder-error" id="f-err" role="alert" hidden></p>`;function fa(e){return n`<form class="finder-form" data-step="1" novalidate autocomplete="off">
+    <fieldset class="finder-field" aria-describedby="f-err">
+      ${Pe("Kellele abi otsite?")}
+      <div class="finder-options">${ma.map(a=>W("f-who",a.id,a.label,e.who===a.id))}</div>
+    </fieldset>
+    ${Ae}
+    <div class="actions finder-actions">
+      <button type="submit" class="btn btn-primary">Edasi</button>
+    </div>
+  </form>`}function li(e){const a=ka.filter(i=>i.who===e.who);return n`<form class="finder-form" data-step="2" novalidate autocomplete="off">
+    <fieldset class="finder-field" aria-describedby="f-2-hint f-err">
+      ${Pe("Mis igapäevase asjaga on raske?")}
+      <p class="hint finder-hint" id="f-2-hint">Valige üks asi, millest soovite alustada.</p>
+      <div class="finder-options">
+        ${a.map(i=>W("f-task",i.id,i.label,e.task===i.id))}
+        ${W("f-task",X.id,X.label,e.task===X.id," finder-option-alt")}
+      </div>
+    </fieldset>
+    ${Ae}
+    <div class="actions finder-actions">
+      <button type="button" class="btn" data-f="back">Tagasi</button>
+      <button type="submit" class="btn btn-primary">Edasi</button>
+    </div>
+  </form>`}function fe(e){return e==="kohale"||e==="koju"}function ba(e){return e==="koik"?"Lisa linn või vald":"Linn või vald"}function oi(e){const a=fe(e.meet)||e.meet==="koik";return n`<form class="finder-form" data-step="3" novalidate autocomplete="off">
+    <fieldset class="finder-field" aria-describedby="f-3-hint f-err">
+      ${Pe("Kuidas ja kus sobib?")}
+      <p class="hint finder-hint" id="f-3-hint">Valige, kuidas soovite kohtuda.</p>
+      <div class="finder-options">${Qa.map(i=>W("f-meet",i,Ee(i,e.who),e.meet===i))}</div>
+    </fieldset>
+    <div class="field finder-place" data-place ${a?"":"hidden"}>
+      <label for="f-koht"><span data-place-label>${ba(e.meet)}</span> <span class="opt" data-place-opt ${e.meet==="koik"?"":"hidden"}>(valikuline)</span></label>
+      <p class="hint" id="f-koht-hint">Näiteks Tartu või Saaremaa vald.</p>
+      <input id="f-koht" name="f-koht" type="text" list="f-kohad" autocomplete="off" spellcheck="false" aria-describedby="f-koht-hint f-koht-err" value="${e.placeText}" />
+      <datalist id="f-kohad">${he.map(i=>n`<option value="${i.name}"></option>`)}</datalist>
+      <p class="error" id="f-koht-err" hidden></p>
+    </div>
+    ${Ae}
+    <div class="actions finder-actions">
+      <button type="button" class="btn" data-f="back">Tagasi</button>
+      <button type="submit" class="btn btn-primary">Näita sobivaid võimalusi</button>
+    </div>
+  </form>`}function di(e,a,i){const t=e.t,s=e.slot?ue(y(e.slot.date),e.slot.time):"";return n`<li class="fcard" ${i?"hidden":""}>
+    <div class="fcard-main">
+      <h4 class="fcard-name" tabindex="-1">${t.name}</h4>
+      <p class="fcard-kind">${t.org?we(t):"Kinnitatud tegevusterapeut"}</p>
+      ${t.org?.licence?n`<p class="fcard-meta mono">Terviseameti tegevusluba nr ${t.org.licence} (näidis)</p>`:""}
+      <p class="fcard-meta">${si(e,a)} · ${va(ti(t.languages))} keeles</p>
+      <p class="fcard-meta">${e.service.name} · ${e.service.minutes} minutit · <span class="mono">${$(e.service.priceCents)}</span></p>
+      <p class="fcard-meta muted">Saatekiri pole vajalik.</p>
+    </div>
+    <div class="fcard-side">
+      ${e.slot?n`<p class="label">Järgmine vaba aeg</p>
+            <p class="fcard-time">${s}</p>
+            <button type="button" class="btn btn-primary" data-f="pick" data-id="${t.id}" data-date="${y(e.slot.date)}" data-time="${e.slot.time}"
+              aria-label="Vali see aeg, ${t.name}, ${s}">Vali see aeg</button>
+            <p class="fcard-more"><a href="#/terapeut/${t.id}">Vaata teisi aegu</a></p>`:n`<p class="fcard-time">Veebis vabu aegu ei ole.</p>
+            <p class="fcard-more"><a href="#/terapeut/${t.id}">Vaata terapeudi kontakte</a></p>`}
+    </div>
+  </li>`}function ri(e,a,i){if(a.length===0){const s=e.meet!=="video"&&e.place!==null,l=e.meet==="video"?0:Ve(e,"video").length;return n`<h3 class="finder-h3">${i}</h3>
+      <div class="notice finder-empty">
+        <p class="notice-title">Selle valikuga terapeuti ei leidu.</p>
+        <div class="actions">
+          ${s?n`<button type="button" class="btn" data-f="edit-place">Muuda kohta</button>`:""}
+          ${l>0?n`<button type="button" class="btn" data-f="video">Vaata videokohtumisi</button>`:""}
+          <a class="btn" href="tel:${H.tel}">Helista meile</a>
+        </div>
+      </div>`}const t=e.showAll?a.length:Math.min(3,a.length);return n`<h3 class="finder-h3">${i}</h3>
+    <ol class="fcards" aria-label="${i}">${a.map((s,l)=>di(s,e,l>=t))}</ol>
+    ${t<a.length?n`<p><button type="button" class="btn" data-f="more">Näita rohkem terapeute (${a.length-t})</button></p>`:""}`}function ui(e){const a=v.seatsLeft(e);return n`<li class="ftrain">
+    <p class="ftrain-date mono">${ue(e.date,e.time).replace(" kell "," · ")}</p>
+    <h4 class="ftrain-title">${e.title}</h4>
+    <p class="fcard-meta">${e.audience.map(i=>O[i]).join(", ")} · ${e.city==="Veebis"?"Veebis":e.city} · <span class="mono">${e.priceCents===0?"Tasuta":$(e.priceCents)}</span></p>
+    <p class="fcard-meta">${a>0?`Registreerimine on avatud, vabu kohti ${a}.`:"Kohad on täis."}</p>
+    <a class="btn" href="#/koolitused">Vaata koolitust</a>
+  </li>`}function qe(e,a){const i=ii(e);if(!a&&i.length===0)return n``;const t=i.slice(0,a?3:1);return n`${a?"":n`<h3 class="finder-h3">Koolitus lähedastele</h3>`}
+    ${t.length?n`<ul class="plain-list ftrains">${t.map(ui)}</ul>`:n`<div class="notice"><p class="notice-title">Praegu ei ole siin sobivat koolitust.</p></div>`}
+    ${a?n`<p class="finder-links"><a href="#/koolitused">Küsi koolituse kohta</a> · <a href="#/koolitused">Vaata koolitusi</a></p>
+          <p class="muted">Koolituse päringus küsime ainult asutuse nime, kontakti ja sobivaid kuupäevi.</p>`:n`<p class="finder-links"><a href="#/koolitused">Vaata koolitusi</a></p>`}`}function ci(e){const a=te(e),i=a?a.tools:X.tools,t=e.who==="ise"||e.who==="eakas"||e.who==="hooldaja";return n`<h3 class="finder-h3">Näiteid vahenditest</h3>
+    <ul class="plain-list ftools">
+      ${i.map(s=>{const l=ei[s],o=l?v.product(l):void 0;return n`<li>${s}${o?n`<span class="muted"> · e-poes </span><a href="#/vahendid/${o.id}">${o.name}</a> <span class="mono">${$(o.priceCents)}</span>`:""}</li>`})}
+    </ul>
+    <p class="muted">Vahendit tasub enne ostmist proovida. Küsige terapeudilt, mis teile sobib.</p>
+    ${t?n`<p class="muted">Kuidas saada vahendit soodsamalt? Seda selgitab Sotsiaalkindlustusameti abivahendite leht sotsiaalkindlustusamet.ee.</p>`:""}
+    <p class="finder-links"><a href="#/vahendid">Vaata vahendeid</a></p>`}function pi(e){const a=te(e),i=a?a.result:X.result,t=Ve(e),s=e.who==="asutus";return n`<div class="finder-results">
+    <h2 class="finder-q" id="f-q" tabindex="-1">${s?"Koolitused ja nõu teie asutusele":"Sobivad tegevusterapeudid"}</h2>
+    <p class="finder-explain">${i}</p>
+    <p class="finder-chosen"><span>${ni(e)}</span> <button type="button" class="link-btn" data-f="edit">Muuda valikuid</button></p>
+    ${a?.visitFirst&&e.meet==="video"?n`<p class="muted">Selle asja juures on kasu, kui terapeut näeb kohta oma silmaga. Videokõnes saab alustada nõust.</p>`:""}
+    ${s?qe(e,!0):""}
+    ${ri(e,t,s?"Tegevusterapeudid, kes nõustavad asutusi":"Terapeudid ja järgmine vaba aeg")}
+    ${ci(e)}
+    ${s?"":qe(e,!1)}
+    <div class="actions"><button type="button" class="link-btn" data-f="restart">Alusta otsast</button></div>
+  </div>`}function De(e,a){const i=a==="tel",t=i?"f-tel":"f-email";return n`<div class="field" data-channel="${a}" ${e.channel===a?"":"hidden"}>
+    <label for="${t}">${i?"Telefoninumber":"E-posti aadress"}</label>
+    <input id="${t}" name="${t}" type="${i?"tel":"email"}" autocomplete="${i?"tel":"email"}" ${i?n`inputmode="tel"`:""}
+      aria-describedby="${t}-err" value="${i?e.phone:e.email}" />
+    <p class="error field-error" id="${t}-err" hidden></p>
+  </div>`}function mi(e){const a=e.pick,i=a?v.therapist(a.therapistId):void 0,t=a&&i?re(i,a.mode):void 0;return!a||!i||!t?n`<p>Valitud aega ei leitud. <button type="button" class="link-btn" data-f="change-time">Vali aeg</button></p>`:n`<form class="finder-form" data-step="broneeri" novalidate autocomplete="on">
+    <h2 class="finder-q" id="f-q" tabindex="-1">Kontrollige aega ja jätke kontakt</h2>
+    <dl class="receipt">
+      <div><dt>Terapeut</dt><dd>${i.name}</dd></div>
+      <div><dt>Aeg</dt><dd>${ue(a.date,a.time)}</dd></div>
+      <div><dt>Koht</dt><dd>${ga(i,a,e.who)}</dd></div>
+      <div><dt>Kohtumine</dt><dd>${t.name}, ${t.minutes} minutit</dd></div>
+      <div><dt>Hind</dt><dd><span class="mono">${$(t.priceCents)}</span>, tasute terapeudile</dd></div>
+    </dl>
+    <p class="muted">Saatekiri pole vajalik.</p>
+    <p><button type="button" class="link-btn" data-f="change-time">Muuda aega</button></p>
+    <div class="error" id="f-sum" tabindex="-1" hidden></div>
+    <div class="field">
+      <label for="f-nimi">Teie nimi</label>
+      <input id="f-nimi" name="f-nimi" type="text" autocomplete="name" data-guard="Teie nimi" aria-describedby="f-nimi-err" value="${e.name}" />
+      <p class="error field-error" id="f-nimi-err" hidden></p>
+    </div>
+    <fieldset class="finder-field">
+      <legend>Kuhu saadame kinnituse?</legend>
+      <div class="finder-options finder-options-inline">
+        ${W("f-kanal","tel","Telefonile sõnumiga",e.channel==="tel")}
+        ${W("f-kanal","email","E-postiga",e.channel==="email")}
+      </div>
+    </fieldset>
+    ${De(e,"tel")}
+    ${De(e,"email")}
+    ${q}
+    <p class="finder-privacy-note">Kasutame teie nime ja kontakti aja broneerimiseks ja kinnituse saatmiseks. Need andmed saab ainult ${i.name}.</p>
+    <div class="actions finder-actions">
+      <button type="button" class="btn" data-f="change-time">Muuda aega</button>
+      <button type="submit" class="btn btn-primary">Broneeri aeg</button>
+    </div>
+  </form>`}function ki(e){const a=e.done;return a?n`<div class="confirm">
+    <h2 class="finder-q" id="f-q" tabindex="-1">Aeg on broneeritud</h2>
+    <dl class="receipt">
+      <div><dt>Broneering</dt><dd class="mono">${a.booking.id} (näidis)</dd></div>
+      <div><dt>Terapeut</dt><dd>${a.therapist.name}</dd></div>
+      <div><dt>Aeg</dt><dd>${ue(a.booking.date,a.booking.time)}</dd></div>
+      <div><dt>Koht</dt><dd>${a.where}</dd></div>
+      <div><dt>Hind</dt><dd><span class="mono">${$(a.service.priceCents)}</span>, tasute terapeudile</dd></div>
+    </dl>
+    <p>Kinnitus saadeti: <strong>${a.sentTo}</strong>.</p>
+    <p><strong>Muuda või tühista aeg:</strong> kinnituses on link, millega saab aega muuta või tasuta tühistada kuni 24 tundi enne kohtumist.</p>
+    <p class="muted">Abi leidmise valikud on kustutatud.</p>
+    <div class="actions"><button type="button" class="btn" data-f="restart">Alusta uut otsingut</button></div>
+  </div>`:n``}function vi(e){switch(e.screen){case 1:return fa(e);case 2:return li(e);case 3:return oi(e);case"tulemused":return pi(e);case"broneeri":return mi(e);case"valmis":return ki(e)}}function gi(){return n`<section class="finder" id="abi" aria-labelledby="abi-pealkiri" hidden>
+    <div class="finder-bar">
+      <p class="finder-title" id="abi-pealkiri">Aita mul leida õige abi</p>
+      <p class="finder-progress" id="f-progress">${ha(1)}</p>
+      <p class="finder-call">${ca()} <span class="muted">${H.hours}</span></p>
+    </div>
+    <div class="finder-body" id="f-body">${fa(ne())}</div>
+    <p class="finder-privacy">Teie valikud jäävad selle lehe sulgemiseni teie seadmesse.</p>
+  </section>`}function hi(e){const a=k("#abi",e),i=k("#f-body",a),t=ne(),s=(c="#f-q")=>{i.innerHTML=vi(t).value,k("#f-progress",a).textContent=ha(t.screen),document.title=`${Ne(t.screen)} — Tegevusteraapia Keskus`;const u=i.querySelector("form[data-step=broneeri]");u&&N(u),i.querySelector(c)?.focus()},l=(c,u)=>{t.screen=c,s(u),u||a.scrollIntoView({block:"start"})},o=(c,u)=>{const g=k("#f-err",i);g.textContent=c,g.hidden=!1,i.querySelector(u)?.focus()};function d(c,u){const g=document.getElementById(`${c.id}-err`);g&&(g.textContent=u,g.hidden=u===""),c.setAttribute("aria-invalid",u?"true":"false")}const p=k("[data-open-finder]",e);p.addEventListener("click",()=>{a.hidden=!1,p.setAttribute("aria-expanded","true"),a.scrollIntoView({block:"start"}),i.querySelector("#f-q")?.focus({preventScroll:!0}),document.title=`${Ne(t.screen)} — Tegevusteraapia Keskus`}),a.addEventListener("change",c=>{const u=c.target;if(u.name==="f-who")t.who=u.value;else if(u.name==="f-task")t.task=u.value;else if(u.name==="f-meet"){t.meet=u.value;const g=k("[data-place]",i);g.hidden=!(fe(t.meet)||t.meet==="koik"),k("[data-place-label]",g).textContent=ba(t.meet),k("[data-place-opt]",g).hidden=t.meet!=="koik"}else u.name==="f-kanal"&&(t.channel=u.value,i.querySelectorAll("[data-channel]").forEach(g=>{g.hidden=g.dataset.channel!==t.channel}))}),a.addEventListener("input",c=>{const u=c.target;u.getAttribute("aria-invalid")==="true"&&d(u,""),u.id==="f-koht"?t.placeText=u.value:u.id==="f-nimi"?t.name=u.value:u.id==="f-tel"?t.phone=u.value:u.id==="f-email"&&(t.email=u.value)}),a.addEventListener("submit",c=>{c.preventDefault();const u=c.target,g=u.dataset.step;if(g==="1"){if(!t.who)return o("Valige üks vastus.","input[name=f-who]");const b=te(t);return b&&b.who!==t.who&&(t.task=null),l(2)}if(g==="2")return t.task?l(3):o("Valige üks vastus. Kui te ei tea, valige „Ei oska öelda, vajan nõu“.","input[name=f-task]");if(g==="3"){if(!t.meet)return o("Valige üks vastus.","input[name=f-meet]");const b=k("#f-koht",i);if(d(b,""),t.meet!=="video"){const h=t.placeText.trim();if(!h&&fe(t.meet)){d(b,"Kirjutage linn või vald, näiteks Tartu või Saaremaa vald."),b.focus();return}const T=h?Xa(h):null;if(h&&!T){d(b,"Seda kohta ei leidu. Proovige valla nime või valige „Näita kõiki võimalusi“."),b.focus();return}t.place=T,T&&(t.placeText=T.name)}return t.showAll=!1,l("tulemused")}g==="broneeri"&&r(u)});const r=c=>{const u=t.pick,g=u?v.therapist(u.therapistId):void 0,b=u&&g?re(g,u.mode):void 0;if(!u||!g||!b)return;const h=k("#f-nimi",c),T=k(t.channel==="tel"?"#f-tel":"#f-email",c),S=[],se=t.name.trim(),z=(t.channel==="tel"?t.phone:t.email).trim();if(se||S.push({input:h,msg:"Sisestage oma nimi."}),t.channel==="tel"){const E=z.replace(/\D/g,""),Ce=E.startsWith("372")&&E.length>8?E.slice(3):E;(Ce.length<7||Ce.length>8)&&S.push({input:T,msg:"Sisestage telefoninumber, näiteks 5123 456."})}else/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(z)||S.push({input:T,msg:"Kontrollige e-posti aadressi, näiteks nimi@näide.ee."});d(h,""),d(T,"");const R=k("#f-sum",c);R.hidden=!0;for(const E of S)d(E.input,E.msg);if(S.length===1){S[0]?.input.focus();return}if(S.length>1){R.innerHTML=n`<p class="notice-title">Kontrollige kahte välja</p>
+        <ul>${S.map(E=>n`<li><a href="#/" data-focus="${E.input.id}">${E.msg}</a></li>`)}</ul>`.value,R.hidden=!1,R.focus();return}if(!ee(g).some(E=>y(E.date)===u.date&&E.time===u.time)){R.innerHTML=n`<p class="notice-title">See aeg on vahepeal broneeritud. Valige teine aeg.</p>
+        <p><button type="button" class="link-btn" data-f="change-time">Vali teine aeg</button></p>`.value,R.hidden=!1,R.focus();return}const La={booking:v.book({therapistId:g.id,service:b.kind,date:u.date,time:u.time,name:se,email:t.channel==="email"?z:"",phone:t.channel==="tel"?z:""}),therapist:g,service:b,where:ga(g,u,t.who),sentTo:z};Object.assign(t,ne(),{screen:"valmis",done:La}),s()};a.addEventListener("click",c=>{const u=c.target,g=u.closest("[data-focus]");if(g){c.preventDefault(),document.getElementById(g.dataset.focus??"")?.focus();return}const b=u.closest("[data-f]");if(!b)return;const h=b.dataset.f;if(h==="back")l(t.screen===3?2:1);else if(h==="edit")l(1);else if(h==="edit-place")l(3,"#f-koht");else if(h==="video")t.meet="video",l("tulemused");else if(h==="more"){const T=i.querySelector(".fcard[hidden]");t.showAll=!0,i.querySelectorAll(".fcard[hidden]").forEach(S=>S.hidden=!1),b.closest("p")?.remove(),T?.querySelector(".fcard-name")?.focus()}else if(h==="pick"){const T=v.therapist(b.dataset.id??""),S=T?Ve(t).find(se=>se.t.id===T.id):void 0;if(!S)return;t.pick={therapistId:S.t.id,mode:S.mode,city:S.city,date:b.dataset.date??"",time:b.dataset.time??""},l("broneeri")}else h==="change-time"?l("tulemused"):h==="restart"&&(Object.assign(t,ne()),l(1))})}const fi=[{value:"koik",label:"Kõik"},...Y.map(e=>({value:e,label:e})),{value:"veeb",label:"Veebis"},{value:"kodu",label:"Koduvisiit"}],bi=[{value:"koik",label:"Kõik"},...Object.keys(C).map(e=>({value:e,label:C[e]}))],$i=[{value:"koik",label:"Kõik"},{value:"tasuline",label:"Tasuline"},{value:"tervisekassa",label:"Tervisekassa partner"},{value:"ska",label:"SKA partner"}],ji=`${K(A(w,1))}–${K(sa)}`;function xe(){const e=Wa(v.therapists.filter(a=>da(a,M)));return e.length===0?n`<p class="empty">Nende valikutega terapeuti ei leitud. Proovige laiemat piirkonda või saatke allpool päring — piirkonna terapeudid vastavad ise.</p>`:n`<ol class="ledger" aria-label="Terapeudid">
+    ${e.map(a=>{const i=ae(a);return n`<li class="ledger-row${a.joinedNow?" is-new":""}">
+        ${ra(a)}
+        <div class="ledger-main">
+          <h3 class="ledger-name"><a href="#/terapeut/${a.id}">${a.name}</a>${a.joinedNow?n` <span class="tag">Liitus täna</span>`:""}</h3>
+          <p class="ledger-kind">${we(a)}</p>
+          <p class="ledger-meta">${ua(a)}</p>
+          ${a.org?.licence?n`<p class="ledger-meta mono">Terviseameti tegevusluba nr ${a.org.licence} (näidis)</p>`:""}
+          <p class="ledger-meta"><span class="label">Sihtrühm</span> ${pa(a)}</p>
+          ${de(a)}
+        </div>
+        <div class="ledger-side">
+          <p class="slot${i?"":" slot-none"}"><span class="label">Järgmine vaba aeg</span><span class="mono">${Ya(i)}</span></p>
+          <p class="price mono">${za(a)}</p>
+          <a class="btn btn-primary" href="#/terapeut/${a.id}">Vaata ja broneeri</a>
+        </div>
+      </li>`})}
+  </ol>`}function He(){const e=v.therapists.filter(a=>da(a,M)).length;return`${G(e,"teenusepakkuja","teenusepakkujat")} · järjestatud järgmise vaba aja järgi`}function yi(){return n`<section class="inquiry" aria-labelledby="paring-pealkiri">
+    <div class="inquiry-intro">
+      <h2 id="paring-pealkiri">Ei leidnud vaba aega? Saada päring piirkonna terapeutidele</h2>
+      <p>Päring läheb kõigile valitud piirkonna kinnitatud terapeutidele. Vaba ajaga terapeut võtab teiega ise ühendust. Kirjutage ainult praktiline info — mure sisu arutate terapeudiga.</p>
+    </div>
+    <form class="form inquiry-form" id="paring" novalidate>
+      <div class="form-grid">
+        <div class="field">
+          <label for="p-linn">Piirkond</label>
+          <select id="p-linn" name="p-linn">
+            ${Y.map(e=>n`<option value="${e}">${e}</option>`)}
+            <option value="veeb">Veebis, piirkond pole oluline</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="p-ryhm">Kellele aega otsite</label>
+          <select id="p-ryhm" name="p-ryhm">
+            ${Object.keys(C).map(e=>n`<option value="${e}">${C[e]}</option>`)}
+          </select>
+        </div>
+        <div class="field">
+          <label for="p-aeg">Sobiv aeg</label>
+          <select id="p-aeg" name="p-aeg">
+            <option>Ükskõik millal</option>
+            <option>Hommikupoolikul</option>
+            <option>Pärastlõunal</option>
+            <option>Õhtul või laupäeval</option>
+          </select>
+        </div>
+        ${f("p-nimi","Teie nimi",{autocomplete:"name",guard:!0})}
+        ${f("p-kontakt","Telefon või e-post",{autocomplete:"email",guard:!0})}
+        ${f("p-markus","Praktiline märkus",{type:"textarea",required:!1,guard:!0,hint:"Nt keel, liikumisvõimalused, sobiv linnaosa. Mitte diagnoosi ega isikukoodi."})}
+      </div>
+      ${q}
+      <button type="submit" class="btn btn-primary">Saada päring</button>
+      <div class="result" data-result aria-live="polite"></div>
+    </form>
+  </section>`}function Ti(){const e=[...v.trainings].sort((a,i)=>a.date<i.date?-1:1).slice(0,4);return n`<section class="almanac" aria-label="Koolitused ja vahendid">
+    <div>
+      <h2 class="h-rule">Koolituskalendris järgmisena</h2>
+      <ul class="plain-list">
+        ${e.map(a=>{const i=L(a.date),t=v.therapist(a.trainerId);return n`<li class="almanac-row">
+            <span class="mono almanac-date">${U(i)} ${K(i)}</span>
+            <span><a href="#/koolitused">${a.title}</a><br /><span class="muted">${a.city} · ${a.audience.map(s=>O[s]).join(", ")} · ${t?.name??""}</span></span>
+          </li>`})}
+      </ul>
+      <p><a class="more" href="#/koolitused">Kogu koolituskalender</a></p>
+    </div>
+    <div>
+      <h2 class="h-rule">Terapeutide soovitatud vahendid</h2>
+      <ul class="plain-list">
+        ${I.slice(0,4).map(a=>{const i=v.therapist(a.recommendedBy);return n`<li class="almanac-row">
+            <span class="mono almanac-date">${$(a.priceCents)}</span>
+            <span><a href="#/vahendid/${a.id}?ref=${a.recommendedBy}">${a.name}</a><br /><span class="muted">Soovitab ${i?.name??""}</span></span>
+          </li>`})}
+      </ul>
+      <p><a class="more" href="#/vahendid">Kõik vahendid</a></p>
+    </div>
+  </section>`}function Ki(){return{title:"Leia tegevusterapeut",render:()=>n`
+      <section class="opening wrap" aria-labelledby="mis-on">
+        <div class="opening-main">
+          <h1 id="mis-on">Mis on tegevusteraapia?</h1>
+          <p class="opening-answer">Tegevusterapeut aitab harjutada igapäevaseid asju, näiteks söömist, riietumist või kirjutamist.</p>
+          <p class="opening-action">
+            <button type="button" class="btn btn-primary btn-large" data-open-finder aria-controls="abi" aria-expanded="false">Aita mul leida õige abi</button>
+          </p>
+          <ul class="opening-links" aria-label="Kui teate juba, mida otsite">
+            <li><a href="#/" data-jump="otsing-pealkiri">Leia terapeut</a></li>
+            <li><a href="#/koolitused">Vaata koolitusi</a></li>
+            <li><a href="#/vahendid">Leia vahend</a></li>
+          </ul>
+        </div>
+        <aside class="margin-note call-note" aria-labelledby="helista">
+          <p class="margin-title" id="helista">Helista meile</p>
+          <p class="call-number"><a class="mono" href="tel:${H.tel}">${H.display}</a> <span class="muted">(näidis)</span></p>
+          <p>${H.hours}. Aitame leida terapeudi, koolituse või vahendi. Helistada võib ka lähedase eest.</p>
+        </aside>
+      </section>
+
+      <div class="wrap">${gi()}</div>
+
+      <section class="wrap search" aria-labelledby="otsing-pealkiri">
+        <h2 id="otsing-pealkiri" class="h-rule search-title" tabindex="-1">Leia tegevusterapeut ja broneeri aeg</h2>
+        <p class="search-lede">Siin on Eesti tegevusterapeudid, kes on kinnitanud oma isiku Smart-ID või Mobiil-ID-ga ja kutse Kutseregistris. Otsingus on kõrvuti üksikspetsialistid, väikesed praksised ja suured kliinikud. Vabad ajad tulevad terapeudi enda kalendrist.</p>
+        <p class="muted search-note">Broneerimisel küsime nime ja kontakti. Mitte isikukoodi ega diagnoosi — need jäävad teie ja terapeudi vahele.</p>
+        <form class="filters" id="filtrid">
+          ${Q("place","Piirkond või linn",fi,M.place)}
+          ${Q("group","Sihtrühm",bi,M.group)}
+          ${Q("funding","Rahastus",$i,M.funding)}
+          <label class="switch">
+            <input type="checkbox" name="thisWeek" role="switch" ${M.thisWeek?"checked":""} />
+            <span class="switch-track" aria-hidden="true"></span>
+            <span>Vabad ajad sel nädalal <span class="mono muted">(${ji})</span></span>
+          </label>
+        </form>
+        <p class="count" id="tulemuste-arv" aria-live="polite">${He()}</p>
+        <div id="tulemused">${xe()}</div>
+        <p class="footnote">Partneri märge tähendab, et terapeut töötab Tervisekassa või Sotsiaalkindlustusameti (SKA) lepingupartneri juures. Rahastatud teenuse tingimused, saatekirja või suunamisotsuse vajaduse täpsustab terapeut ise.</p>
+      </section>
+
+      <div class="wrap">${yi()}</div>
+      <div class="wrap">${Ti()}</div>
+    `,mount(e){hi(e),e.addEventListener("click",l=>{const o=l.target.closest("[data-jump]");if(!o)return;l.preventDefault();const d=document.getElementById(o.dataset.jump??"");d?.scrollIntoView({block:"start"}),d?.focus({preventScroll:!0})});const a=k("#filtrid",e),i=()=>{const l=P(a);M.place=l.place??"koik",M.group=l.group??"koik",M.funding=l.funding??"koik",M.thisWeek=k("[name=thisWeek]",a).checked,k("#tulemused",e).innerHTML=xe().value,k("#tulemuste-arv",e).textContent=He()};a.addEventListener("change",i);const t=k("#paring",e),s=N(t);t.addEventListener("submit",l=>{if(l.preventDefault(),!s())return;const o=P(t),d=k("[data-result]",t);if(!o["p-nimi"]||!o["p-kontakt"]){d.innerHTML=n`<p class="error">Lisage nimi ja telefon või e-post, et terapeut saaks vastata.</p>`.value;return}const p=o["p-linn"]??"",r=o["p-ryhm"]??"lapsed",c=v.therapists.filter(g=>(p==="veeb"?g.online:g.city===p||g.online&&!g.city)&&g.groups.includes(r)),u=Math.max(c.length,1);d.innerHTML=n`<div class="notice">
+          <p class="notice-title">Päring on saadetud</p>
+          <p>Päring <span class="mono">${ie("P")}</span> (näidis) läks ${G(u,"terapeudile","terapeudile")} piirkonnas ${p==="veeb"?"veeb":p}, kes töötavad sihtrühmaga „${C[r]}“. Vastus tuleb otse terapeudilt, tavaliselt kahe tööpäeva jooksul.</p>
+        </div>`.value,t.reset(),s()})}}}const J={smartid:"Smart-ID",mobiilid:"Mobiil-ID",idkaart:"ID-kaart"},m={type:"solo",step:"isik",method:"smartid",code:"",person:null,kutse:null,org:null,stash:null},be=[{id:"solo",name:"Üksikspetsialist",who:"Eraisik, FIE või ühe inimesega OÜ",price:"Baas 0 €/kuu · Profi 24 €/kuu",checks:"Isik Smart-ID, Mobiil-ID või ID-kaardiga ja kutse Kutseregistrist.",points:[],example:"kadri-tamm"},{id:"praksis",name:"Väike praksis või keskus",who:"2–5 terapeuti ühes kohas",price:"69 €/kuu",checks:"Keskuse registrikood Äriregistrist. Iga spetsialist kinnitab end ise Smart-ID-ga ja kutse Kutseregistrist.",points:["Keskuse koondleht otsingus, kõrvuti üksikspetsialistidega","Mitu Smart-ID-ga kinnitatud spetsialisti, igaühel oma alamprofiil","Ühine kalender: klient näeb kõigi terapeutide vabu aegu ühes kohas","Asutuste päringud ja kuutasu e-arvega"],example:"vaikese-kae-keskus"},{id:"kliinik",name:"Suur kliinik või ettevõte",who:"6 või rohkem terapeuti, mitu asukohta, näiteks taastusravikeskus või erahaigla",price:"189 €/kuu",checks:"Ettevõtte registrikood Äriregistrist ja Terviseameti tegevusluba. Spetsialistid lisate hiljem töölaual.",points:["Ettevõtte peakonto ja administraatori roll","Äriregistri ja Terviseameti tegevusloa kinnitus, tegevusloa number on profiilil näha","Piiramatu arv kinnitatud spetsialiste ja mitu asukohta","Tervisekassa ja SKA rahastusmärgid","Kalendri- või API-liidestus teie praeguse registratuuriga"],example:"vabaduse-kliinik"}];function $e(e){return be.find(a=>a.id===e)??be[0]}function Si(){return n`<fieldset class="service-list account-types">
+    <legend>Kes liitub</legend>
+    ${be.map(e=>n`<label class="service account-type">
+        <input type="radio" name="acc-type" value="${e.id}" ${m.type===e.id?"checked":""} />
+        <span class="service-name">${e.name}</span>
+        <span class="service-note">${e.who}</span>
+        <span class="service-price mono">${e.price}</span>
+      </label>`)}
+  </fieldset>`}function Oe(){const e=$e(m.type),a=e.example?v.therapist(e.example):void 0;return n`<div class="type-detail">
+    <h3 class="type-title">${e.name} <span class="mono type-price">${e.price}</span></h3>
+    ${e.id==="solo"?n`${Li()}
+          <p class="footnote">Baaskonto eesmärk on, et iga Eesti tegevusterapeut saaks olla otsingus nähtav ilma kuutasuta. Profi-konto tasu katab broneerimiskalendri, meeldetuletused ja e-arved.</p>`:n`<ul class="focus type-points">${e.points.map(i=>n`<li>${i}</li>`)}</ul>`}
+    <p class="type-checks"><span class="label">Liitumisel kontrollime</span> ${e.checks}</p>
+    ${a?n`<p class="muted">Näide otsingus: <a href="#/terapeut/${a.id}">${a.name}</a></p>`:""}
+  </div>`}const wi=[{label:"Kuutasu",baas:"0 €/kuu",profi:"24 €/kuu"},{label:"Kinnitatud profiil üle-eestilises otsingus",baas:"Jah",profi:"Jah"},{label:"Reaalajas broneerimiskalender, Google- või Outlooki sünkroonimine",baas:"Ei, kliendid saadavad päringu",profi:"Jah, meeldetuletused e-posti ja SMS-iga"},{label:"Koolitused koolituskalendris",baas:"Kuni 2 aastas",profi:"Piiramatult"},{label:"Asutuste ja piirkonna klientide päringud",baas:"Ainult e-postiga",profi:"Töölauale ja e-postiga"},{label:"E-poe soovitustasu",baas:"—",profi:`${_} % soovitatud vahendite müügist`}];function Li(){return n`<table class="plans">
+    <caption class="visually-hidden">Kontode võrdlus</caption>
+    <thead><tr><th scope="col"><span class="visually-hidden">Võimalus</span></th><th scope="col">Baaskonto</th><th scope="col">Profi-konto</th></tr></thead>
+    <tbody>
+      ${wi.map((e,a)=>n`<tr${a===0?n` class="plans-price"`:""}><th scope="row">${e.label}</th><td${a===0?n` class="mono"`:""}>${e.baas}</td><td${a===0?n` class="mono"`:""}>${e.profi}</td></tr>`)}
+    </tbody>
+  </table>`}const Ei={solo:"Kutseregister",praksis:"Äriregister ja kutse",kliinik:"Äriregister ja tegevusluba"};function Vi(){return[{id:"isik",label:"Isik"},{id:"sk",label:"SK kinnitus"},{id:"kutse",label:Ei[m.type]},{id:"profiil",label:"Profiil"}]}function pe(){const e=Vi(),a=e.findIndex(i=>i.id===m.step);return n`<ol class="stepper" aria-label="Liitumise sammud">
+    ${e.map((i,t)=>n`<li class="${t<a?"is-done":t===a?"is-current":""}" ${t===a?n`aria-current="step"`:""}>${i.label}</li>`)}
+  </ol>`}function me(){if(m.step==="isik")return n`<fieldset class="service-list">
+        <legend>Millega kinnitate oma isiku</legend>
+        ${Object.keys(J).map(a=>n`<label class="service">
+            <input type="radio" name="method" value="${a}" ${m.method===a?"checked":""} />
+            <span class="service-name">${J[a]}</span>
+            <span class="service-note">${a==="idkaart"?"Kaardilugeja ja PIN1":a==="mobiilid"?"Telefoninumber ja PIN1 SK lehel":"Rakendus telefonis, PIN1"}</span>
+          </label>`)}
+      </fieldset>
+      <p class="muted">Isikukoodi sisestate SK lehel, mitte meile. Platvorm saab tagasi ainult teie nime ja kinnituse, et isik on tuvastatud.</p>
+      <div class="actions"><button type="button" class="btn btn-primary" data-act="to-sk">Jätka SK Authentigate lehele</button></div>`;if(m.step==="sk")return n`<div class="external" role="region" aria-label="SK Authentigate, väline leht (simulatsioon)">
+        <p class="external-bar mono">auth.sk.ee · SK Authentigate · väline server (simulatsioon)</p>
+        <div class="external-body">
+          <p>${J[m.method]}</p>
+          ${m.method==="idkaart"?n`<p>Sisestage kaardilugejas ID-kaardi PIN1.</p>`:n`<p>Kontrollkood</p>
+                <p class="control-code mono" aria-live="polite">${m.code}</p>
+                <p>Veenduge, et telefonis on sama kood, ja sisestage ${J[m.method]} PIN1.</p>`}
+          <div class="actions">
+            <button type="button" class="btn" data-act="to-isik">Katkesta</button>
+            <button type="button" class="btn btn-primary" data-act="sk-ok">Sisestasin PIN1 (simulatsioon)</button>
+          </div>
+        </div>
+      </div>`;if(m.step==="kutse"&&m.type!=="solo")return Pi(m.type);if(m.step==="kutse")return n`<p class="ok-line">Isik tuvastatud: <strong>${m.person??""}</strong> · ${J[m.method]}</p>
+      <form class="form" id="kutse-form" novalidate>
+        ${f("kutse-nr","Kutsetunnistuse number",{inputmode:"numeric",hint:"Kuuekohaline number Kutseregistrist, nt 245 731. Tegevusterapeudi kutse tase 6 või 7."})}
+        <div class="error" data-err hidden></div>
+        <div class="actions"><button type="submit" class="btn btn-primary">Kontrolli Kutseregistrist</button></div>
+      </form>`;const e=m.type==="solo"||!m.org?n`Kinnitatud: <strong>${m.person??""}</strong> · Tegevusterapeut, tase ${m.kutse?.level??7} · <span class="mono">nr ${m.kutse?.number??""} (näidis), kehtib ${m.kutse?.validUntil??""}</span>`:n`Kinnitatud: <strong>${m.org.name}</strong> · <span class="mono">registrikood ${m.org.regCode}${m.org.licence?` · tegevusluba ${m.org.licence}`:""} (näidis)</span> · administraator ${m.person??""}`;return n`<p class="ok-line">${e}</p>
+    <form class="form" id="profiil-form" novalidate>
+      <div class="form-grid">
+        <div class="field">
+          <label for="j-linn">Kus võtate vastu</label>
+          <select id="j-linn" name="j-linn">${Y.map(a=>n`<option>${a}</option>`)}<option value="veeb">Ainult veebis</option></select>
+        </div>
+        ${f("j-piirkond","Linnaosa või aadress",{value:"Kesklinn",guard:!0})}
+        ${f("j-hind","Esmavisiidi hind eurodes",{type:"number",value:"60",min:"0",max:"300",inputmode:"numeric"})}
+      </div>
+      <fieldset class="choices">
+        <legend>Sihtrühmad</legend>
+        <div class="choices-row">
+          ${Object.keys(C).map(a=>n`<label class="choice"><input type="checkbox" name="g-${a}" ${a==="lapsed"||a==="omastehooldajad"?"checked":""} /><span>${C[a]}</span></label>`)}
+        </div>
+      </fieldset>
+      <fieldset class="choices">
+        <legend>Rahastus</legend>
+        <div class="choices-row">
+          ${Object.keys(le).map(a=>n`<label class="choice"><input type="checkbox" name="f-${a}" ${a==="tasuline"?"checked":""} /><span>${le[a]}</span></label>`)}
+        </div>
+      </fieldset>
+      <fieldset class="choices">
+        <legend>Lisaks</legend>
+        <div class="choices-row">
+          <label class="choice"><input type="checkbox" name="j-veeb" /><span>Veebikohtumised</span></label>
+          <label class="choice"><input type="checkbox" name="j-kodu" checked /><span>Koduvisiidid</span></label>
+        </div>
+      </fieldset>
+      ${m.type==="solo"?n`<fieldset class="choices">
+              <legend>Konto</legend>
+              <div class="choices-row">
+                <label class="choice"><input type="radio" name="j-plan" value="baas" /><span>${D.baas}</span></label>
+                <label class="choice"><input type="radio" name="j-plan" value="profi" checked /><span>${D.profi}</span></label>
+              </div>
+            </fieldset>`:n`<p class="ok-line">Pakett: ${D[m.type]}, arve e-arvena kord kuus.${m.org&&m.org.size>1?` Kutse saadetakse veel ${m.org.size-1} spetsialistile, kes kinnitavad end Smart-ID-ga ise.`:""}</p>`}
+      ${q}
+      <div class="error" data-err hidden></div>
+      <div class="actions"><button type="submit" class="btn btn-primary">Avalda profiil ja ava töölaud</button></div>
+    </form>`}function Pi(e){const a=e==="kliinik",i=a?[6,8,10,15,20,30]:[2,3,4,5];return n`<p class="ok-line">Isik tuvastatud: <strong>${m.person??""}</strong> · ${J[m.method]} · konto haldaja</p>
+    <form class="form" id="org-form" novalidate>
+      <div class="form-grid">
+        ${f("o-nimi",a?"Ettevõtte nimi":"Keskuse nimi",{value:m.org?.name??(a?"Kase Taastusravikliinik AS (näidis)":"Kase Teraapiakeskus OÜ (näidis)"),guard:!0})}
+        ${f("o-reg","Registrikood",{inputmode:"numeric",hint:"Kaheksa numbrit Äriregistrist, nt 16 123 456."})}
+        ${a?f("o-luba","Terviseameti tegevusloa number",{hint:"Tegevusloa number Terviseameti registrist, nt L06231."}):f("kutse-nr","Teie kutsetunnistuse number",{inputmode:"numeric",hint:"Kuuekohaline number Kutseregistrist, nt 245 731."})}
+        <div class="field">
+          <label for="o-arv">${a?"Mitu spetsialisti ettevõttes töötab":"Mitu terapeuti keskuses töötab"}</label>
+          <select id="o-arv" name="o-arv">${i.map(t=>n`<option value="${t}" ${t===(a?10:3)?"selected":""}>${t}</option>`)}</select>
+        </div>
+      </div>
+      <div class="error" data-err hidden></div>
+      ${q}
+      <div class="actions"><button type="submit" class="btn btn-primary">${a?"Kontrolli Äriregistrist ja Terviseametist":"Kontrolli Äriregistrist ja Kutseregistrist"}</button></div>
+    </form>`}const Re={lapsed:["kirjutamine","riietumine","soomine","keskkond","paevakava"],taiskasvanud:["kook","pesemine","haare","too","paevakava"],eakad:["kodu","liikumine","kook","paevakava"],omastehooldajad:["juhendamine","vahendid","kodu"],asutused:["juhendamine","keskkond"]};function Ai(e){const a=e["j-linn"]??"Tallinn",i=a==="veeb"?null:a,t=Math.max(0,Math.min(300,Number(e["j-hind"]??"60")||60)),s=Object.keys(C).filter(h=>e[`g-${h}`]),l=Object.keys(le).filter(h=>e[`f-${h}`]),o=!!e["j-veeb"]||i===null,d=!!e["j-kodu"]&&i!==null,p=[{kind:"esmavisiit",name:"Esmavisiit",minutes:60,priceCents:t*100,note:i?"Kabinetis.":"Videokõne."},{kind:"korduv",name:"Korduv kohtumine",minutes:45,priceCents:Math.max(0,t-10)*100,note:"Kabinetis või videokõnes."}];d&&p.push({kind:"koduvisiit",name:"Koduvisiit",minutes:75,priceCents:(t+20)*100,note:"Sõit linna piires on hinnas."}),o&&i&&p.push({kind:"veeb",name:"Veebinõustamine",minutes:45,priceCents:Math.max(0,t-15)*100,note:"Videokõne."});const r=m.type!=="solo"&&m.org?m.org:null,c=[...new Set(s.flatMap(h=>Re[h]))],u={id:r?m.type==="kliinik"?"kase-kliinik":"kase-keskus":"liis-kask",kind:m.type,name:r?r.name:"Liis Kask (näidis)",city:i,area:i?e["j-piirkond"]||"Kesklinn":"Ainult veebis",online:o,homeVisits:d?`${i??""} ja lähiümbrus`:null,homeCounties:d&&i?[Ke[i]]:[],groups:s.length?s:["lapsed"],funding:l.length?l:["tasuline"],languages:["eesti"],kutse:m.kutse??{number:"245 731",level:7,validUntil:"08.2031"},bio:"Profiili tutvustuse kirjutab terapeut ise oma töölaual. Siin on näha, kuidas uus kinnitatud terapeut ilmub otsingusse kohe pärast liitumist, ilma et keegi peaks profiili käsitsi üle vaatama.",focus:s.map(h=>C[h]),services:p,weekly:{1:["10:30","13:00"],2:["09:00","10:30"],4:["13:00","14:30","16:00"],5:["09:00"]},availableFrom:null,products:["pliiatsihoidja","taimer"],address:i?`${e["j-piirkond"]||"Kesklinn"}, ${i} (näidis)`:"Videokõne",tasks:c.length?c:Re.lapsed,joinedNow:!0};r&&(u.org={regCode:r.regCode,licence:r.licence,verified:1,specialists:m.kutse?[{name:"Liis Kask (näidis)",level:m.kutse.level,kutse:m.kutse.number}]:[],invited:Math.max(0,r.size-1),branches:[]},u.bio="Keskuse tutvustuse kirjutab konto haldaja töölaual. Siin on näha, kuidas uus kinnitatud keskus ilmub otsingusse kohe pärast liitumist, kõrvuti üksikspetsialistidega."),v.therapists=[...v.therapists.filter(h=>h.id!==u.id),u];const g=m.type!=="solo"?m.type:e["j-plan"]==="baas"?"baas":"profi";v.account={therapistId:u.id,plan:g,products:new Set(u.products),published:!0},g==="baas"&&(m.stash=u.weekly,u.weekly={});const b=[{d:1,time:"13:00",kind:"esmavisiit",name:"Maria R. (näidis)"},{d:5,time:"10:30",kind:"korduv",name:"Toomas K. (näidis)"},{d:9,time:"09:00",kind:d?"koduvisiit":"esmavisiit",name:"Eha L. (näidis)"}];for(const h of b)v.bookings.push({id:`B-${String(4100+h.d)}`,therapistId:u.id,service:h.kind,date:y(A(w,h.d)),time:h.time,name:h.name,email:"naidis@example.ee",phone:"+372 5555 0000",createdAt:new Date});v.emit()}function Mi(){return{title:"Terapeudile",render:()=>n`
+      <section class="intro wrap">
+        <div class="intro-main">
+          <p class="kicker">Tegevusterapeutidele ja koolitajatele</p>
+          <h1>Liitu kinnitatud tegevusterapeudina</h1>
+          <p class="lede">Platvormi asutasid Terje ja Kristel, kuid iga terapeut haldab oma profiili, vabu aegu, koolitusi ja soovitatud vahendeid ise. Isik kinnitatakse Smart-ID, Mobiil-ID või ID-kaardiga ja kutse Kutseregistrist, nii et keegi ei pea teie profiili käsitsi üle vaatama.</p>
+        </div>
+        <aside class="margin-note">
+          <p class="margin-title">Mida platvorm ei tee</p>
+          <p>Ei kogu klientide terviseandmeid ega ühendu X-teega. Kliinilised märkmed jäävad teie enda süsteemi.</p>
+        </aside>
+      </section>
+
+      <section class="wrap" aria-labelledby="paketid">
+        <h2 id="paketid" class="h-rule">Kolm liitumisviisi</h2>
+        <p class="type-lede">Liituda saab üksi, väikese praksisena või suure kliinikuna. Kõik kolm on otsingus kõrvuti ja igaüks haldab oma profiili ise.</p>
+        <div class="types">
+          <div id="j-types">${Si()}</div>
+          <div id="j-type-detail" aria-live="polite">${Oe()}</div>
+        </div>
+      </section>
+
+      <section class="wrap join" aria-labelledby="liitu">
+        <div class="join-head">
+          <h2 id="liitu">Liitumine</h2>
+          <p class="muted" id="j-type-line">Liitumisviis: <strong>${$e(m.type).name}</strong>. Muuda seda ülal.</p>
+          ${v.account?n`<p class="ok-line">Olete juba liitunud. <a href="#/terapeudile/toolaud">Ava töölaud</a></p>`:""}
+        </div>
+        <div id="j-stepper">${pe()}</div>
+        <div id="j-body" class="booking-body">${me()}</div>
+      </section>
+    `,mount(e){const a=k("#j-body",e),i=s=>{k("#j-stepper",e).innerHTML=pe().value,a.innerHTML=me().value,t(),s&&a.querySelector(s)?.focus()},t=()=>{const s=a.querySelector("#kutse-form");s&&s.addEventListener("submit",d=>{d.preventDefault();const p=(P(s)["kutse-nr"]??"").replace(/\s/g,""),r=k("[data-err]",s);if(!/^\d{6}$/.test(p)){r.hidden=!1,r.textContent="Kutsetunnistuse number on kuuekohaline.";return}if(p==="000000"){r.hidden=!1,r.textContent="Kutseregistris ei leitud selle numbriga kehtivat tegevusterapeudi kutset. Kontrollige numbrit kutseregister.ee lehel.";return}m.kutse={number:`${p.slice(0,3)} ${p.slice(3)}`,level:Number(p[5]??"1")%2===0?6:7,validUntil:"08.2031"},m.step="profiil",i("#j-linn")});const l=a.querySelector("#org-form");if(l){const d=N(l);l.addEventListener("submit",p=>{if(p.preventDefault(),!d())return;const r=P(l),c=k("[data-err]",l),u=(h,T)=>{c.hidden=!1,c.textContent=h,l.querySelector(`#${T}`)?.focus()},g=(r["o-reg"]??"").replace(/\s/g,"");if(!r["o-nimi"])return u("Lisage nimi nii, nagu see on Äriregistris.","o-nimi");if(!/^\d{8}$/.test(g))return u("Registrikood on kaheksakohaline.","o-reg");if(g==="00000000")return u("Äriregistris ei leitud selle registrikoodiga ettevõtet.","o-reg");let b=null;if(m.type==="kliinik"){const h=(r["o-luba"]??"").replace(/\s/g,"").toUpperCase();if(!/^L\d{5}$/.test(h))return u("Tegevusloa number on kujul L ja viis numbrit, nt L06231.","o-luba");if(h==="L00000")return u("Terviseameti registris ei leitud selle numbriga kehtivat tegevusluba.","o-luba");b=h}else{const h=(r["kutse-nr"]??"").replace(/\s/g,"");if(!/^\d{6}$/.test(h))return u("Kutsetunnistuse number on kuuekohaline.","kutse-nr");if(h==="000000")return u("Kutseregistris ei leitud selle numbriga kehtivat tegevusterapeudi kutset.","kutse-nr");m.kutse={number:`${h.slice(0,3)} ${h.slice(3)}`,level:Number(h[5]??"1")%2===0?6:7,validUntil:"08.2031"}}m.org={name:r["o-nimi"],regCode:`${g.slice(0,2)} ${g.slice(2,5)} ${g.slice(5)}`,licence:b,size:Number(r["o-arv"]??"2")||2},m.step="profiil",i("#j-linn")})}const o=a.querySelector("#profiil-form");if(o){const d=N(o);o.addEventListener("submit",p=>{p.preventDefault(),d()&&(Ai(P(o)),Ha("#/terapeudile/toolaud"))})}};a.addEventListener("change",s=>{const l=s.target;l.name==="method"&&(m.method=l.value)}),k("#j-types",e).addEventListener("change",s=>{const l=s.target;l.name==="acc-type"&&(m.type=l.value,m.person&&m.step==="profiil"&&(m.step="kutse"),m.type==="solo"&&(m.org=null),k("#j-type-detail",e).innerHTML=Oe().value,k("#j-type-line",e).innerHTML=n`Liitumisviis: <strong>${$e(m.type).name}</strong>. Muuda seda ülal.`.value,k("#j-stepper",e).innerHTML=pe().value,a.innerHTML=me().value,t())}),a.addEventListener("click",s=>{const l=s.target.closest("[data-act]");if(!l)return;const o=l.dataset.act;o==="to-sk"?(m.code=String(1e3+Math.floor(Math.random()*9e3)),m.step="sk",i("[data-act=sk-ok]")):o==="to-isik"?(m.step="isik",i("input[name=method]")):o==="sk-ok"&&(m.person="LIIS KASK (näidis)",m.step="kutse",i("#kutse-nr"))}),t()}}}const Be=[1,2,3,4,5,6],Fe={1:"E",2:"T",3:"K",4:"N",5:"R",6:"L"};function Ci(e){const a=v.bookings.filter(i=>i.therapistId===e.id).sort((i,t)=>`${i.date} ${i.time}`<`${t.date} ${t.time}`?-1:1);return a.length===0?n`<p class="empty">Broneeringuid veel ei ole.</p>`:n`<table class="data-table">
+    <thead><tr><th scope="col">Aeg</th><th scope="col">Klient</th><th scope="col">Teenus</th><th scope="col">Kontakt</th></tr></thead>
+    <tbody>
+      ${a.map(i=>{const t=L(i.date),s=e.services.find(l=>l.kind===i.service);return n`<tr><td class="mono">${U(t)} ${K(t)} ${i.time}</td><td>${i.name}</td><td>${s?.name??i.service}</td><td class="mono small">${i.phone}<br />${i.email}</td></tr>`})}
+    </tbody>
+  </table>`}function ke(e,a){const i=a==="baas"?m.stash??{}:e.weekly,t=Object.values(i).reduce((s,l)=>s+(l?.length??0),0);return n`<p class="count" aria-live="polite">${G(t,"avatud aeg","avatud aega")} nädalas${a==="baas"?" · kalender on Baaskontol välja lülitatud":" · muudatus jõuab otsingusse kohe"}</p>
+    <table class="slot-grid">
+      <thead><tr><th scope="col"><span class="visually-hidden">Kellaaeg</span></th>${Be.map(s=>n`<th scope="col">${Fe[s]??""}</th>`)}</tr></thead>
+      <tbody>
+        ${oa.map(s=>n`<tr>
+            <th scope="row" class="mono">${s}</th>
+            ${Be.map(l=>{const o=(i[l]??[]).includes(s);return n`<td><button type="button" class="slot-toggle" data-day="${l}" data-time="${s}" aria-pressed="${o?"true":"false"}" ${a==="baas"?"disabled":""}
+                aria-label="${Fe[l]??""} ${s}: ${o?"avatud":"suletud"}">${o?"Avatud":"·"}</button></td>`})}
+          </tr>`)}
+      </tbody>
+    </table>`}function ve(){const e=v.account;if(!e)return n``;const a=I.filter(t=>e.products.has(t.id)),i=a.reduce((t,s)=>t+Math.round(s.priceCents*10*(_/100)),0);return n`<fieldset class="pick-products">
+      <legend>Vahendid, mida soovitate oma profiilil</legend>
+      ${I.map(t=>n`<label class="check"><input type="checkbox" name="pp" value="${t.id}" ${e.products.has(t.id)?"checked":""} /> <span>${t.name} <span class="mono muted">${$(t.priceCents)}</span></span></label>`)}
+    </fieldset>
+    <p class="count" aria-live="polite" id="pp-sum">${e.plan!=="baas"?`Valitud ${a.length}. Kui iga valitud vahendi ostab teie lingi kaudu 10 klienti, on soovitustasu ${$(i)}.`:`Valitud ${a.length}. Baaskontoga saate vahendeid soovitada, ${_} % soovitustasu on Profi-kontol.`}</p>
+    <p class="mono small">tegevusteraapiakeskus.ee/vahendid?ref=${e.therapistId}</p>`}function ge(e){const a=v.account,i=v.trainings.filter(s=>s.trainerId===e.id).length,t=a?.plan==="baas"&&i>=2;return n`<form class="form" id="koolitus-form" novalidate>
+    <p class="muted">${a?.plan==="baas"?`Baaskontoga kuni 2 koolitust aastas, kasutatud ${i}.`:`${a?.plan==="profi"?"Profi-kontoga":"Teie paketiga"} piiramatult. Avaldatud ${i}.`}</p>
+    <div class="form-grid">
+      ${f("kt-title","Koolituse pealkiri",{value:"Kodused mängud peenmotoorika arendamiseks",guard:!0})}
+      ${f("kt-date","Kuupäev",{type:"date",value:y(A(w,21)),min:y(A(w,1))})}
+      ${f("kt-time","Kellaaeg",{value:"10:00–14:00"})}
+      <div class="field">
+        <label for="kt-city">Linn või veeb</label>
+        <select id="kt-city" name="kt-city">${Y.map(s=>n`<option ${e.city===s?"selected":""}>${s}</option>`)}<option>Veebis</option></select>
+      </div>
+      <div class="field">
+        <label for="kt-aud">Kellele</label>
+        <select id="kt-aud" name="kt-aud">${Object.keys(O).map(s=>n`<option value="${s}">${O[s]}</option>`)}</select>
+      </div>
+      ${f("kt-hours","Maht, ak/h",{type:"number",value:"4",min:"1",max:"80",inputmode:"numeric"})}
+      ${f("kt-seats","Kohti",{type:"number",value:"16",min:"1",max:"200",inputmode:"numeric"})}
+      ${f("kt-price","Hind eurodes",{type:"number",value:"45",min:"0",max:"2000",inputmode:"numeric"})}
+    </div>
+    <label class="check"><input type="checkbox" name="kt-ehis" /> <span>Olen EHIS-es registreeritud täienduskoolituse pakkuja</span></label>
+    ${q}
+    <div class="result" data-result aria-live="polite"></div>
+    <div class="actions"><button type="submit" class="btn btn-primary" ${t?"disabled":""}>Avalda koolituskalendris</button></div>
+  </form>`}function Ii(){const e=v.account,a=e?v.therapist(e.therapistId):void 0;return!e||!a?{title:"Terapeudi töölaud",render:()=>n`<div class="wrap page-head">
+        <h1>Terapeudi töölaud</h1>
+        <p class="lede">Töölaud avaneb pärast isiku ja kutse kinnitamist.</p>
+        <p><a class="btn btn-primary" href="#/terapeudile">Liitu ja kinnita isik</a></p>
+      </div>`}:{title:"Terapeudi töölaud",render:()=>n`
+      <div class="wrap page-head dash-head">
+        <p class="kicker">${a.org?"Keskuse töölaud":"Terapeudi töölaud"} · ${D[e.plan]}</p>
+        <h1>${a.name}</h1>
+        ${de(a,!0)}
+        <p class="ok-line">Profiil on otsingus nähtav. <a href="#/terapeut/${a.id}">Vaata oma avalikku profiili</a> · <a href="#/">Vaata otsingus</a></p>
+      </div>
+      <div class="wrap dash">
+        <nav class="dash-nav" aria-label="Töölaua osad">
+          <a href="#d-broneeringud" data-jump>Broneeringud</a>
+          <a href="#d-ajad" data-jump>Vabad ajad</a>
+          <a href="#d-koolitus" data-jump>Lisa koolitus</a>
+          <a href="#d-vahendid" data-jump>Soovitatud vahendid</a>
+          <a href="#d-konto" data-jump>Konto</a>
+        </nav>
+        <div class="dash-main">
+          <section id="d-broneeringud" aria-labelledby="h-bron">
+            <h2 id="h-bron" class="h-rule">Sissetulevad broneeringud</h2>
+            <p class="muted">Broneeringus on ainult nimi, kontakt, teenus ja aeg. Terviseinfo kogute oma süsteemis.</p>
+            <div id="d-bron-list">${Ci(a)}</div>
+          </section>
+          <section id="d-ajad" aria-labelledby="h-ajad">
+            <h2 id="h-ajad" class="h-rule">Vabad ajad</h2>
+            <p class="muted">Vajutage lahtrile, et aeg avada või sulgeda. Korduv nädalamuster järgmiseks neljaks nädalaks. Hõivatud ajad peidetakse klientide eest automaatselt.</p>
+            <div id="d-grid">${ke(a,e.plan)}</div>
+            <div class="actions"><button type="button" class="btn" data-sync ${e.plan==="baas"?"disabled":""}>Ühenda Google- või Outlooki kalender</button></div>
+          </section>
+          <section id="d-koolitus" aria-labelledby="h-koolitus">
+            <h2 id="h-koolitus" class="h-rule">Lisa koolitus koolituskalendrisse</h2>
+            <div id="d-koolitus-form">${ge(a)}</div>
+          </section>
+          <section id="d-vahendid" aria-labelledby="h-vahendid">
+            <h2 id="h-vahendid" class="h-rule">Soovitatud vahendid e-poest</h2>
+            <div id="d-pp">${ve()}</div>
+          </section>
+          <section id="d-konto" aria-labelledby="h-konto">
+            <h2 id="h-konto" class="h-rule">Konto</h2>
+            ${a.org?n`<dl class="facts facts-tight">
+                    <div><dt>Pakett</dt><dd>${D[e.plan]}</dd></div>
+                    <div><dt>Registrikood</dt><dd class="mono">${a.org.regCode} (näidis)</dd></div>
+                    ${a.org.licence?n`<div><dt>Tegevusluba</dt><dd class="mono">Terviseamet, nr ${a.org.licence} (näidis)</dd></div>`:""}
+                    <div><dt>Spetsialistid</dt><dd>${G(a.org.verified,"kinnitatud","kinnitatud")}${a.org.invited?`, kutse saadetud veel ${a.org.invited}-le. Iga spetsialist kinnitab end Smart-ID-ga ise.`:""}</dd></div>
+                  </dl>
+                  <p class="muted">Arve tuleb kord kuus e-arvena. Paketti saab muuta kirjutades, muudatus kehtib järgmisest kuust.</p>`:n`<fieldset class="choices">
+                    <legend>Pakett</legend>
+                    <div class="choices-row">
+                      <label class="choice"><input type="radio" name="plan" value="baas" ${e.plan==="baas"?"checked":""} /><span>${D.baas}</span></label>
+                      <label class="choice"><input type="radio" name="plan" value="profi" ${e.plan==="profi"?"checked":""} /><span>${D.profi}</span></label>
+                    </div>
+                  </fieldset>
+                  <p class="muted">Arve tuleb kord kuus e-arvena või PDF-ina. Paketti saab muuta igal ajal, muudatus kehtib kohe.</p>`}
+          </section>
+        </div>
+      </div>
+    `,mount(i){i.addEventListener("click",s=>{const l=s.target,o=l.closest("[data-jump]");if(o){s.preventDefault();const r=document.querySelector(o.getAttribute("href")??"");r?.scrollIntoView(),r?.querySelector("h2")?.setAttribute("tabindex","-1"),r?.querySelector("h2")?.focus();return}const d=l.closest(".slot-toggle");if(d&&e.plan!=="baas"){const r=Number(d.dataset.day),c=d.dataset.time??"",u=new Set(a.weekly[r]??[]);u.has(c)?u.delete(c):u.add(c),a.weekly={...a.weekly,[r]:oa.filter(g=>u.has(g))},k("#d-grid",i).innerHTML=ke(a,e.plan).value,i.querySelector(`.slot-toggle[data-day="${r}"][data-time="${c}"]`)?.focus(),v.emit();return}const p=l.closest("[data-sync]");p&&(p.textContent="Google kalender ühendatud (näidis)",p.disabled=!0)}),i.addEventListener("change",s=>{const l=s.target;if(l.name==="pp")l.checked?e.products.add(l.value):e.products.delete(l.value),a.products=I.filter(o=>e.products.has(o.id)).map(o=>o.id),k("#d-pp",i).innerHTML=ve().value,i.querySelector(`input[name=pp][value="${l.value}"]`)?.focus();else if(l.name==="plan"){const o=l.value;if(o===e.plan)return;e.plan=o,o==="baas"?(m.stash=a.weekly,a.weekly={}):(a.weekly=m.stash??a.weekly,m.stash=null),k(".dash-head .kicker",i).textContent=`Terapeudi töölaud · ${D[o]}`,k("#d-grid",i).innerHTML=ke(a,o).value,k("#d-pp",i).innerHTML=ve().value,k("#d-koolitus-form",i).innerHTML=ge(a).value,t(),ye("[data-sync]",i).forEach(d=>d.disabled=o==="baas"),v.emit()}});const t=()=>{const s=k("#koolitus-form",i),l=N(s);s.addEventListener("submit",o=>{if(o.preventDefault(),!l())return;const d=P(s),p=k("[data-result]",s);if(!d["kt-title"]||!d["kt-date"]||d["kt-date"]<=y(w)){p.innerHTML=n`<p class="error">Lisage pealkiri ja tulevane kuupäev.</p>`.value;return}const r={id:`k-uus-${String(v.trainings.length+1)}`,date:d["kt-date"],time:d["kt-time"]||"10:00–14:00",title:d["kt-title"],city:d["kt-city"]??"Veebis",venue:d["kt-city"]==="Veebis"?"Videokoolitus":a.address,trainerId:a.id,audience:[d["kt-aud"]??"spetsialistid"],hours:Number(d["kt-hours"]??"4")||4,ehis:!!d["kt-ehis"],seats:Number(d["kt-seats"]??"16")||16,taken:0,priceCents:(Number(d["kt-price"]??"0")||0)*100,language:"eesti"};v.trainings=[...v.trainings,r],v.emit(),k("#d-koolitus-form",i).innerHTML=ge(a).value,t();const c=L(r.date);k("[data-result]",i.querySelector("#koolitus-form")??i).innerHTML=n`<div class="notice">
+            <p class="notice-title">Avaldatud koolituskalendris</p>
+            <p>„${r.title}“, <span class="mono">${U(c)} ${K(c)}</span>, ${r.city}. <a href="#/koolitused">Vaata koolituskalendrit</a></p>
+          </div>`.value})};t()}}}const Ue=[{id:"teenus",label:"Teenus"},{id:"aeg",label:"Aeg"},{id:"kontakt",label:"Kontaktandmed"},{id:"kinnitus",label:"Kinnitus"}];function Me(e,a){return a.kind==="veeb"||!e.city?"Videokõne, link saadetakse e-postiga":a.kind==="koduvisiit"?`Teie kodus (${e.homeVisits??""})`:e.address}function Ni(e,a,i){const t=L(a.date),[s,l]=a.time.split(":").map(Number),o=new Date(t.getFullYear(),t.getMonth(),t.getDate(),s??0,l??0),d=new Date(o.getTime()+i.minutes*6e4),p=r=>`${r.getFullYear()}${String(r.getMonth()+1).padStart(2,"0")}${String(r.getDate()).padStart(2,"0")}T${String(r.getHours()).padStart(2,"0")}${String(r.getMinutes()).padStart(2,"0")}00`;return["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Tegevusteraapia Keskus//prototuup//ET","BEGIN:VEVENT",`UID:${a.id}@tegevusteraapiakeskus.ee`,`DTSTART;TZID=Europe/Tallinn:${p(o)}`,`DTEND;TZID=Europe/Tallinn:${p(d)}`,`SUMMARY:${i.name} — ${e.name}`,`LOCATION:${Me(e,i)}`,"END:VEVENT","END:VCALENDAR"].join(`\r
+`)}function Je(e){const a=Ue.findIndex(i=>i.id===e);return n`<ol class="stepper" aria-label="Broneerimise sammud">
+    ${Ue.map((i,t)=>n`<li class="${t<a?"is-done":t===a?"is-current":""}" ${t===a?n`aria-current="step"`:""}>${i.label}</li>`)}
+  </ol>`}function _e(e,a){return a.service?n`<dl class="pick-summary">
+    <div><dt>Teenus</dt><dd>${a.service.name}, ${a.service.minutes} min · <span class="mono">${$(a.service.priceCents)}</span></dd></div>
+    ${a.date&&a.time?n`<div><dt>Aeg</dt><dd class="mono">${U(L(a.date))} ${K(L(a.date))} kell ${a.time}</dd></div>`:""}
+    <div><dt>Koht</dt><dd>${Me(e,a.service)}</dd></div>
+  </dl>`:n``}function We(e,a){if(a.step==="teenus")return n`<fieldset class="service-list">
+        <legend>Valige teenus</legend>
+        ${e.services.map(s=>n`<label class="service">
+            <input type="radio" name="service" value="${s.kind}" ${a.service?.kind===s.kind?"checked":""} />
+            <span class="service-name">${s.name} <span class="muted">· ${s.minutes} min</span></span>
+            <span class="service-note">${s.note}</span>
+            <span class="service-price mono">${$(s.priceCents)}</span>
+          </label>`)}
+      </fieldset>
+      <div class="actions"><button type="button" class="btn btn-primary" data-act="to-aeg" ${a.service?"":"disabled"}>Edasi: vali aeg</button></div>`;if(a.step==="aeg"){const s=A(w,1+a.page*14),l=ee(e,s,14),o=Array.from({length:14},(r,c)=>A(s,c)),d=a.date?l.filter(r=>y(r.date)===a.date):[],p=ee(e).length===0;return n`${_e(e,a)}
+      ${p?n`<p class="notice">Järgmise nelja nädala jooksul vabu aegu ei ole. <a href="#/">Saatke päring piirkonna terapeutidele</a> — vaba ajaga terapeut vastab ise.</p>`:""}
+      <div class="cal-head">
+        <p class="cal-range mono">${K(o[0]??s)}–${K(o[13]??s)}</p>
+        <div class="cal-nav">
+          <button type="button" class="link-btn" data-act="page-prev" ${a.page===0?"disabled":""}>Eelmised 14 päeva</button>
+          <button type="button" class="link-btn" data-act="page-next" ${a.page===1?"disabled":""}>Järgmised 14 päeva</button>
+        </div>
+      </div>
+      <div class="days" role="group" aria-label="Kuupäev">
+        ${o.map(r=>{const c=l.filter(g=>y(g.date)===y(r)).length,u=a.date===y(r);return n`<button type="button" class="day" data-act="day" data-date="${y(r)}" aria-pressed="${u?"true":"false"}" ${c===0?"disabled":""}
+              aria-label="${F(r)} ${K(r)}, ${c===0?"vabu aegu ei ole":G(c,"vaba aeg","vaba aega")}">
+            <span class="day-wd">${U(r)}</span><span class="day-dm mono">${K(r)}</span><span class="day-n">${c===0?"—":`${c} vaba`}</span>
+          </button>`})}
+      </div>
+      ${a.date?n`<div class="times" role="group" aria-label="Kellaaeg">
+              <p class="label">${F(L(a.date))}, ${Te(L(a.date))}</p>
+              <div class="times-row">
+              ${d.map(r=>n`<button type="button" class="time mono" data-act="time" data-time="${r.time}" aria-pressed="${a.time===r.time?"true":"false"}">${r.time}</button>`)}
+              </div>
+            </div>`:n`<p class="muted">Valige kuupäev, et näha vabu kellaaegu.</p>`}
+      <div class="actions">
+        <button type="button" class="btn" data-act="to-teenus">Tagasi</button>
+        <button type="button" class="btn btn-primary" data-act="to-kontakt" ${a.time?"":"disabled"}>Edasi: kontaktandmed</button>
+      </div>`}if(a.step==="kontakt")return n`${_e(e,a)}
+      <form class="form" id="kontakt" novalidate>
+        <p class="form-intro">Broneerimiseks on vaja ainult kontakti. Diagnoosist ja murest räägite otse terapeudiga.</p>
+        <div class="form-grid">
+          ${f("b-nimi","Nimi",{autocomplete:"name",guard:!0,hint:"Kui broneerite lapsele või lähedasele, kirjutage oma nimi."})}
+          ${f("b-email","E-post",{type:"email",autocomplete:"email",guard:!0})}
+          ${f("b-tel","Telefon",{type:"tel",autocomplete:"tel",guard:!0,inputmode:"tel"})}
+          ${f("b-markus","Praktiline märkus",{type:"textarea",required:!1,guard:!0,hint:"Nt parkimine, lift või tõlgi vajadus. Mitte diagnoosi ega isikukoodi."})}
+        </div>
+        ${q}
+        <label class="check"><input type="checkbox" name="b-nous" required /> <span>Nõustun, et minu nime ja kontakti näeb ainult ${e.name} ja et neid kasutatakse ainult selle aja jaoks.</span></label>
+        <div class="error" data-err hidden></div>
+        <div class="actions">
+          <button type="button" class="btn" data-act="to-aeg">Tagasi</button>
+          <button type="submit" class="btn btn-primary">Kinnita broneering</button>
+        </div>
+      </form>`;const i=a.done;if(!i||!a.service)return n``;const t=L(i.date);return n`<div class="confirm" tabindex="-1" id="kinnitus">
+    <h3>Broneering on kinnitatud</h3>
+    <dl class="receipt">
+      <div><dt>Broneering</dt><dd class="mono">${i.id} (näidis)</dd></div>
+      <div><dt>Terapeut</dt><dd>${e.name}</dd></div>
+      <div><dt>Teenus</dt><dd>${a.service.name}, ${a.service.minutes} min</dd></div>
+      <div><dt>Aeg</dt><dd><span class="mono">${K(t)}</span> ${F(t)} kell <span class="mono">${i.time}</span></dd></div>
+      <div><dt>Koht</dt><dd>${Me(e,a.service)}</dd></div>
+      <div><dt>Hind</dt><dd class="mono">${$(a.service.priceCents)}, tasute terapeudile</dd></div>
+    </dl>
+    <p>Kinnitus saadeti aadressile <strong>${i.email}</strong>. Aja saab tasuta tühistada kuni 24 tundi enne kohtumist kinnituskirjas oleva lingi kaudu.</p>
+    <div class="actions">
+      <a class="btn btn-primary" data-ics download="${i.id}.ics" href="#">Lisa oma kalendrisse (.ics)</a>
+      <a class="btn" href="#/">Tagasi otsingusse</a>
+    </div>
+  </div>`}function qi(e){const a=I.filter(i=>e.products.includes(i.id));return a.length===0?n``:n`<section class="recs" aria-labelledby="soovitused">
+    <h2 id="soovitused" class="h-rule">Selle terapeudi soovitatud vahendid e-poest</h2>
+    <p class="muted">Ostes selle lehe kaudu, saab ${e.name} ${_} % soovitustasu. Teie jaoks hind ei muutu.</p>
+    <ul class="plain-list">
+      ${a.map(i=>n`<li class="rec">
+          ${Se(i)}
+          <div>
+            <h3 class="rec-name"><a href="#/vahendid/${i.id}?ref=${e.id}">${i.name}</a></h3>
+            <p class="rec-note">„${i.note}“</p>
+            <p class="muted mono">?ref=${e.id}</p>
+          </div>
+          <div class="rec-side">
+            <p class="price mono">${$(i.priceCents)}</p>
+            <button type="button" class="btn" data-add="${i.id}" data-ref="${e.id}">Lisa korvi</button>
+          </div>
+        </li>`)}
+    </ul>
+  </section>`}function Di(e){const a=v.trainings.filter(i=>i.trainerId===e.id);return a.length===0?n``:n`<section aria-labelledby="koolitused-terapeut">
+    <h2 id="koolitused-terapeut" class="h-rule">Koolitused koolituskalendris</h2>
+    <ul class="plain-list">
+      ${a.map(i=>{const t=L(i.date);return n`<li class="almanac-row">
+          <span class="mono almanac-date">${U(t)} ${K(t)}</span>
+          <span><a href="#/koolitused">${i.title}</a><br /><span class="muted">${i.city} · ${i.audience.map(s=>O[s]).join(", ")} · ${i.hours} ak/h</span></span>
+        </li>`})}
+    </ul>
+  </section>`}function xi(e){const a=v.therapist(e);if(!a)return{title:"Terapeuti ei leitud",render:()=>n`<div class="wrap page-head"><h1>Terapeuti ei leitud</h1><p><a href="#/">Tagasi otsingusse</a></p></div>`};const i={step:"teenus",service:a.services.length===1?a.services[0]??null:null,date:null,time:null,page:0,done:null};return{title:a.name,render:()=>n`
+      <nav class="wrap crumbs" aria-label="Asukoht"><a href="#/">Leia terapeut</a> <span aria-hidden="true">/</span> <span>${a.name}</span></nav>
+      <div class="wrap profile">
+        <aside class="profile-card">
+          ${ra(a,"lg")}
+          <h1 class="profile-name">${a.name}</h1>
+          <p class="profile-place">${ua(a)}</p>
+          ${de(a,!0)}
+          <dl class="facts">
+            ${a.org?n`<div><dt>Teenusepakkuja</dt><dd>${we(a)}<br /><span class="mono">Registrikood ${a.org.regCode} (näidis)</span></dd></div>
+                  ${a.org.licence?n`<div><dt>Tegevusluba</dt><dd>Terviseamet<br /><span class="mono">nr ${a.org.licence} (näidis)</span></dd></div>`:""}
+                  <div><dt>Spetsialistid</dt><dd>
+                    <ul class="plain-list team">${a.org.specialists.map(t=>n`<li>${t.name}<br /><span class="mono small">Tase ${t.level} · nr ${t.kutse} · Smart-ID</span></li>`)}</ul>
+                    ${a.org.verified>a.org.specialists.length?n`<span class="muted">ja veel ${a.org.verified-a.org.specialists.length} kinnitatud spetsialisti</span>`:""}
+                    ${a.org.invited?n`<span class="muted">Kutse saadetud ${a.org.invited}-le, ootab Smart-ID kinnitust</span>`:""}
+                  </dd></div>`:n`<div><dt>Isik</dt><dd>Kinnitatud Smart-ID-ga, SK Authentigate</dd></div>
+                  <div><dt>Kutse</dt><dd>Tegevusterapeut, tase ${a.kutse.level}<br /><span class="mono">Kutsetunnistus ${a.kutse.number} (näidis), kehtib ${a.kutse.validUntil}</span></dd></div>`}
+            <div><dt>Sihtrühm</dt><dd>${pa(a)}</dd></div>
+            <div><dt>Rahastus</dt><dd>${Ga(a)}</dd></div>
+            <div><dt>Keeled</dt><dd>${a.languages.join(", ")}</dd></div>
+            <div><dt>${a.org?.branches.length?"Asukohad":"Asukoht"}</dt><dd>${a.address}${a.org?.branches.map(t=>n`<br />${t.address}`)??""}</dd></div>
+          </dl>
+        </aside>
+        <div class="profile-main">
+          <p class="bio">${a.bio}</p>
+          <ul class="focus">${a.focus.map(t=>n`<li>${t}</li>`)}</ul>
+
+          <section class="booking" aria-labelledby="broneeri">
+            <div class="booking-head">
+              <h2 id="broneeri">Broneeri aeg</h2>
+              <p class="muted">Ajad tulevad otse terapeudi kalendrist. Hõivatud ajad on peidetud.</p>
+            </div>
+            <div id="stepper">${Je(i.step)}</div>
+            <div id="broneering" class="booking-body">${We(a,i)}</div>
+          </section>
+
+          ${qi(a)}
+          ${Di(a)}
+        </div>
+      </div>
+    `,mount(t){const s=k("#broneering",t),l=p=>{k("#stepper",t).innerHTML=Je(i.step).value,s.innerHTML=We(a,i).value,i.step==="kontakt"&&o(),i.step==="kinnitus"&&d(),p&&s.querySelector(p)?.focus()},o=()=>{const p=k("#kontakt",s),r=N(p);p.addEventListener("submit",c=>{if(c.preventDefault(),!r()||!i.service||!i.date||!i.time)return;const u=P(p),g=k("[data-err]",p),b=[];if(u["b-nimi"]||b.push("nimi"),/^\S+@\S+\.\S+$/.test(u["b-email"]??"")||b.push("korrektne e-post"),(u["b-tel"]??"").replace(/\D/g,"").length<7&&b.push("telefon"),u["b-nous"]||b.push("nõusolek"),b.length){g.hidden=!1,g.textContent=`Palun lisage: ${b.join(", ")}.`;return}i.done=v.book({therapistId:a.id,service:i.service.kind,date:i.date,time:i.time,name:u["b-nimi"]??"",email:u["b-email"]??"",phone:u["b-tel"]??""}),i.step="kinnitus",l("#kinnitus")})},d=()=>{const p=s.querySelector("[data-ics]");p&&i.done&&i.service&&(p.href=URL.createObjectURL(new Blob([Ni(a,i.done,i.service)],{type:"text/calendar"})))};s.addEventListener("change",p=>{const r=p.target;if(r.name==="service"){i.service=a.services.find(u=>u.kind===r.value)??null;const c=s.querySelector("[data-act=to-aeg]");c&&(c.disabled=!i.service)}}),s.addEventListener("click",p=>{const r=p.target.closest("[data-act]");if(!r)return;const c=r.dataset.act;if(c==="to-teenus")i.step="teenus",l("input[name=service]");else if(c==="to-aeg"){if(i.step="aeg",!i.date){const u=ee(a)[0];u&&(i.date=y(u.date),i.page=u.date>=A(w,15)?1:0)}l(".day[aria-pressed=true]")}else c==="page-prev"||c==="page-next"?(i.page=c==="page-next"?1:0,l(`[data-act=${c}]`)):c==="day"?(i.date=r.dataset.date??null,i.time=null,l(`.day[data-date="${i.date??""}"]`)):c==="time"?(i.time=r.dataset.time??null,l(`.time[data-time="${i.time??""}"]`)):c==="to-kontakt"&&(i.step="kontakt",l("#b-nimi"))}),t.addEventListener("click",p=>{const r=p.target.closest("[data-add]");r&&(v.addToCart(r.dataset.add??"",r.dataset.ref??null),r.textContent="Korvis")})}}}const Hi=["Kõik",...new Set(I.map(e=>e.category))];let oe="Kõik",B=null;function $a(e){const a=e?v.therapist(e):void 0;return a?n`<p class="ref-banner">Tulite terapeudi <a href="#/terapeut/${a.id}">${a.name}</a> soovituse kaudu. Teie ostult saab terapeut ${_} % soovitustasu, hind teile ei muutu. <span class="mono">ref=${a.id}</span></p>`:n``}function ja(e){return n`<dl class="facts facts-tight">
+    <div><dt>Tootja</dt><dd>${e.safety.maker}</dd></div>
+    <div><dt>Märgised</dt><dd>${e.safety.marks}</dd></div>
+    <div><dt>Vanus</dt><dd>${e.safety.age}</dd></div>
+    <div><dt>Hoiatus</dt><dd>${e.safety.warning}</dd></div>
+    <div><dt>Vastutav isik EL-is</dt><dd>Tegevusteraapia Keskus OÜ (näidis), Tallinn</dd></div>
+    <div><dt>Tootekood</dt><dd class="mono">${e.sku}</dd></div>
+  </dl>`}function Oi(e,a){const i=v.therapist(e.recommendedBy),t=a??e.recommendedBy;return n`<li class="product" data-cat="${e.category}">
+    ${Se(e)}
+    <div class="product-main">
+      <p class="label">${e.category}</p>
+      <h3><a href="#/vahendid/${e.id}${a?`?ref=${a}`:""}">${e.name}</a></h3>
+      <p>${e.summary}</p>
+      <blockquote class="therapist-note">
+        <p>„${e.note}“</p>
+        <footer>— ${i?n`<a href="#/terapeut/${i.id}">${i.name}</a>`:""}, tegevusterapeut</footer>
+      </blockquote>
+      <details class="safety"><summary>Ohutus- ja tooteinfo (GPSR)</summary>${ja(e)}</details>
+    </div>
+    <div class="product-side">
+      <p class="price mono">${$(e.priceCents)}</p>
+      <p class="muted">${e.digital?"Allalaadimine pärast makset":e.stock<10?`Laos ${e.stock} tk`:"Laos, mahub pakiautomaati"}</p>
+      <button type="button" class="btn btn-primary" data-add="${e.id}" data-ref="${t}">Lisa korvi</button>
+    </div>
+  </li>`}function Ge(e){const a=I.filter(i=>oe==="Kõik"||i.category===oe);return n`<ol class="products">${a.map(i=>Oi(i,e))}</ol>`}function ya(e){e.addEventListener("click",a=>{const i=a.target.closest("[data-add]");if(!i)return;v.addToCart(i.dataset.add??"",i.dataset.ref??null),i.textContent="Lisatud korvi";const t=document.getElementById("korv-teade");t&&(t.textContent=`Lisatud korvi. Korvis on ${v.cartCount()} toodet.`)})}function Ta(){Le("Küsi pakkumist asutusele",n`<p class="dialog-lede">Vahendid lasteaiale, koolile või hooldekodule koguse järgi.</p>
+      <p class="muted">Koostame Shopifys mustandtellimuse ja saadame pakkumise. Arve tuleb masinloetava e-arvena, tasumine 14 päeva jooksul.</p>
+      <form class="form" id="quote-form" novalidate>
+        <table class="qty-table">
+          <thead><tr><th scope="col">Toode</th><th scope="col">Hind</th><th scope="col">Kogus</th></tr></thead>
+          <tbody>
+            ${I.filter(e=>!e.digital).map(e=>n`<tr>
+                <th scope="row">${e.name}</th>
+                <td class="mono">${$(e.priceCents)}</td>
+                <td><label class="visually-hidden" for="q-${e.id}">Kogus: ${e.name}</label><input class="qty-input" id="q-${e.id}" name="q-${e.id}" type="number" min="0" max="500" value="0" inputmode="numeric" /></td>
+              </tr>`)}
+          </tbody>
+        </table>
+        <div class="form-grid">
+          ${f("q-asutus","Asutuse nimi",{autocomplete:"organization",guard:!0})}
+          ${f("q-regkood","Registrikood",{inputmode:"numeric",pattern:"[0-9]{8}",hint:"8 numbrit, e-arve saatmiseks."})}
+          ${f("q-email","E-post",{type:"email",autocomplete:"email",guard:!0})}
+          ${f("q-viide","Viitenumber või hankeviide",{required:!1})}
+        </div>
+        ${q}
+        <p class="count mono" data-qsum>Kokku 0 tk · 0 €</p>
+        <div class="error" data-err hidden></div>
+        <div class="actions"><button type="submit" class="btn btn-primary">Küsi pakkumist (e-arvega)</button></div>
+      </form>`,e=>{const a=k("#quote-form",e),i=N(a),t=()=>{let s=0,l=0;for(const o of I){const d=a.querySelector(`#q-${o.id}`),p=d?Math.max(0,Number(d.value)||0):0;s+=p,l+=p*o.priceCents}return{qty:s,cents:l}};a.addEventListener("input",()=>{const s=t();k("[data-qsum]",a).textContent=`Kokku ${s.qty} tk · ${$(s.cents)} (koguse hinnapakkumine võib olla soodsam)`}),a.addEventListener("submit",s=>{if(s.preventDefault(),!i())return;const l=P(a),o=t(),d=k("[data-err]",a);if(o.qty===0||!l["q-asutus"]||!/^\d{8}$/.test(l["q-regkood"]??"")||!/^\S+@\S+\.\S+$/.test(l["q-email"]??"")){d.hidden=!1,d.textContent="Valige vähemalt üks toode ning lisage asutuse nimi, 8-kohaline registrikood ja e-post.";return}k(".dialog-body",e).innerHTML=n`<div class="confirm">
+          <h3>Pakkumise päring on saadetud</h3>
+          <dl class="receipt">
+            <div><dt>Mustandtellimus</dt><dd class="mono">${ie("D")} (näidis)</dd></div>
+            <div><dt>Asutus</dt><dd>${l["q-asutus"]??""}, <span class="mono">${l["q-regkood"]??""}</span></dd></div>
+            <div><dt>Kogus</dt><dd class="mono">${o.qty} tk, jaehinnas ${$(o.cents)}</dd></div>
+          </dl>
+          <p>Pakkumine tuleb aadressile ${l["q-email"]??""} ühe tööpäeva jooksul. Kinnitamisel saadame e-arve teie e-arve operaatorile.</p>
+          <div class="actions"><button type="button" class="btn btn-primary" data-close>Sulge</button></div>
+        </div>`.value})})}function Ri(){return n`<aside class="margin-note">
+    <p class="margin-title">Asutusele</p>
+    <p>Lasteaed, kool või hooldekodu saab koguse kohta pakkumise ja e-arve.</p>
+    <button type="button" class="btn" data-quote>Küsi pakkumist (e-arvega)</button>
+    <p class="margin-title margin-gap">Tagastamine</p>
+    <p>Lepingust saab taganeda 14 päeva jooksul. <a href="#/taganemine">Taganemisavaldus</a></p>
+  </aside>`}function Bi(e){return{title:"Vahendid",render:()=>n`
+      <section class="intro wrap">
+        <div class="intro-main">
+          <p class="kicker">E-pood · tarne pakiautomaati üle Eesti</p>
+          <h1>Vahendid</h1>
+          <p class="lede">Tegevusterapeutide soovitatud abivahendid, peenmotoorika vahendid ja eestikeelsed töölehed. Iga toote juures on terapeudi märkus, miks ja kellele ta seda kasutab, ning ohutusinfo.</p>
+        </div>
+        ${Ri()}
+      </section>
+      <section class="wrap">
+        ${$a(e)}
+        <fieldset class="choices" id="kategooria">
+          <legend>Kategooria</legend>
+          <div class="choices-row">
+            ${Hi.map(a=>n`<label class="choice"><input type="radio" name="cat" value="${a}" ${a===oe?"checked":""} /><span>${a}</span></label>`)}
+          </div>
+        </fieldset>
+        <div id="kataloog">${Ge(e)}</div>
+      </section>
+    `,mount(a){ya(a),k("#kategooria",a).addEventListener("change",i=>{oe=i.target.value,k("#kataloog",a).innerHTML=Ge(e).value}),a.addEventListener("click",i=>{i.target.closest("[data-quote]")&&Ta()})}}}function Fi(e,a){const i=v.product(e);if(!i)return{title:"Toodet ei leitud",render:()=>n`<div class="wrap page-head"><h1>Toodet ei leitud</h1><p><a href="#/vahendid">Kõik vahendid</a></p></div>`};const t=v.therapist(i.recommendedBy),s=a??i.recommendedBy;return{title:i.name,render:()=>n`
+      <nav class="wrap crumbs" aria-label="Asukoht"><a href="#/vahendid">Vahendid</a> <span aria-hidden="true">/</span> <span>${i.name}</span></nav>
+      <div class="wrap">${$a(a)}</div>
+      <div class="wrap product-page">
+        ${Se(i,"lg")}
+        <div>
+          <p class="label">${i.category}</p>
+          <h1>${i.name}</h1>
+          <p class="lede">${i.summary}</p>
+          <p class="price price-lg mono">${$(i.priceCents)}</p>
+          <p class="muted">${i.digital?"Digisisu. Laadite alla kohe pärast makset.":`Laos ${i.stock} tk. Tarne pakiautomaati 1–3 tööpäevaga.`}</p>
+          <div class="actions">
+            <button type="button" class="btn btn-primary" data-add="${i.id}" data-ref="${s}">Lisa korvi</button>
+            <a class="btn" href="#/korv">Vaata korvi</a>
+          </div>
+          <p class="visually-hidden" id="korv-teade" aria-live="polite"></p>
+          <blockquote class="therapist-note">
+            <p>„${i.note}“</p>
+            <footer>— ${t?n`<a href="#/terapeut/${t.id}">${t.name}</a>`:""}, tegevusterapeut</footer>
+          </blockquote>
+          <h2 class="h-rule">Ohutus- ja tooteinfo</h2>
+          ${ja(i)}
+        </div>
+      </div>
+    `,mount:ya}}const V={carrier:"omniva",locker:"",bank:"Swedbank"};function je(){let e=0,a=!1,i=!1;for(const l of v.cart){const o=v.product(l.productId);o&&(e+=o.priceCents*l.qty,o.digital?i=!0:a=!0)}const t=Z.find(l=>l.id===V.carrier),s=a?t?.priceCents??0:0;return{goods:e,shipping:s,total:e+s,physical:a,digital:i}}function Ye(){if(v.cart.length===0)return n`<p class="empty">Korv on tühi. <a href="#/vahendid">Vaata vahendeid</a></p>`;const e=je(),a=Z.find(i=>i.id===V.carrier)??Z[0];return n`<div class="cart">
+    <div class="cart-main">
+      <table class="cart-table">
+        <caption class="visually-hidden">Korvi sisu</caption>
+        <thead><tr><th scope="col">Toode</th><th scope="col">Kogus</th><th scope="col" class="num">Summa</th></tr></thead>
+        <tbody>
+          ${v.cart.map(i=>{const t=v.product(i.productId);if(!t)return"";const s=i.ref?v.therapist(i.ref):void 0;return n`<tr>
+              <th scope="row">
+                <a href="#/vahendid/${t.id}">${t.name}</a>
+                <span class="muted block mono">${$(t.priceCents)} / tk${t.digital?" · digisisu":""}</span>
+                ${s?n`<span class="muted block">Soovitas ${s.name} · ${_} % soovitustasu terapeudile</span>`:""}
+              </th>
+              <td>
+                <div class="qty">
+                  <button type="button" class="qty-btn" data-qty="${t.id}" data-d="-1" aria-label="Vähenda: ${t.name}">−</button>
+                  <span class="mono" aria-live="polite">${i.qty}</span>
+                  <button type="button" class="qty-btn" data-qty="${t.id}" data-d="1" aria-label="Suurenda: ${t.name}">+</button>
+                </div>
+              </td>
+              <td class="num mono">${$(t.priceCents*i.qty)}</td>
+            </tr>`})}
+        </tbody>
+      </table>
+
+      <form class="form" id="kassa" novalidate>
+        ${e.physical?n`<fieldset class="carriers">
+              <legend>Tarne pakiautomaati</legend>
+              ${Z.map(i=>n`<label class="service">
+                  <input type="radio" name="carrier" value="${i.id}" ${i.id===V.carrier?"checked":""} />
+                  <span class="service-name">${i.name}</span>
+                  <span class="service-note">${i.lockers.length} automaati selles prototüübis</span>
+                  <span class="service-price mono">${$(i.priceCents)}</span>
+                </label>`)}
+              <div class="field">
+                <label for="locker">${a?.name??"Pakiautomaat"}: vali asukoht</label>
+                <select id="locker" name="locker" required>
+                  <option value="">Valige pakiautomaat</option>
+                  ${(a?.lockers??[]).map(i=>n`<option ${V.locker===i?"selected":""}>${i} (näidis)</option>`)}
+                </select>
+              </div>
+            </fieldset>`:n`<p class="muted">Korvis on ainult digisisu, tarnet ei ole vaja.</p>`}
+        <fieldset>
+          <legend>Kontakt</legend>
+          <div class="form-grid">
+            ${f("k-nimi","Nimi",{autocomplete:"name",guard:!0})}
+            ${f("k-email","E-post",{type:"email",autocomplete:"email",guard:!0})}
+            ${f("k-tel","Telefon",{type:"tel",autocomplete:"tel",guard:!0,hint:"Pakiautomaadi kood tuleb SMS-iga."})}
+          </div>
+        </fieldset>
+        <fieldset class="banks">
+          <legend>Pangalink, Maksekeskus</legend>
+          <div class="bank-grid">
+            ${Ba.map(i=>n`<label class="bank"><input type="radio" name="bank" value="${i}" ${i===V.bank?"checked":""} /><span>${i}</span></label>`)}
+          </div>
+        </fieldset>
+        <label class="check"><input type="checkbox" name="tingimused" /> <span>Olen tutvunud <a href="#/taganemine">müügitingimuste ja taganemisõigusega</a>.</span></label>
+        ${e.digital?n`<label class="check"><input type="checkbox" name="digisisu" /> <span>Soovin digisisu kohe kätte ja olen teadlik, et taganemisõigus lõpeb allalaadimise algusega.</span></label>`:""}
+        ${q}
+        <div class="error" data-err hidden></div>
+        <button type="submit" class="btn btn-primary btn-wide">Maksa ${$(e.total)}: ${V.bank}</button>
+      </form>
+    </div>
+    <aside class="cart-summary" aria-label="Kokkuvõte">
+      <dl class="receipt">
+        <div><dt>Tooted</dt><dd class="mono">${$(e.goods)}</dd></div>
+        <div><dt>Tarne</dt><dd class="mono">${e.physical?$(e.shipping):"—"}</dd></div>
+        <div class="receipt-total"><dt>Kokku</dt><dd class="mono">${$(e.total)}</dd></div>
+      </dl>
+      <p class="muted">Hinnad sisaldavad käibemaksu. Makse liigub Maksekeskuse kaudu teie panka, kaardiandmeid me ei näe.</p>
+      <p class="muted">Asutusele: <button type="button" class="link-btn" data-quote>küsi pakkumist e-arvega</button></p>
+    </aside>
+  </div>`}function ze(e){return n`<div class="confirm" tabindex="-1" id="tellimus">
+    <h2>Makse on laekunud, tellimus on vastu võetud</h2>
+    <dl class="receipt">
+      <div><dt>Tellimus</dt><dd class="mono">${e.id} (näidis)</dd></div>
+      ${e.lines.map(a=>n`<div><dt>${a.qty} × ${a.name}</dt><dd class="mono">${$(a.cents)}</dd></div>`)}
+      <div class="receipt-total"><dt>Kokku makstud</dt><dd class="mono">${$(e.total)}</dd></div>
+      ${e.locker?n`<div><dt>Pakiautomaat</dt><dd>${e.locker}</dd></div>`:""}
+    </dl>
+    <p>Kinnitus ja arve saadeti aadressile <strong>${e.email}</strong>. ${e.locker?`Pakk jõuab automaati eeldatavasti ${K(A(w,2))}.`:""}</p>
+    <p>Kui soovite lepingust taganeda, saate seda teha 14 päeva jooksul: <a href="#/taganemine?tellimus=${e.id}">taganemisavaldus tellimusele ${e.id}</a>.</p>
+    <div class="actions"><a class="btn" href="#/vahendid">Tagasi vahendite juurde</a></div>
+  </div>`}function Ui(){return{title:"Korv",render:()=>n`
+      <div class="wrap page-head">
+        <h1>Korv</h1>
+        <p class="lede">Tarne Omniva, SmartPosti, DPD või Venipaki pakiautomaati. Makse pangalingiga Maksekeskuse kaudu.</p>
+      </div>
+      <div class="wrap" id="korv">${B&&v.cart.length===0?ze(B):Ye()}</div>
+    `,mount(e){const a=k("#korv",e),i=()=>{a.innerHTML=Ye().value,t()},t=()=>{const s=a.querySelector("#kassa");if(!s)return;const l=N(s);s.addEventListener("change",o=>{const d=o.target;d.name==="carrier"?(V.carrier=d.value,V.locker="",i(),a.querySelector(`input[name=carrier][value=${d.value}]`)?.focus()):d.name==="bank"?(V.bank=d.value,k("[type=submit]",s).textContent=`Maksa ${$(je().total)}: ${V.bank}`):d.name==="locker"&&(V.locker=d.value.replace(" (näidis)",""))}),s.addEventListener("submit",o=>{if(o.preventDefault(),!l())return;const d=P(s),p=je(),r=k("[data-err]",s),c=[];if(p.physical&&!d.locker&&c.push("pakiautomaat"),d["k-nimi"]||c.push("nimi"),/^\S+@\S+\.\S+$/.test(d["k-email"]??"")||c.push("korrektne e-post"),p.physical&&(d["k-tel"]??"").replace(/\D/g,"").length<7&&c.push("telefon"),d.tingimused||c.push("tingimustega nõustumine"),p.digital&&!d.digisisu&&c.push("digisisu nõusolek"),c.length){r.hidden=!1,r.textContent=`Palun lisage: ${c.join(", ")}.`;return}const u=k("[type=submit]",s);u.disabled=!0,u.textContent=`Suuname Maksekeskuse kaudu: ${V.bank} (simulatsioon)`,window.setTimeout(()=>{B={id:`TK-${String(10418+Math.floor(Math.random()*400))}`,lines:v.cart.map(g=>{const b=v.product(g.productId);return{name:b?.name??"",qty:g.qty,cents:(b?.priceCents??0)*g.qty,digital:b?.digital??!1}}),total:p.total,email:d["k-email"]??"",locker:p.physical?`${Z.find(g=>g.id===V.carrier)?.name??""}, ${d.locker??""}`:null},v.cart=[],v.emit(),a.innerHTML=ze(B).value,a.querySelector("#tellimus")?.focus()},700)})};t(),a.addEventListener("click",s=>{const l=s.target,o=l.closest("[data-qty]");if(o){const d=o.dataset.qty??"",p=v.cart.find(r=>r.productId===d);p&&v.setQty(d,p.qty+Number(o.dataset.d??0)),i(),a.querySelector(`[data-qty="${d}"][data-d="${o.dataset.d??""}"]`)?.focus();return}l.closest("[data-quote]")&&Ta()})}}}function Ji(e){const a=B&&B.id===e?B:null;return{title:"Taganemine lepingust",render:()=>n`
+      <div class="wrap page-head">
+        <h1>Taganemine lepingust</h1>
+        <p class="lede">E-poes ostetud toodetest saate taganeda 14 päeva jooksul pärast kättesaamist. Alates 1. septembrist 2026 saab seda teha otse siin, ilma sisselogimiseta ja ka külalisena tehtud tellimuse puhul.</p>
+      </div>
+      <div class="wrap narrow" id="taganemine">
+        <form class="form" id="tag-form" novalidate>
+          <div class="form-grid">
+            ${f("t-tellimus","Tellimuse number",{value:e??"",hint:"Näiteks TK-10418. Number on kinnituskirjas."})}
+            ${f("t-email","Tellimusel kasutatud e-post",{type:"email",autocomplete:"email",value:a?.email??""})}
+          </div>
+          ${a?n`<fieldset><legend>Millest taganete</legend>
+                ${a.lines.map((i,t)=>n`<label class="check"><input type="checkbox" name="rida-${t}" checked ${i.digital?"disabled":""} /> <span>${i.qty} × ${i.name}${i.digital?" — digisisu on alla laaditud, taganemisõigus on lõppenud":""}</span></label>`)}
+              </fieldset>`:n`${f("t-tooted","Tooted, millest taganete",{type:"textarea",required:!1,hint:"Kui jätate tühjaks, loeme taganemise kogu tellimuse kohta."})}`}
+          ${f("t-pohjus","Põhjus",{type:"textarea",required:!1,hint:"Põhjust ei pea ütlema."})}
+          <div class="error" data-err hidden></div>
+          <div class="actions"><button type="submit" class="btn btn-primary">Edasi: kontrolli andmeid</button></div>
+        </form>
+      </div>
+    `,mount(i){const t=k("#taganemine",i),s=k("#tag-form",t);s.addEventListener("submit",l=>{l.preventDefault();const o=P(s),d=k("[data-err]",s);if(!/^TK-\d{4,6}$/i.test(o["t-tellimus"]??"")||!/^\S+@\S+\.\S+$/.test(o["t-email"]??"")){d.hidden=!1,d.textContent="Palun lisage tellimuse number kujul TK-10418 ja e-post.";return}const p=a?a.lines.filter((c,u)=>!a.lines[u]?.digital&&s.querySelector(`[name=rida-${u}]`)?.checked).map(c=>`${c.qty} × ${c.name}`):[o["t-tooted"]||"Kogu tellimus"];s.hidden=!0;const r=document.createElement("div");r.className="confirm",r.tabIndex=-1,r.innerHTML=n`<h2>Kontrollige ja kinnitage</h2>
+          <dl class="receipt">
+            <div><dt>Tellimus</dt><dd class="mono">${(o["t-tellimus"]??"").toUpperCase()}</dd></div>
+            <div><dt>E-post</dt><dd>${o["t-email"]??""}</dd></div>
+            <div><dt>Taganen</dt><dd>${p.join("; ")}</dd></div>
+          </dl>
+          <div class="actions">
+            <button type="button" class="btn" data-back>Muuda</button>
+            <button type="button" class="btn btn-primary" data-final>Kinnitan taganemise</button>
+          </div>`.value,t.append(r),r.focus(),r.addEventListener("click",c=>{const u=c.target;if(u.closest("[data-back]"))r.remove(),s.hidden=!1,k("#t-tellimus",s).focus();else if(u.closest("[data-final]")){const g=new Date,b=`${Te(g)} kell ${g.toLocaleTimeString("et-EE")}`;r.innerHTML=n`<h2>Taganemisavaldus on kätte saadud</h2>
+              <dl class="receipt">
+                <div><dt>Ajatempel</dt><dd class="mono">${b}</dd></div>
+                <div><dt>Tellimus</dt><dd class="mono">${(o["t-tellimus"]??"").toUpperCase()}</dd></div>
+                <div><dt>Tagastuskood</dt><dd class="mono">${ie("OMN")} (näidis)</dd></div>
+              </dl>
+              <p>Kinnitus koos ajatempliga saadeti aadressile <strong>${o["t-email"]??""}</strong>. Saatke tooted 14 päeva jooksul tagastuskoodiga mis tahes Omniva pakiautomaati. Raha tagastame samasse panka 14 päeva jooksul alates tänasest.</p>`.value,r.focus()}})})}}}const x={city:"koik",audience:"koik"};function Ka(){return[...v.trainings].filter(e=>x.city==="koik"||e.city===x.city).filter(e=>x.audience==="koik"||e.audience.includes(x.audience)).sort((e,a)=>e.date<a.date?-1:e.date>a.date?1:0)}function _i(e){const a=v.seatsLeft(e),i=Math.round((e.seats-a)/e.seats*100);return n`<div class="seats">
+    <p class="mono">${a===0?"Kohad on täis":`Vabu kohti ${a} / ${e.seats}`}</p>
+    <div class="seats-bar" aria-hidden="true"><span style="width:${i}%"></span></div>
+  </div>`}function Ze(){const e=Ka();if(e.length===0)return n`<p class="empty">Selle valikuga koolitusi praegu kalendris ei ole. Asutusele saab tellida koolituse sobival ajal.</p>`;const a=new Map;for(const i of e){const t=L(i.date),s=`${ta(t)} ${t.getFullYear()}`;a.set(s,[...a.get(s)??[],i])}return n`${[...a.entries()].map(([i,t])=>n`<section class="month">
+      <h2 class="month-title">${i.charAt(0).toUpperCase()+i.slice(1)}</h2>
+      <ol class="trainings">
+        ${t.map(s=>{const l=L(s.date),o=v.therapist(s.trainerId),d=v.seatsLeft(s);return n`<li class="training" id="koolitus-${s.id}">
+            <div class="training-date">
+              <span class="mono training-dm">${K(l)}</span>
+              <span class="training-wd">${F(l)}</span>
+              <span class="mono muted">${s.time}</span>
+            </div>
+            <div class="training-main">
+              <h3>${s.title}</h3>
+              <p class="ledger-meta">${s.city==="Veebis"?"Veebis":s.city} · ${s.venue} · keel: ${s.language}</p>
+              <p class="ledger-meta">Koolitaja: ${o?n`<a href="#/terapeut/${o.id}">${o.name}</a>`:""}</p>
+              ${o?de(o):""}
+              <p class="ledger-meta"><span class="label">Kellele</span> ${s.audience.map(p=>O[p]).join(", ")}</p>
+              <p class="ledger-meta mono">${s.hours} ak/h · ${s.ehis?"EHIS-es registreeritud täienduskoolitus":"osalustõend, EHIS-väline"}</p>
+            </div>
+            <div class="training-side">
+              ${_i(s)}
+              <p class="price mono">${s.priceCents===0?"Tasuta":$(s.priceCents)}</p>
+              ${d===0?n`<button type="button" class="btn" data-wait="${s.id}">Lisa ootenimekirja</button>`:n`<button type="button" class="btn btn-primary" data-reg="${s.id}">Registreeru</button>`}
+            </div>
+          </li>`})}
+      </ol>
+    </section>`)}`}function Wi(e,a){const i=v.seatsLeft(e),t=v.therapist(e.trainerId),s=Math.min(i,10);Le("Registreerumine koolitusele",n`<p class="dialog-lede">${e.title}</p>
+      <p class="mono muted">${K(L(e.date))} · ${e.time} · ${e.city} · ${e.priceCents===0?"tasuta":`${$(e.priceCents)} osaleja kohta`}</p>
+      <p class="muted">Koolitaja ${t?.name??""}. Vabu kohti ${i}.</p>
+      <form class="form" id="reg-form" novalidate>
+        <div class="form-grid">
+          ${f("r-nimi","Nimi",{autocomplete:"name",guard:!0})}
+          ${f("r-email","E-post",{type:"email",autocomplete:"email",guard:!0})}
+          ${f("r-asutus","Asutus",{required:!1,autocomplete:"organization",guard:!0})}
+          <div class="field">
+            <label for="r-arv">Osalejate arv</label>
+            <select id="r-arv" name="r-arv">${Array.from({length:s},(l,o)=>n`<option>${o+1}</option>`)}</select>
+          </div>
+        </div>
+        <fieldset class="choices">
+          <legend>Arve</legend>
+          <div class="choices-row">
+            <label class="choice"><input type="radio" name="r-arve" value="isik" checked /><span>Eraisikule e-postiga</span></label>
+            <label class="choice"><input type="radio" name="r-arve" value="asutus" /><span>Asutusele e-arvena</span></label>
+          </div>
+        </fieldset>
+        <div data-regcode hidden>${f("r-regkood","Asutuse registrikood",{required:!1,inputmode:"numeric",pattern:"[0-9]{8}",hint:"8 numbrit. E-arve läheb asutuse e-arve operaatorile."})}</div>
+        ${q}
+        <div class="error" data-err hidden></div>
+        <div class="actions"><button type="submit" class="btn btn-primary">Kinnita registreerumine</button></div>
+      </form>`,l=>{const o=k("#reg-form",l),d=N(o);o.addEventListener("change",()=>{k("[data-regcode]",o).hidden=P(o)["r-arve"]!=="asutus"}),o.addEventListener("submit",p=>{if(p.preventDefault(),!d())return;const r=P(o),c=k("[data-err]",o);if(!r["r-nimi"]||!/^\S+@\S+\.\S+$/.test(r["r-email"]??"")){c.hidden=!1,c.textContent="Palun lisage nimi ja korrektne e-post.";return}if(r["r-arve"]==="asutus"&&!/^\d{8}$/.test(r["r-regkood"]??"")){c.hidden=!1,c.textContent="E-arve jaoks on vaja asutuse 8-kohalist registrikoodi.";return}const u=Number(r["r-arv"]??"1");v.register(e.id,u),a();const g=k(".dialog-body",l);g.innerHTML=n`<div class="confirm">
+          <h3>Olete registreeritud</h3>
+          <dl class="receipt">
+            <div><dt>Registreering</dt><dd class="mono">${ie("R")} (näidis)</dd></div>
+            <div><dt>Koolitus</dt><dd>${e.title}</dd></div>
+            <div><dt>Osalejaid</dt><dd>${u}</dd></div>
+            <div><dt>Arve</dt><dd>${r["r-arve"]==="asutus"?`E-arve, registrikood ${r["r-regkood"]??""}`:`PDF aadressile ${r["r-email"]??""}`}</dd></div>
+            <div><dt>Summa</dt><dd class="mono">${e.priceCents===0?"tasuta":$(e.priceCents*u)}</dd></div>
+          </dl>
+          <p>Koolitaja saadab praktilise info nädal enne koolitust.</p>
+          <div class="actions"><button type="button" class="btn btn-primary" data-close>Sulge</button></div>
+        </div>`.value,g.querySelector("[data-close]")?.focus()})})}function Gi(e){Le("Tellimuskoolitus asutusele",n`<p class="dialog-lede">Koolitus teie lasteaiale, koolile või hooldekodule, teie ruumides või veebis.</p>
+      <p class="muted">Päring läheb kinnitatud koolitajatele, kes teemat õpetavad. Hinnapakkumine ja arve tulevad masinloetava e-arvena.</p>
+      <form class="form" id="order-form" novalidate>
+        <div class="form-grid">
+          ${f("o-asutus","Asutuse nimi",{autocomplete:"organization",guard:!0})}
+          ${f("o-regkood","Registrikood",{inputmode:"numeric",pattern:"[0-9]{8}",hint:"8 numbrit, e-arve saatmiseks."})}
+          ${f("o-kontakt","Kontaktisik",{autocomplete:"name",guard:!0})}
+          ${f("o-email","E-post",{type:"email",autocomplete:"email",guard:!0})}
+          <div class="field">
+            <label for="o-teema">Teema</label>
+            <select id="o-teema" name="o-teema">
+              ${v.trainings.map(a=>n`<option ${e===a.id?"selected":""}>${a.title}</option>`)}
+              <option>Muu teema, kirjeldan märkuses</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="o-linn">Koht</label>
+            <select id="o-linn" name="o-linn">${Y.map(a=>n`<option>${a}</option>`)}<option>Muu asukoht</option><option>Veebis</option></select>
+          </div>
+          ${f("o-arv","Osalejaid umbes",{type:"number",min:"1",max:"200",value:"15",inputmode:"numeric"})}
+          ${f("o-aeg","Sobiv aeg",{required:!1,hint:"Nt jaanuari teine pool, pärastlõuna."})}
+          ${f("o-markus","Märkus",{type:"textarea",required:!1,guard:!0,hint:"Ärge kirjutage elanike või laste terviseandmeid."})}
+        </div>
+        ${q}
+        <div class="error" data-err hidden></div>
+        <div class="actions"><button type="submit" class="btn btn-primary">Saada päring</button></div>
+      </form>`,a=>{const i=k("#order-form",a),t=N(i);i.addEventListener("submit",s=>{if(s.preventDefault(),!t())return;const l=P(i),o=k("[data-err]",i);if(!l["o-asutus"]||!/^\d{8}$/.test(l["o-regkood"]??"")||!/^\S+@\S+\.\S+$/.test(l["o-email"]??"")){o.hidden=!1,o.textContent="Palun lisage asutuse nimi, 8-kohaline registrikood ja e-post.";return}const d=k(".dialog-body",a);d.innerHTML=n`<div class="confirm">
+          <h3>Päring on saadetud</h3>
+          <dl class="receipt">
+            <div><dt>Päring</dt><dd class="mono">${ie("T")} (näidis)</dd></div>
+            <div><dt>Asutus</dt><dd>${l["o-asutus"]??""}, <span class="mono">${l["o-regkood"]??""}</span></dd></div>
+            <div><dt>Teema</dt><dd>${l["o-teema"]??""}</dd></div>
+            <div><dt>Koht</dt><dd>${l["o-linn"]??""}, umbes ${l["o-arv"]??""} osalejat</dd></div>
+          </dl>
+          <p>Koolitaja saadab pakkumise kolme tööpäeva jooksul. Arve tuleb e-arvena teie asutuse e-arve operaatorile.</p>
+          <div class="actions"><button type="button" class="btn btn-primary" data-close>Sulge</button></div>
+        </div>`.value,d.querySelector("[data-close]")?.focus()})})}function Yi(){const e=[{value:"koik",label:"Kõik"},...Y.map(t=>({value:t,label:t})),{value:"Veebis",label:"Veebis"}],a=[{value:"koik",label:"Kõik"},...Object.keys(O).map(t=>({value:t,label:O[t]}))],i=()=>`${G(Ka().length,"koolitus","koolitust")} kalendris`;return{title:"Koolituskalender",render:()=>n`
+      <section class="intro wrap">
+        <div class="intro-main">
+          <p class="kicker">Üle-eestiline koolituskalender</p>
+          <h1>Koolitused</h1>
+          <p class="lede">Avatud koolitused lasteaedadele, koolidele, hooldekodudele, omastehooldajatele ja spetsialistidele. Koolitusi lisavad kinnitatud terapeudid ja koolitajad ise oma kontolt.</p>
+        </div>
+        <aside class="margin-note">
+          <p class="margin-title">Koolitus teie asutusele</p>
+          <p>Tellige sama koolitus oma majja. Pakkumine ja arve tulevad e-arvena.</p>
+          <button type="button" class="btn" data-order>Küsi tellimuskoolitust asutusele (e-arvega)</button>
+        </aside>
+      </section>
+      <section class="wrap">
+        <form class="filters" id="k-filtrid">
+          ${Q("city","Linn või veeb",e,x.city)}
+          ${Q("audience","Kellele",a,x.audience)}
+        </form>
+        <p class="count" id="k-arv" aria-live="polite">${i()}</p>
+        <div id="k-list">${Ze()}</div>
+      </section>
+    `,mount(t){const s=()=>{k("#k-list",t).innerHTML=Ze().value,k("#k-arv",t).textContent=i()};k("#k-filtrid",t).addEventListener("change",l=>{const o=l.target;o.name==="city"&&(x.city=o.value),o.name==="audience"&&(x.audience=o.value),s()}),t.addEventListener("click",l=>{const o=l.target,d=o.closest("[data-reg]");if(d){const r=v.trainings.find(c=>c.id===d.dataset.reg);r&&Wi(r,s);return}const p=o.closest("[data-wait]");if(p){p.textContent="Lisatud ootenimekirja (näidis)",p.setAttribute("disabled","");return}o.closest("[data-order]")&&Gi()})}}}const zi=[{href:"#/",label:"Leia terapeut",match:""},{href:"#/koolitused",label:"Koolitused",match:"koolitused"},{href:"#/vahendid",label:"Vahendid",match:"vahendid"},{href:"#/terapeudile",label:"Terapeudile",match:"terapeudile"}];function Zi(){return n`
+    <header class="mast">
+      <div class="wrap mast-top">
+        <span class="mono">tegevusteraapiakeskus.ee</span>
+        <span>${F(w).charAt(0).toUpperCase()+F(w).slice(1)}, ${Te(w)} · prototüüp, kõik andmed on näidised</span>
+        <span class="mast-call">${ca()} · ${H.hours}</span>
+      </div>
+      <div class="wrap mast-main">
+        <a class="brand" href="#/">
+          <span class="brand-name">Tegevusteraapia Keskus</span>
+          <span class="brand-sub">Eesti tegevusterapeutide ühine platvorm</span>
+        </a>
+        <nav class="nav" aria-label="Peamenüü">
+          ${zi.map(e=>n`<a href="${e.href}" data-nav="${e.match}">${e.label}</a>`)}
+          <a href="#/korv" class="nav-cart" data-nav="korv">Korv <span class="mono" id="korv-arv">(0)</span></a>
+        </nav>
+      </div>
+    </header>
+    <main id="sisu" tabindex="-1"></main>
+    <footer class="foot">
+      <div class="wrap foot-grid">
+        <div>
+          <p class="brand-name foot-brand">Tegevusteraapia Keskus</p>
+          <p>Eesti tegevusterapeutide ühine platvorm. Asutajad Terje ja Kristel. Terapeudid haldavad oma profiili, aegu ja koolitusi ise.</p>
+        </div>
+        <div>
+          <p class="label">Kliendile</p>
+          <ul class="plain-list">
+            <li><a href="#/">Leia terapeut</a></li>
+            <li><a href="#/koolitused">Koolituskalender</a></li>
+            <li><a href="#/vahendid">Vahendid</a></li>
+            <li><a href="#/taganemine">Taganemine lepingust</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="label">Andmed</p>
+          <p>Platvorm ei kogu terviseandmeid ega isikukoodi. Broneeringus on ainult nimi, kontakt, teenus ja aeg. Makse liigub Maksekeskuse kaudu, tarne Omniva, SmartPosti, DPD ja Venipaki automaatidesse.</p>
+        </div>
+      </div>
+      <div class="wrap foot-small">
+        <p class="mono">Prototüüp 1 „Keskus“ · kuupäev 25.11.2026 · nimed, numbrid ja aadressid on näidised</p>
+      </div>
+    </footer>`.value}function Qi(){const{path:e,query:a}=na(),[i,t]=e;return i?i==="terapeut"&&t?xi(t):i==="koolitused"?Yi():i==="vahendid"&&t?Fi(t,a.get("ref")):i==="vahendid"?Bi(a.get("ref")):i==="korv"?Ui():i==="taganemine"?Ji(a.get("tellimus")):i==="terapeudile"&&t==="toolaud"?Ii():i==="terapeudile"?Mi():{title:"Lehte ei leitud",render:()=>n`<div class="wrap page-head"><h1>Lehte ei leitud</h1><p><a href="#/">Avalehele</a></p></div>`}:Ki()}function Sa(){const e=document.getElementById("korv-arv");e&&(e.textContent=`(${v.cartCount()})`)}let Qe=!0;function wa(){const e=k("#sisu"),a=e.cloneNode(!1);e.replaceWith(a);const i=Qi();a.innerHTML=i.render().value,i.mount?.(a),document.title=`${i.title} — Tegevusteraapia Keskus`;const t=na().path[0]??"";ye("[data-nav]").forEach(s=>{const l=s.dataset.nav??"";l===t||l==="vahendid"&&t==="taganemine"?s.setAttribute("aria-current","page"):s.removeAttribute("aria-current")}),Qe||(window.scrollTo(0,0),a.focus({preventScroll:!0})),Qe=!1}k("#app").innerHTML=Zi();v.on(Sa);Sa();window.addEventListener("hashchange",wa);document.querySelector(".skip")?.addEventListener("click",e=>{e.preventDefault(),k("#sisu").focus()});wa();</script>
+    <style rel="stylesheet" crossorigin>:root{--paber: #F6F3EC;--lina: #E7E0D2;--tint: #1E2A2B;--hall: #434D4C;--sinine: #23405C;--savi: #9C4127;--serif: "Source Serif 4", "Source Serif Pro", Georgia, serif;--sans: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, sans-serif;--mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;--gutter: 16px;--rule: 1px solid var(--tint);--rule-soft: 1px solid var(--lina);color-scheme:light}*,*:before,*:after{box-sizing:border-box}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{margin:0;background:var(--paber);color:var(--tint);font-family:var(--sans);font-size:1.125rem;line-height:1.6;overflow-wrap:break-word;font-variant-numeric:lining-nums}img{max-width:100%}h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.15;letter-spacing:-.01em;margin:0 0 .5em;text-wrap:balance}h1{font-size:clamp(2.1rem,1.3rem + 3.2vw,3.4rem);max-width:20ch}h2{font-size:clamp(1.45rem,1.2rem + .8vw,1.75rem)}h3{font-size:1.3rem}p{margin:0 0 .8em}a{color:var(--sinine);text-decoration-thickness:1px;text-underline-offset:.18em}a:hover{color:var(--tint);text-decoration-thickness:2px}:focus-visible{outline:3px solid var(--savi);outline-offset:2px}::selection{background:var(--lina);color:var(--tint)}.mono{font-family:var(--mono);font-size:.92em;letter-spacing:0}.small{font-size:.85rem;overflow-wrap:anywhere}.muted{color:var(--hall)}.block{display:block}.label{font-size:.82rem;font-weight:700;color:var(--hall);letter-spacing:.02em;margin-right:.4em}.visually-hidden{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}.skip{position:absolute;left:-9999px;top:8px;z-index:10;background:var(--tint);color:var(--paber);padding:10px 16px}.skip:focus{left:16px}.wrap{max-width:1200px;margin-inline:auto;padding-inline:var(--gutter)}@media(min-width:720px){:root{--gutter: 32px}}.mast-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 24px;padding-block:8px;font-size:.85rem;color:var(--hall)}.mast{border-bottom:3px double var(--tint)}.mast-main{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 32px;padding-block:14px 10px;border-top:var(--rule-soft)}.brand{display:flex;flex-direction:column;color:var(--tint);text-decoration:none}.brand-name{font-family:var(--serif);font-weight:700;font-size:clamp(1.5rem,1.2rem + 1vw,1.9rem);line-height:1.1;letter-spacing:-.015em}.brand-sub{font-size:.92rem;color:var(--hall)}.nav{display:flex;flex-wrap:wrap;gap:0 26px}.nav a{display:inline-block;padding:10px 0 8px;color:var(--tint);font-weight:700;text-decoration:none;border-bottom:3px solid transparent}.nav a:hover{border-bottom-color:var(--lina)}.nav a[aria-current=page]{border-bottom-color:var(--savi)}main{display:block;min-height:60vh}main:focus{outline:none}.intro{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px 32px;padding-block:48px 32px}.intro-main{grid-column:1 / span 8}.margin-note{grid-column:10 / span 3;align-self:end;border-left:var(--rule);padding-left:18px;font-size:.98rem}.margin-title{font-family:var(--serif);font-weight:600;font-size:1.15rem;margin-bottom:.3em}.margin-gap{margin-top:1.2em}.kicker{display:inline-block;font-weight:700;font-size:.92rem;border-top:3px solid var(--savi);padding-top:6px;margin-bottom:18px}.lede{font-size:1.22rem;max-width:62ch}.page-head{padding-block:44px 20px}.narrow{max-width:820px;margin-left:max(var(--gutter),calc((100% - 1200px) / 2 + var(--gutter)))}.crumbs{padding-block:18px 0;font-size:.95rem;color:var(--hall)}.h-rule{border-top:var(--rule);padding-top:14px;margin-top:48px}.footnote{font-size:.92rem;color:var(--hall);max-width:78ch;margin-top:20px}.count{font-size:.98rem;color:var(--hall);margin:18px 0 0}.empty{padding:24px 0;border-top:var(--rule);border-bottom:var(--rule-soft)}.filters{border-top:var(--rule);border-bottom:var(--rule-soft);padding-block:18px 8px}fieldset{border:0;margin:0 0 16px;padding:0;min-width:0}legend{font-weight:700;font-size:.95rem;padding:0;margin-bottom:8px}.choices-row{display:flex;flex-wrap:wrap;gap:8px}.choice{position:relative}.choice input,.bank input{position:absolute;opacity:0;width:1px;height:1px}.choice span{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;border:1.5px solid var(--hall);border-radius:2px;background:var(--paber);cursor:pointer;font-size:1rem}.choice span:hover{background:var(--lina)}.choice input:checked+span{background:var(--tint);border-color:var(--tint);color:var(--paber);font-weight:700}.choice input:focus-visible+span,.bank input:focus-visible+span,.switch input:focus-visible+.switch-track{outline:3px solid var(--savi);outline-offset:2px}.switch{position:relative;display:inline-flex;align-items:center;gap:12px;min-height:48px;margin-bottom:10px;cursor:pointer;font-weight:700}.switch input{position:absolute;opacity:0;width:1px;height:1px}.switch-track{position:relative;flex:none;width:52px;height:30px;border:2px solid var(--tint);border-radius:2px;background:var(--paber)}.switch-track:after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;background:var(--tint)}.switch input:checked+.switch-track{background:var(--sinine);border-color:var(--sinine)}.switch input:checked+.switch-track:after{left:25px;background:var(--paber)}.ledger{list-style:none;margin:14px 0 0;padding:0;border-top:var(--rule)}.ledger-row{display:grid;grid-template-columns:76px minmax(0,1fr) 270px;gap:8px 24px;padding-block:22px;border-bottom:var(--rule-soft)}.ledger-row.is-new{background:var(--lina);padding-inline:12px}.ledger-name{font-size:1.4rem;margin-bottom:4px}.ledger-name a{color:var(--tint)}.ledger-name a:hover{color:var(--sinine)}.ledger-meta{font-size:1rem;color:var(--hall);margin:0 0 4px}.ledger-side{display:flex;flex-direction:column;align-items:flex-start;gap:6px}.ledger-side .btn{margin-top:6px}.slot{margin:0;display:flex;flex-direction:column}.slot .mono{font-size:1.05rem;font-weight:500}.slot-none .mono{color:var(--hall);font-size:.92rem}.price{margin:0}.price-lg{font-size:1.6rem}.tag{display:inline-block;font-family:var(--sans);font-size:.8rem;font-weight:700;border:1.5px solid var(--savi);color:var(--tint);padding:1px 8px;vertical-align:middle;letter-spacing:0}.verified{display:inline-flex;align-items:baseline;gap:8px;font-size:.92rem;font-weight:700;color:var(--sinine);margin:4px 0 8px}.verified-seal{position:relative;flex:none;top:2px;width:14px;height:14px;border:2px solid var(--sinine)}.verified-seal:after{content:"";position:absolute;inset:2px;background:var(--sinine)}.portrait,.pframe{position:relative;margin:0;display:flex;align-items:center;justify-content:center;border:3px double var(--hall);background:var(--lina)}.portrait-sm{width:76px;height:92px}.portrait-initials{font-family:var(--serif);font-weight:600;font-size:1.7rem;color:var(--tint);letter-spacing:.02em}.portrait-lg{width:100%;max-width:300px;aspect-ratio:4 / 5;margin-bottom:20px}.portrait-lg .portrait-initials{font-size:4.5rem;font-weight:400}.portrait figcaption,.pframe figcaption{position:absolute;left:10px;bottom:8px;font-family:var(--mono);font-size:.75rem;color:var(--hall)}.pframe{flex-direction:column;justify-content:space-between;align-items:flex-start;padding:8px 10px}.pframe-sm{width:96px;height:96px}.pframe-lg{width:100%;aspect-ratio:1;max-width:440px;padding:18px}.pframe-cat{max-width:100%;overflow-wrap:anywhere;hyphens:auto;font-family:var(--serif);font-style:italic;font-size:.85rem;line-height:1.2}.pframe-lg .pframe-cat{font-size:1.8rem}.pframe-sku{font-family:var(--mono);font-size:.7rem;color:var(--hall)}.pframe-lg .pframe-sku{font-size:.85rem;margin-bottom:22px}.btn{display:inline-flex;align-items:center;justify-content:flex-start;min-height:48px;padding:10px 18px;border:1.5px solid var(--tint);border-radius:2px;background:transparent;color:var(--tint);font:inherit;font-size:1rem;font-weight:700;line-height:1.25;text-decoration:none;cursor:pointer}.btn:hover{background:var(--lina);color:var(--tint);text-decoration:none}.btn-primary{background:var(--sinine);border-color:var(--sinine);color:var(--paber)}.btn-primary:hover{background:var(--tint);border-color:var(--tint);color:var(--paber)}.btn:disabled{cursor:not-allowed;background:var(--lina);border-color:var(--lina);color:var(--hall)}.btn-wide{width:100%;justify-content:center}.link-btn{background:none;border:0;padding:6px 0;color:var(--sinine);font:inherit;font-size:.98rem;text-decoration:underline;text-underline-offset:.18em;cursor:pointer}.link-btn:disabled{color:var(--hall);text-decoration:none;cursor:default}.actions{display:flex;flex-wrap:wrap;gap:10px 14px;margin-top:20px}.more{font-weight:700}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 20px}.field{display:flex;flex-direction:column}.field:has(textarea){grid-column:1 / -1}.field label{font-weight:700;font-size:.98rem;margin-bottom:4px}.opt{font-weight:400;color:var(--hall)}.hint{font-size:.88rem;color:var(--hall);margin:0 0 6px}input[type=text],input[type=email],input[type=tel],input[type=number],input[type=date],select,textarea{font:inherit;font-size:1rem;color:var(--tint);background:var(--paber);border:1.5px solid var(--hall);border-radius:2px;padding:10px 12px;min-height:48px;width:100%}textarea{resize:vertical}[aria-invalid=true]{border:2.5px solid var(--savi)}input[type=checkbox],input[type=radio]{accent-color:var(--sinine);width:22px;height:22px;margin:0;flex:none}.check{display:flex;gap:12px;align-items:flex-start;margin:14px 0 0;font-size:1rem;cursor:pointer}.check input{margin-top:3px}.form-intro{font-size:1rem}.guard,.error{border-left:4px solid var(--savi);background:var(--paber);padding:12px 16px;margin:16px 0 0;font-size:1rem}.guard strong{display:block;font-family:var(--serif);font-size:1.1rem;margin-bottom:4px}.notice{border-left:4px solid var(--sinine);background:var(--paber);padding:14px 18px;margin-top:16px}.notice-title{font-family:var(--serif);font-weight:600;font-size:1.2rem;margin-bottom:4px}.ok-line{border-left:4px solid var(--sinine);padding:4px 0 4px 14px;font-size:1rem}.inquiry{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px 32px;margin-top:56px;padding:32px;background:var(--lina);border-top:3px double var(--tint)}.inquiry-intro{grid-column:1 / span 4}.inquiry-form{grid-column:5 / span 8}.inquiry .btn-primary{margin-top:18px}.almanac{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px}.plain-list{list-style:none;margin:0;padding:0}.almanac-row{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;padding-block:12px;border-bottom:var(--rule-soft);font-size:1rem}.almanac-date{padding-top:2px}.profile{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;padding-block:28px 0}.profile-card{grid-column:1 / span 4}.profile-main{grid-column:5 / span 8}.profile-name{font-size:clamp(1.9rem,1.4rem + 1.5vw,2.5rem)}.profile-place{color:var(--hall)}.facts{margin:16px 0 0}.facts>div{border-top:var(--rule-soft);padding-block:8px}.facts dt{font-size:.82rem;font-weight:700;color:var(--hall)}.facts dd{margin:0;font-size:1rem}.facts-tight>div{display:grid;grid-template-columns:180px minmax(0,1fr);gap:12px}.bio{font-family:var(--serif);font-size:1.32rem;line-height:1.5;max-width:60ch}.focus{list-style:none;padding:0;margin:0 0 32px}.focus li{position:relative;padding-left:1.4em}.focus li:before{content:"—";position:absolute;left:0;color:var(--savi)}.booking{border:var(--rule);background:var(--paber)}.booking-head{background:var(--lina);padding:18px 24px 8px;border-bottom:var(--rule)}.booking-head h2{margin-bottom:4px}.booking-body{padding:24px}.join .booking-body{border:var(--rule);border-top:0}.stepper{list-style:none;display:flex;flex-wrap:wrap;gap:0;margin:0;padding:0 24px;border-bottom:var(--rule-soft);font-size:.98rem}.join .stepper{border:var(--rule);border-bottom:var(--rule-soft);background:var(--lina)}.stepper li{padding:12px 0 9px;margin-right:22px;color:var(--hall);border-bottom:3px solid transparent}.stepper li.is-done{color:var(--tint)}.stepper li.is-current{color:var(--tint);font-weight:700;border-bottom-color:var(--savi)}.service-list legend,.carriers legend{margin-bottom:4px}.service{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:2px 14px;align-items:start;padding:14px 10px;border-bottom:var(--rule-soft);cursor:pointer}.service:has(input:checked){background:var(--lina)}.service input{grid-row:1 / span 2;margin-top:4px}.service-name{font-weight:700}.service-note{grid-column:2;font-size:.95rem;color:var(--hall)}.service-price{grid-column:3;grid-row:1}.pick-summary{margin:0 0 20px;border-left:3px solid var(--savi);padding-left:14px}.pick-summary>div{display:flex;gap:10px;font-size:1rem}.pick-summary dt{font-weight:700;min-width:64px}.pick-summary dd{margin:0}.cal-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 16px}.cal-range{margin:0;font-weight:500}.cal-nav{display:flex;gap:18px}.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin:10px 0 18px}.day{display:flex;flex-direction:column;align-items:flex-start;gap:0;padding:8px 8px 6px;min-height:72px;border:1.5px solid var(--hall);border-radius:2px;background:var(--paber);color:var(--tint);font:inherit;cursor:pointer}.day:hover:not(:disabled){background:var(--lina)}.day[aria-pressed=true]{background:var(--tint);border-color:var(--tint);color:var(--paber)}.day:disabled{border-style:dashed;border-color:var(--hall);background:transparent;color:var(--hall);cursor:default}.day-wd{font-weight:700;font-size:.95rem}.day-dm{font-size:.85rem}.day-n{font-size:.78rem}.times .label{display:block;margin-bottom:8px}.times-row{display:flex;flex-wrap:wrap;gap:8px}.time{min-width:92px;min-height:48px;border:1.5px solid var(--sinine);border-radius:2px;background:var(--paber);color:var(--sinine);font-size:1.05rem;font-weight:500;cursor:pointer}.time:hover{background:var(--lina)}.time[aria-pressed=true]{background:var(--sinine);color:var(--paber)}.confirm{border-top:3px double var(--tint);padding-top:18px}.confirm:focus{outline:none}.confirm h2,.confirm h3{font-size:1.6rem}.receipt{margin:0 0 18px}.receipt>div{display:flex;justify-content:space-between;gap:16px;padding-block:8px;border-bottom:1px dotted var(--hall);font-size:1rem}.receipt dt{color:var(--hall)}.receipt dd{margin:0;text-align:right}.receipt-total{font-weight:700;border-bottom:var(--rule)}.receipt-total dt{color:var(--tint)}.recs .plain-list{border-top:var(--rule-soft)}.rec{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:16px 20px;padding-block:16px;border-bottom:var(--rule-soft)}.rec-name{font-size:1.15rem;margin-bottom:4px}.rec-note{font-family:var(--serif);font-style:italic;font-size:1.02rem;margin-bottom:4px}.rec .muted.mono{font-size:.8rem}.rec-side{display:flex;flex-direction:column;align-items:flex-start;gap:8px}.month{margin-top:36px}.month-title{font-size:clamp(1.6rem,1.3rem + 1vw,2rem);border-bottom:3px double var(--tint);padding-bottom:8px;margin-bottom:0}.trainings{list-style:none;margin:0;padding:0}.training{display:grid;grid-template-columns:150px minmax(0,1fr) 250px;gap:10px 28px;padding-block:22px;border-bottom:var(--rule-soft)}.training-date{display:flex;flex-direction:column}.training-dm{font-size:1.7rem;line-height:1.1;font-weight:500}.training-wd{font-weight:700}.training-main h3{font-size:1.35rem;margin-bottom:6px}.training-side{display:flex;flex-direction:column;align-items:flex-start;gap:8px}.seats{width:100%}.seats p{margin:0 0 6px;font-size:.95rem}.seats-bar{height:8px;border:1px solid var(--hall);background:var(--paber)}.seats-bar span{display:block;height:100%;background:var(--sinine)}.ref-banner{border:1.5px solid var(--sinine);background:var(--lina);padding:12px 16px;font-size:1rem;margin:0 0 24px}.products{list-style:none;margin:18px 0 0;padding:0;border-top:var(--rule)}.product{display:grid;grid-template-columns:96px minmax(0,1fr) 220px;gap:12px 28px;padding-block:26px;border-bottom:var(--rule-soft)}.product-main h3{font-size:1.4rem;margin-bottom:6px}.product-main h3 a{color:var(--tint)}.product-main>p{max-width:64ch}.product-side{display:flex;flex-direction:column;align-items:flex-start;gap:6px}.product-side .price{font-size:1.25rem}.product-side .muted{font-size:.95rem}.therapist-note{margin:14px 0;padding-left:16px;border-left:3px solid var(--savi);max-width:64ch}.therapist-note p{font-family:var(--serif);font-style:italic;font-size:1.1rem;margin-bottom:4px}.therapist-note footer{font-size:.95rem;color:var(--hall)}.safety summary{cursor:pointer;font-weight:700;font-size:.98rem;color:var(--sinine);text-decoration:underline;text-underline-offset:.18em;padding-block:6px}.product-page{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:40px;padding-block:20px 0}.cart{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:40px;align-items:start}.cart-table,.data-table,.qty-table,.plans,.slot-grid{width:100%;border-collapse:collapse;font-size:1rem}.cart-table th,.cart-table td,.data-table th,.data-table td,.qty-table th,.qty-table td,.plans th,.plans td{text-align:left;vertical-align:top;padding:12px 10px 12px 0;border-bottom:var(--rule-soft)}.cart-table thead th,.data-table thead th,.qty-table thead th,.plans thead th{font-size:.85rem;color:var(--hall);border-bottom:var(--rule)}.cart-table tbody th{font-weight:400}.cart-table .num{text-align:right;padding-right:0}.qty{display:flex;align-items:center;gap:10px}.qty-btn{width:44px;height:44px;border:1.5px solid var(--tint);border-radius:2px;background:var(--paber);color:var(--tint);font-size:1.25rem;font-weight:700;cursor:pointer}.qty-btn:hover{background:var(--lina)}.qty-input{max-width:96px}#kassa fieldset{margin-top:28px;border-top:var(--rule);padding-top:14px}#kassa legend{font-family:var(--serif);font-size:1.3rem;font-weight:600;float:left;width:100%;margin-bottom:10px}#kassa legend+*{clear:left}.carriers .field{margin-top:14px}.bank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;clear:left}.bank{position:relative}.bank span{display:flex;align-items:center;min-height:56px;padding:10px 14px;border:1.5px solid var(--hall);border-radius:2px;font-weight:700;cursor:pointer}.bank span:hover{background:var(--lina)}.bank input:checked+span{background:var(--tint);border-color:var(--tint);color:var(--paber)}#kassa .btn-wide{margin-top:22px}.cart-summary{position:sticky;top:16px;border-top:3px double var(--tint);padding-top:12px}.plans{margin-top:8px}.plans thead th{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--tint)}.plans tbody th{font-weight:400;width:44%}.plans th:nth-child(3),.plans td:nth-child(3){background:var(--lina);padding-left:12px}.plans-price td{font-size:1.35rem;font-weight:500}.join{margin-top:16px}.join-head{margin-top:48px;border-top:var(--rule);padding-top:14px}.external{border:2px solid var(--tint);max-width:560px}.external-bar{margin:0;background:var(--tint);color:var(--paber);padding:8px 14px;font-size:.82rem}.external-body{padding:20px}.control-code{font-size:3rem;font-weight:500;letter-spacing:.25em;margin:0 0 8px}.dash-head h1{margin-bottom:4px}.dash{display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px;align-items:start}.dash-nav{position:sticky;top:16px;display:flex;flex-direction:column;border-left:2px solid var(--lina);margin-top:48px}.dash-nav a{padding:8px 0 8px 14px;color:var(--tint);text-decoration:none;font-weight:700;font-size:1rem}.dash-nav a:hover{text-decoration:underline}.dash-main section h2:focus{outline:none}.slot-grid{margin-top:12px;table-layout:fixed}.slot-grid th{font-size:.9rem;font-weight:700;padding:6px 4px;text-align:left}.slot-grid td{padding:3px}.slot-toggle{width:100%;min-height:44px;border:1.5px solid var(--hall);border-radius:2px;background:var(--paber);color:var(--hall);font:inherit;font-size:.85rem;font-weight:700;padding:2px;cursor:pointer}.slot-toggle[aria-pressed=true]{background:var(--sinine);border-color:var(--sinine);color:var(--paber)}.slot-toggle:disabled{cursor:not-allowed;border-style:dashed}.pick-products,.pick-products .check{margin-top:8px}.dialog{width:min(680px,calc(100% - 24px));max-height:calc(100vh - 32px);padding:0;border:2px solid var(--tint);border-radius:2px;background:var(--paber);color:var(--tint)}.dialog::backdrop{background:color-mix(in srgb,var(--tint) 62%,transparent)}.dialog-head{position:sticky;top:0;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:16px;background:var(--lina);padding:10px 20px;border-bottom:var(--rule)}.dialog-title{font-family:var(--serif);font-weight:600;font-size:1.25rem;margin:0}.dialog-body{padding:20px}.dialog-lede{font-family:var(--serif);font-size:1.3rem;line-height:1.3;margin-bottom:6px}.foot{margin-top:88px;background:var(--lina);border-top:3px double var(--tint);padding-top:36px;font-size:.98rem}.foot-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,3fr) minmax(0,4fr);gap:24px 40px}.foot-brand{display:block;font-size:1.4rem;margin-bottom:6px}.foot .label{display:block;margin-bottom:6px}.foot .plain-list li{padding-block:3px}.foot-small{margin-top:24px;padding-block:14px 20px;border-top:1px solid var(--hall);font-size:.85rem;color:var(--hall)}.foot-small p{margin:0}h4{font-family:var(--serif);font-weight:600;line-height:1.2;margin:0 0 .3em}.mast-call .call-link{color:var(--tint)}.call-link{font-weight:700}.opening{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px 32px;padding-block:48px 36px}.opening-main{grid-column:1 / span 8}.opening-answer{font-family:var(--serif);font-size:clamp(1.3rem,1.1rem + .8vw,1.6rem);line-height:1.45;max-width:36ch;margin-bottom:24px}.opening-action{margin-bottom:8px}.btn-large{min-height:56px;padding:14px 26px;font-size:1.15rem}.opening-links{display:flex;flex-wrap:wrap;list-style:none;margin:0;padding:0}.opening-links li+li:before{content:"·";color:var(--hall);padding-inline:12px}.opening-links a{display:inline-block;padding-block:10px;font-weight:700}.call-note{grid-column:10 / span 3}.call-number{font-size:1.5rem;margin-bottom:4px}.call-number a{font-weight:500}.finder{max-width:860px;margin-bottom:8px;border:var(--rule);background:var(--paber);scroll-margin-top:12px}.finder-bar{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 24px;padding:14px 24px 12px;background:var(--lina);border-bottom:var(--rule)}.finder-bar p{margin:0}.finder-title{font-family:var(--serif);font-weight:600;font-size:1.2rem}.finder-progress{font-weight:700}.finder-call{margin-left:auto}.finder-body{padding:24px 24px 12px}.finder-legend{margin-bottom:6px}.finder-q{font-size:clamp(1.65rem,1.45rem + .6vw,1.9rem);margin:0 0 6px;max-width:30ch}.finder-hint{font-size:1rem;margin-bottom:14px}.finder-options{display:grid;gap:8px}.finder-option{display:flex;align-items:flex-start;gap:14px;min-height:56px;padding:14px 16px;border:1.5px solid var(--hall);border-radius:2px;background:var(--paber);font-size:1.125rem;line-height:1.45;cursor:pointer}.finder-option input{width:24px;height:24px;margin-top:1px}.finder-option:hover{background:var(--lina)}.finder-option:has(input:checked){border-color:var(--tint);border-left:6px solid var(--savi);padding-left:11.5px;background:var(--lina);font-weight:700}.finder-option-alt{margin-top:12px}.finder-options-inline{grid-template-columns:repeat(2,minmax(0,1fr))}.finder-place{margin-top:20px;max-width:440px}.finder-place input{font-size:1.125rem}.finder-actions{margin-top:24px}.finder-error{margin-top:18px}.field-error{margin-top:8px;padding:8px 12px}.finder-privacy{margin:0;padding:12px 24px 14px;border-top:var(--rule-soft);font-size:.95rem;color:var(--hall)}.finder-privacy-note{font-size:1rem;margin-top:18px}.finder-form .field{margin-top:16px}.finder-form>.finder-field{margin-top:18px}.finder-form>.finder-field legend{font-size:1rem}.finder-explain{font-family:var(--serif);font-size:1.3rem;line-height:1.45;max-width:60ch}.finder-chosen{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 16px;padding-block:8px;border-top:var(--rule-soft);border-bottom:var(--rule-soft);font-weight:700}.finder-h3{margin-top:32px;padding-top:12px;border-top:var(--rule)}.finder-empty .actions{margin-top:8px}.finder-links{font-weight:700;margin-top:12px}.fcards{list-style:none;margin:0;padding:0}.fcard{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:8px 24px;padding-block:18px;border-bottom:var(--rule-soft)}.fcard[hidden]{display:none}.fcard-name{font-size:1.25rem;margin-bottom:2px}.fcard-kind{font-weight:700;margin-bottom:4px}.fcard-meta{font-size:1rem;margin-bottom:2px}.fcard-time{font-weight:700;margin-bottom:10px}.fcard-side .label{display:block;margin-bottom:2px}.fcard-side .btn{width:100%}.fcard-more{margin:8px 0 0;font-size:1rem}.ftrain{padding-block:16px;border-bottom:var(--rule-soft)}.ftrain-date{margin:0;color:var(--hall)}.ftrain-title{font-size:1.2rem;margin:2px 0 4px}.ftrain .btn{margin-top:6px}.ftools li{padding-block:8px;border-bottom:var(--rule-soft);font-size:1rem}.search-title{margin-top:56px}.search-lede{max-width:70ch;font-size:1.1rem}.search-note{font-size:.98rem;margin-bottom:18px}.ledger-kind{font-size:.95rem;font-weight:700;margin:0 0 2px}.team li{padding-block:4px}.type-lede{max-width:70ch}.types{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px 40px;align-items:start}.account-type{grid-template-columns:22px minmax(0,1fr);padding-block:16px}.account-type input{grid-row:1 / span 3}.account-type .service-price{grid-column:2;grid-row:auto;font-weight:500}.type-detail{border-left:var(--rule-soft);padding-left:28px}.type-title{font-size:1.4rem}.type-price{display:block;margin-top:4px;font-size:1rem;font-weight:500;color:var(--savi)}.type-points{margin-bottom:16px}.type-checks{font-size:1rem;border-top:var(--rule-soft);padding-top:10px}@media(max-width:960px){.intro,.profile,.inquiry{grid-template-columns:minmax(0,1fr)}.intro-main,.margin-note,.inquiry-intro,.inquiry-form,.profile-card,.profile-main{grid-column:1 / -1}.margin-note{align-self:start}.training{grid-template-columns:120px minmax(0,1fr)}.training-side{grid-column:2}.ledger-row{grid-template-columns:76px minmax(0,1fr)}.ledger-side{grid-column:2}.product{grid-template-columns:96px minmax(0,1fr)}.product-side{grid-column:2}.cart,.product-page,.dash{grid-template-columns:minmax(0,1fr)}.cart-summary,.dash-nav{position:static}.dash-nav{flex-direction:row;flex-wrap:wrap;gap:0 18px;border-left:0;border-top:var(--rule-soft);border-bottom:var(--rule-soft);margin-top:0}.dash-nav a{padding:10px 0}.portrait-lg{max-width:220px}}@media(max-width:640px){body{font-size:1.0625rem}.intro{padding-block:32px 20px}.mast-main{align-items:flex-start}.nav{gap:0 18px}.form-grid,.almanac{grid-template-columns:minmax(0,1fr)}.inquiry{padding:22px 16px;margin-inline:calc(var(--gutter) * -1)}.ledger-row{grid-template-columns:56px minmax(0,1fr);gap:8px 14px}.ledger-row.is-new{margin-inline:calc(var(--gutter) * -1);padding-inline:var(--gutter)}.portrait-sm{width:56px;height:68px}.portrait-sm .portrait-initials{font-size:1.3rem}.ledger-side{grid-column:1 / -1}.training,.product,.rec{grid-template-columns:minmax(0,1fr)}.training-side,.product-side{grid-column:1}.training-date{flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:0 12px}.product .pframe-sm,.rec .pframe-sm{width:100%;height:64px}.booking-head,.booking-body,.stepper{padding-inline:16px}.stepper li{margin-right:14px}.days{grid-template-columns:repeat(4,minmax(0,1fr))}.facts-tight>div{grid-template-columns:minmax(0,1fr);gap:0}.foot-grid{grid-template-columns:minmax(0,1fr)}.data-table thead{display:none}.data-table tr{display:block;padding-block:10px;border-bottom:var(--rule-soft)}.data-table td{display:block;border:0;padding:0}.plans thead tr,.plans tbody tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.plans thead th:first-child{display:none}.plans tbody th{grid-column:1 / -1;width:auto;font-weight:700;border-bottom:0;padding-bottom:2px}.plans td,.plans th:nth-child(3){padding-left:10px}.plans-price td{font-size:1.1rem}.slot-toggle{font-size:.72rem}.control-code{font-size:2.4rem}.receipt>div{flex-direction:column;gap:0}.receipt dd{text-align:left}}@media(max-width:960px){.opening,.types{grid-template-columns:minmax(0,1fr)}.opening-main,.call-note{grid-column:1 / -1}.type-detail{border-left:0;padding-left:0;border-top:var(--rule);padding-top:14px}}@media(max-width:640px){.opening{padding-block:32px 24px}.opening-links{flex-direction:column}.opening-links li+li:before{content:none}.opening-links a{padding-block:8px}.finder{margin-inline:calc(var(--gutter) * -1);border-inline:0}.finder-bar{padding:12px 16px 10px}.finder-call{margin-left:0}.finder-body{padding:20px 16px 8px}.finder-privacy{padding:12px 16px 14px}.finder-options-inline,.fcard{grid-template-columns:minmax(0,1fr)}}</style>
+  </head>
+  <body>
+    <a class="skip" href="#sisu">Liigu sisu juurde</a>
+    <div id="app"></div>
+  </body>
+</html>
