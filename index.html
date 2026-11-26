@@ -3,7 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tegevusteraapia Keskus — 4 kujundus- ja abileidja suunda</title>
+  <title>Tegevusteraapia Keskus — prototüübid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap" />
   <script>
     (function () {
       var p = window.location.pathname;
@@ -14,57 +17,105 @@
   </script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #F5F2EC; color: #24211E; }
+    html, body {
+      height: 100%;
+      font-family: "Onest", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #F6F4EF;
+      color: #222A27;
+      -webkit-font-smoothing: antialiased;
+    }
     body { display: flex; flex-direction: column; }
     .bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      padding: 10px 18px;
-      background: #FFFDF9;
-      border-bottom: 1px solid #DDD6C8;
+      gap: 12px 20px;
+      padding: 10px 20px;
+      background: #FAF9F5;
+      border-bottom: 1px solid rgba(34, 42, 39, 0.08);
       flex-wrap: wrap;
     }
-    .brand { font-size: 13px; font-weight: 600; color: #24211E; }
-    .brand span { font-weight: 400; color: #665E55; margin-left: 8px; }
-    .tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+    .brand {
+      font-size: 13.5px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #222A27;
+      white-space: nowrap;
+    }
+    .tabs {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      background: #ECEAE2;
+      border-radius: 12px;
+      flex-wrap: wrap;
+    }
     .tab {
       appearance: none;
-      border: 1px solid #D4CCBD;
-      background: #F7F4EE;
-      color: #2C2824;
-      padding: 6px 12px;
-      border-radius: 2px;
-      font-size: 12.5px;
-      font-weight: 500;
+      border: 0;
+      background: transparent;
+      color: #525E59;
+      padding: 6px 13px;
+      border-radius: 9px;
+      font: 500 13px/1.3 "Onest", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       cursor: pointer;
+      transition: background 140ms ease, color 140ms ease, box-shadow 140ms ease;
     }
-    .tab:hover { border-color: #8C8275; background: #EFEAE0; }
-    .tab.active { background: #24211E; color: #FFFDF9; border-color: #24211E; }
-    .open-link { font-size: 12.5px; color: #24211E; text-decoration: underline; }
-    iframe { flex: 1; width: 100%; border: 0; background: #F6F1E8; }
+    .tab:hover {
+      color: #222A27;
+      background: rgba(255, 255, 255, 0.55);
+    }
+    .tab.active {
+      background: #FFFFFF;
+      color: #222A27;
+      box-shadow: 0 1px 2px rgba(34, 42, 39, 0.08), 0 2px 6px rgba(34, 42, 39, 0.04);
+    }
+    .tab:focus-visible, .open-link:focus-visible {
+      outline: 2px solid #2E6154;
+      outline-offset: 2px;
+    }
+    .open-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: #2E6154;
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: background 140ms ease;
+      white-space: nowrap;
+    }
+    .open-link:hover {
+      background: #E8F1ED;
+    }
+    iframe {
+      flex: 1;
+      width: 100%;
+      border: 0;
+      background: #F6F4EF;
+    }
   </style>
 </head>
 <body>
   <header class="bar">
-    <div class="brand">tegevusteraapiakeskus.ee <span>4 kujundust, 4 fondi- ja värvisuunda, 4 erinevat abileidjat</span></div>
-    <nav class="tabs" aria-label="Vali kujundussuund">
-      <button class="tab active" type="button" data-slug="v2-pohjala">1 · Põhjala (reaalajas abileidja)</button>
-      <button class="tab" type="button" data-slug="v1-kasikiri">2 · Käsikiri (trükifolio 1/3)</button>
-      <button class="tab" type="button" data-slug="v3-paevavalgus">3 · Päevavalgus (eakasõbralik suur)</button>
-      <button class="tab" type="button" data-slug="v4-eesti-puhas">4 · Eesti Puhas (lause-abileidja)</button>
+    <div class="brand">Tegevusteraapia Keskus</div>
+    <nav class="tabs" aria-label="Vali prototüüp">
+      <button class="tab active" type="button" data-slug="v5-rahulik">Uus · Rahulik</button>
+      <button class="tab" type="button" data-slug="v2-pohjala">Põhjala</button>
+      <button class="tab" type="button" data-slug="v1-kasikiri">Käsikiri</button>
+      <button class="tab" type="button" data-slug="v3-paevavalgus">Päevavalgus</button>
+      <button class="tab" type="button" data-slug="v4-eesti-puhas">Eesti Puhas</button>
     </nav>
-    <a id="direct" class="open-link" href="./v2-pohjala/index.html" target="_blank" rel="noopener">Ava eraldi aknas</a>
+    <a id="direct" class="open-link" href="./v5-rahulik/index.html" target="_blank" rel="noopener">Ava eraldi</a>
   </header>
-  <iframe id="stage" src="./v2-pohjala/index.html" title="Kujundussuund"></iframe>
+  <iframe id="stage" src="./v5-rahulik/index.html" title="Tegevusteraapia Keskuse prototüüp"></iframe>
   <script>
-    const slugs = ['v2-pohjala', 'v1-kasikiri', 'v3-paevavalgus', 'v4-eesti-puhas'];
+    const slugs = ['v5-rahulik', 'v2-pohjala', 'v1-kasikiri', 'v3-paevavalgus', 'v4-eesti-puhas'];
     const stage = document.getElementById('stage');
     const direct = document.getElementById('direct');
     const tabs = Array.from(document.querySelectorAll('.tab'));
     function pick(slug) {
-      if (!slugs.includes(slug)) slug = 'v2-pohjala';
+      if (!slugs.includes(slug)) slug = 'v5-rahulik';
       stage.src = './' + slug + '/index.html';
       direct.href = './' + slug + '/index.html';
       tabs.forEach(t => t.classList.toggle('active', t.dataset.slug === slug));
