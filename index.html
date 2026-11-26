@@ -20,23 +20,22 @@
     html, body { height: 100%; }
     body {
       display: flex; flex-direction: column;
-      font: 500 13.5px/1.3 "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font: 500 13px/1.3 "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: #E6E2DA; color: #ECEAE5;
       -webkit-font-smoothing: antialiased;
     }
-    .bar { display: flex; align-items: center; gap: 8px 14px; flex-wrap: wrap; min-height: 48px; padding: 6px 16px; background: #202328; }
+    .bar { display: flex; align-items: center; gap: 6px 10px; flex-wrap: wrap; min-height: 48px; padding: 6px 14px; background: #202328; }
     .name { display: flex; align-items: baseline; gap: 8px; margin-right: auto; white-space: nowrap; }
-    .name strong { font-weight: 600; font-size: 14px; letter-spacing: -0.01em; color: #FFFFFF; }
-    .name span { color: #B0B5BD; font-weight: 400; }
+    .name strong { font-weight: 600; font-size: 13.5px; letter-spacing: -0.01em; color: #FFFFFF; }
     .group { display: inline-flex; gap: 2px; padding: 3px; border-radius: 10px; background: rgba(255, 255, 255, 0.08); flex-wrap: nowrap; }
     .group button {
       appearance: none; border: 0; background: transparent; color: #CFD4DC;
-      min-height: 32px; padding: 5px 11px; border-radius: 7px; font: inherit; cursor: pointer; white-space: nowrap;
+      min-height: 30px; padding: 4px 10px; border-radius: 7px; font: inherit; cursor: pointer; white-space: nowrap;
       transition: background-color 140ms ease, color 140ms ease;
     }
     .group button:hover { color: #FFFFFF; background: rgba(255, 255, 255, 0.08); }
     .group button[aria-selected="true"], .group button[aria-pressed="true"] { background: #F5F2EC; color: #1F1E1C; font-weight: 600; }
-    .open-link { color: #ECEAE5; text-decoration: underline; text-decoration-color: rgba(236, 234, 229, 0.42); text-underline-offset: 3px; padding: 6px 2px; white-space: nowrap; }
+    .open-link { color: #ECEAE5; text-decoration: underline; text-decoration-color: rgba(236, 234, 229, 0.42); text-underline-offset: 3px; padding: 4px 2px; white-space: nowrap; }
     .open-link:hover { text-decoration-color: currentColor; }
     :focus-visible { outline: 2px solid #9CC0E2; outline-offset: 2px; }
     .stage { flex: 1; min-height: 0; display: flex; justify-content: center; }
@@ -47,11 +46,11 @@
       border: 1px solid rgba(31, 30, 28, 0.18); border-radius: 28px;
       box-shadow: 0 12px 32px rgba(31, 30, 28, 0.10);
     }
-    @media (max-width: 1060px) {
-      .name span { display: none; }
+    @media (max-width: 1220px) {
+      .name { display: none; }
     }
-    @media (max-width: 860px) {
-      .name, .devices, .open-link { display: none; }
+    @media (max-width: 900px) {
+      .devices, .open-link { display: none; }
       .bar { flex-wrap: nowrap; gap: 8px; padding-inline: 10px; overflow-x: auto; scrollbar-width: none; }
       .group { flex: 0 0 auto; }
       .stage[data-device="phone"] { padding: 0; }
@@ -61,7 +60,7 @@
 </head>
 <body>
   <header class="bar">
-    <p class="name"><strong>Tegevusteraapia Keskus</strong><span>kastid ja värvid</span></p>
+    <p class="name"><strong>Tegevusteraapia Keskus</strong></p>
     <div class="group" role="tablist" aria-label="Kastid ja paigutus">
       <button type="button" role="tab" data-style="a" aria-selected="true">A · Paber</button>
       <button type="button" role="tab" data-style="b" aria-selected="false" tabindex="-1">B · Raam</button>
@@ -74,38 +73,50 @@
       <button type="button" data-tone="kivi" aria-pressed="false">Kivi</button>
       <button type="button" data-tone="ploom" aria-pressed="false">Ploom</button>
     </div>
+    <div class="group" role="group" aria-label="Font">
+      <button type="button" data-font="source" aria-pressed="true" title="Source Sans 3 — soe humanistlik sans">Source</button>
+      <button type="button" data-font="plex" aria-pressed="false" title="IBM Plex Sans — selge Euroopa grotesk">Plex</button>
+      <button type="button" data-font="karla" aria-pressed="false" title="Karla — sõbralik põhjamaine grotesk">Karla</button>
+      <button type="button" data-font="barlow" aria-pressed="false" title="Barlow — puhas arhitektuurne sans">Barlow</button>
+      <button type="button" data-font="atkinson" aria-pressed="false" title="Atkinson Hyperlegible Next — eriti kergesti loetav">Atkinson</button>
+      <button type="button" data-font="literata" aria-pressed="false" title="Literata + Source Sans 3 — soe raamatulik pealkiri">Literata</button>
+    </div>
     <div class="group devices" role="group" aria-label="Vaate laius">
       <button type="button" data-device="desktop" aria-pressed="true">Arvuti</button>
       <button type="button" data-device="phone" aria-pressed="false">Telefon</button>
     </div>
-    <a id="direct" class="open-link" href="./v5-rahulik/index.html?style=a&amp;tone=sinine" target="_blank" rel="noopener">Ava eraldi</a>
+    <a id="direct" class="open-link" href="./v5-rahulik/index.html?style=a&amp;tone=sinine&amp;font=source" target="_blank" rel="noopener">Ava eraldi</a>
   </header>
   <main class="stage" id="stage-wrap" data-device="desktop">
-    <iframe id="stage" src="./v5-rahulik/index.html?style=a&amp;tone=sinine" title="Tegevusteraapia Keskuse prototüüp"></iframe>
+    <iframe id="stage" src="./v5-rahulik/index.html?style=a&amp;tone=sinine&amp;font=source" title="Tegevusteraapia Keskuse prototüüp"></iframe>
   </main>
   <script>
     const styles = ['a', 'b', 'c', 'd'];
     const tones = ['sinine', 'savi', 'kivi', 'ploom'];
+    const fonts = ['source', 'plex', 'karla', 'barlow', 'atkinson', 'literata'];
+    const defaultFontFor = { a: 'source', b: 'plex', c: 'karla', d: 'barlow' };
     const stage = document.getElementById('stage');
     const wrap = document.getElementById('stage-wrap');
     const direct = document.getElementById('direct');
     const styleTabs = Array.from(document.querySelectorAll('[role="tab"][data-style]'));
     const toneBtns = Array.from(document.querySelectorAll('[data-tone][aria-pressed]'));
+    const fontBtns = Array.from(document.querySelectorAll('[data-font][aria-pressed]'));
     const deviceBtns = Array.from(document.querySelectorAll('[data-device][aria-pressed]'));
-    let current = { style: 'a', tone: 'sinine', device: 'desktop' };
+    let current = { style: 'a', tone: 'sinine', font: 'source', device: 'desktop' };
 
     function pushTheme() {
       try {
-        stage.contentWindow?.postMessage({ type: 'ttk-theme', style: current.style, tone: current.tone }, '*');
+        stage.contentWindow?.postMessage({ type: 'ttk-theme', style: current.style, tone: current.tone, font: current.font }, '*');
       } catch {}
     }
 
-    function show(style, tone, device) {
+    function show(style, tone, font, device) {
       if (!styles.includes(style)) style = 'a';
       if (!tones.includes(tone)) tone = 'sinine';
+      if (!fonts.includes(font)) font = defaultFontFor[style] || 'source';
       if (device !== 'phone') device = 'desktop';
-      current = { style, tone, device };
-      const url = './v5-rahulik/index.html?style=' + style + '&tone=' + tone;
+      current = { style, tone, font, device };
+      const url = './v5-rahulik/index.html?style=' + style + '&tone=' + tone + '&font=' + font;
       direct.href = url;
       wrap.dataset.device = device;
       styleTabs.forEach((tab) => {
@@ -114,6 +125,7 @@
         tab.tabIndex = on ? 0 : -1;
       });
       toneBtns.forEach((btn) => btn.setAttribute('aria-pressed', String(btn.dataset.tone === tone)));
+      fontBtns.forEach((btn) => btn.setAttribute('aria-pressed', String(btn.dataset.font === font)));
       deviceBtns.forEach((btn) => btn.setAttribute('aria-pressed', String(btn.dataset.device === device)));
       if (!stage.dataset.loaded) {
         stage.dataset.loaded = '1';
@@ -122,30 +134,34 @@
         pushTheme();
       }
       try {
-        history.replaceState(null, '', '#' + style + '-' + tone + (device === 'phone' ? '/telefon' : ''));
+        history.replaceState(null, '', '#' + style + '-' + tone + '-' + font + (device === 'phone' ? '/telefon' : ''));
       } catch {}
     }
 
     stage.addEventListener('load', pushTheme);
 
     styleTabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => show(tab.dataset.style, current.tone, current.device));
+      tab.addEventListener('click', () => show(tab.dataset.style, current.tone, current.font, current.device));
       tab.addEventListener('keydown', (event) => {
         const step = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
         if (!step) return;
         event.preventDefault();
         const next = styleTabs[(index + step + styleTabs.length) % styleTabs.length];
         next.focus();
-        show(next.dataset.style, current.tone, current.device);
+        show(next.dataset.style, current.tone, current.font, current.device);
       });
     });
-    toneBtns.forEach((btn) => btn.addEventListener('click', () => show(current.style, btn.dataset.tone, current.device)));
-    deviceBtns.forEach((btn) => btn.addEventListener('click', () => show(current.style, current.tone, btn.dataset.device)));
+    toneBtns.forEach((btn) => btn.addEventListener('click', () => show(current.style, btn.dataset.tone, current.font, current.device)));
+    fontBtns.forEach((btn) => btn.addEventListener('click', () => show(current.style, current.tone, btn.dataset.font, current.device)));
+    deviceBtns.forEach((btn) => btn.addEventListener('click', () => show(current.style, current.tone, current.font, btn.dataset.device)));
 
     const raw = location.hash.replace('#', '');
-    const [pair = '', view = ''] = raw.split('/');
-    const [st, tn] = pair.split('-');
-    show(styles.includes(st) ? st : 'a', tones.includes(tn) ? tn : 'sinine', view === 'telefon' ? 'phone' : 'desktop');
+    const [triple = '', view = ''] = raw.split('/');
+    const [st, tn, fn] = triple.split('-');
+    const style = styles.includes(st) ? st : 'a';
+    const tone = tones.includes(tn) ? tn : 'sinine';
+    const font = fonts.includes(fn) ? fn : defaultFontFor[style];
+    show(style, tone, font, view === 'telefon' ? 'phone' : 'desktop');
   </script>
 </body>
 </html>
