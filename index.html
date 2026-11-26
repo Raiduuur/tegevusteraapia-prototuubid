@@ -6,7 +6,7 @@
   <title>Tegevusteraapia Keskus · kujundusvariandid</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600&family=Fraunces:opsz,SOFT,wght@9..144,100,600&family=Lexend:wght@500&family=Literata:opsz,wght@7..72,600&family=Rubik:wght@500&family=Source+Sans+3:wght@400;500;600&display=swap" />
   <script>
     (function () {
       var p = window.location.pathname;
@@ -35,6 +35,12 @@
     }
     .group button:hover { color: #FFFFFF; background: rgba(255, 255, 255, 0.08); }
     .group button[aria-selected="true"], .group button[aria-pressed="true"] { background: #F5F2EC; color: #1F1E1C; font-weight: 600; }
+    .f-source { font-family: "Source Sans 3", sans-serif; }
+    .f-rubik { font-family: "Rubik", sans-serif; }
+    .f-lexend { font-family: "Lexend", sans-serif; font-size: 12.2px; }
+    .f-literata { font-family: "Literata", Georgia, serif; }
+    .f-fraunces { font-family: "Fraunces", Georgia, serif; font-variation-settings: "SOFT" 100; }
+    .f-bitter { font-family: "Bitter", Georgia, serif; }
     .open-link { color: #ECEAE5; text-decoration: underline; text-decoration-color: rgba(236, 234, 229, 0.42); text-underline-offset: 3px; padding: 4px 2px; white-space: nowrap; }
     .open-link:hover { text-decoration-color: currentColor; }
     :focus-visible { outline: 2px solid #9CC0E2; outline-offset: 2px; }
@@ -74,27 +80,27 @@
       <button type="button" data-tone="ploom" aria-pressed="false">Ploom</button>
     </div>
     <div class="group" role="group" aria-label="Font">
-      <button type="button" data-font="source" aria-pressed="true" title="Source Sans 3 — soe humanistlik sans">Source</button>
-      <button type="button" data-font="plex" aria-pressed="false" title="IBM Plex Sans — selge Euroopa grotesk">Plex</button>
-      <button type="button" data-font="karla" aria-pressed="false" title="Karla — sõbralik põhjamaine grotesk">Karla</button>
-      <button type="button" data-font="barlow" aria-pressed="false" title="Barlow — puhas arhitektuurne sans">Barlow</button>
-      <button type="button" data-font="atkinson" aria-pressed="false" title="Atkinson Hyperlegible Next — eriti kergesti loetav">Atkinson</button>
-      <button type="button" data-font="literata" aria-pressed="false" title="Literata + Source Sans 3 — soe raamatulik pealkiri">Literata</button>
+      <button type="button" class="f-source" data-font="source" aria-pressed="true" title="Source Sans 3 — puhas humanistlik sans">Source</button>
+      <button type="button" class="f-rubik" data-font="rubik" aria-pressed="false" title="Rubik — pehme ümarate nurkadega sans">Rubik</button>
+      <button type="button" class="f-lexend" data-font="lexend" aria-pressed="false" title="Lexend — lai ja õhuline kergesti loetav sans">Lexend</button>
+      <button type="button" class="f-literata" data-font="literata" aria-pressed="false" title="Literata + Source Sans 3 — soe raamatulik serif">Literata</button>
+      <button type="button" class="f-fraunces" data-font="fraunces" aria-pressed="false" title="Fraunces (Soft) + Source Sans 3 — pehme orgaaniline serif">Fraunces</button>
+      <button type="button" class="f-bitter" data-font="bitter" aria-pressed="false" title="Bitter + IBM Plex Sans — kindel plaat-serif">Bitter</button>
     </div>
     <div class="group devices" role="group" aria-label="Vaate laius">
       <button type="button" data-device="desktop" aria-pressed="true">Arvuti</button>
       <button type="button" data-device="phone" aria-pressed="false">Telefon</button>
     </div>
-    <a id="direct" class="open-link" href="./v5-rahulik/index.html?style=a&amp;tone=sinine&amp;font=source" target="_blank" rel="noopener">Ava eraldi</a>
+    <a id="direct" class="open-link" href="./v5-rahulik/index.html?v=20261126-f2&amp;style=a&amp;tone=sinine&amp;font=source" target="_blank" rel="noopener">Ava eraldi</a>
   </header>
   <main class="stage" id="stage-wrap" data-device="desktop">
-    <iframe id="stage" src="./v5-rahulik/index.html?style=a&amp;tone=sinine&amp;font=source" title="Tegevusteraapia Keskuse prototüüp"></iframe>
+    <iframe id="stage" src="./v5-rahulik/index.html?v=20261126-f2&amp;style=a&amp;tone=sinine&amp;font=source" title="Tegevusteraapia Keskuse prototüüp"></iframe>
   </main>
   <script>
+    const REV = '20261126-f2';
     const styles = ['a', 'b', 'c', 'd'];
     const tones = ['sinine', 'savi', 'kivi', 'ploom'];
-    const fonts = ['source', 'plex', 'karla', 'barlow', 'atkinson', 'literata'];
-    const defaultFontFor = { a: 'source', b: 'plex', c: 'karla', d: 'barlow' };
+    const fonts = ['source', 'rubik', 'lexend', 'literata', 'fraunces', 'bitter'];
     const stage = document.getElementById('stage');
     const wrap = document.getElementById('stage-wrap');
     const direct = document.getElementById('direct');
@@ -106,6 +112,14 @@
 
     function pushTheme() {
       try {
+        const doc = stage.contentDocument;
+        if (doc && doc.documentElement) {
+          doc.documentElement.dataset.style = current.style;
+          doc.documentElement.dataset.tone = current.tone;
+          doc.documentElement.dataset.font = current.font;
+        }
+      } catch {}
+      try {
         stage.contentWindow?.postMessage({ type: 'ttk-theme', style: current.style, tone: current.tone, font: current.font }, '*');
       } catch {}
     }
@@ -113,10 +127,10 @@
     function show(style, tone, font, device) {
       if (!styles.includes(style)) style = 'a';
       if (!tones.includes(tone)) tone = 'sinine';
-      if (!fonts.includes(font)) font = defaultFontFor[style] || 'source';
+      if (!fonts.includes(font)) font = 'source';
       if (device !== 'phone') device = 'desktop';
       current = { style, tone, font, device };
-      const url = './v5-rahulik/index.html?style=' + style + '&tone=' + tone + '&font=' + font;
+      const url = './v5-rahulik/index.html?v=' + REV + '&style=' + style + '&tone=' + tone + '&font=' + font;
       direct.href = url;
       wrap.dataset.device = device;
       styleTabs.forEach((tab) => {
@@ -158,10 +172,7 @@
     const raw = location.hash.replace('#', '');
     const [triple = '', view = ''] = raw.split('/');
     const [st, tn, fn] = triple.split('-');
-    const style = styles.includes(st) ? st : 'a';
-    const tone = tones.includes(tn) ? tn : 'sinine';
-    const font = fonts.includes(fn) ? fn : defaultFontFor[style];
-    show(style, tone, font, view === 'telefon' ? 'phone' : 'desktop');
+    show(styles.includes(st) ? st : 'a', tones.includes(tn) ? tn : 'sinine', fonts.includes(fn) ? fn : 'source', view === 'telefon' ? 'phone' : 'desktop');
   </script>
 </body>
 </html>
