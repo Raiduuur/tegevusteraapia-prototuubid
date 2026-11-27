@@ -11,9 +11,9 @@ export interface PrototypeVariantMeta {
 }
 
 export const PROTOTYPE_VARIANTS: readonly PrototypeVariantMeta[] = [
-  { id: "A", name: "Teatmik", subtitle: "tegevuste indeks" },
+  { id: "A", name: "Teatmik", subtitle: "igapäevased toimingud" },
   { id: "B", name: "Vastuvõtt", subtitle: "asutajate kiri" },
-  { id: "C", name: "Nädalaplaan", subtitle: "vabade aegade ajakava" },
+  { id: "C", name: "Nädalaplaan", subtitle: "rahulik nädal" },
 ] as const;
 
 /** Gate switcher off in live production builds so a stray merge cannot ship evaluation chrome. */

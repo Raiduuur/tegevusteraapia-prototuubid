@@ -54,11 +54,19 @@ const wordmark = '<span>Tegevusteraapia</span> <span>Keskus</span>';
 function renderHeader(): void {
   const count = cartCount();
   const links = Object.entries(VIEWS).map(([view, title]) => `<a href="#${view}" data-nav="${view}"${store.view === view ? ' aria-current="page"' : ""}>${h(title)}</a>`).join("");
+  const navPhone = helpline
+    ? live
+      ? `<a class="nav-phone num" href="${tel(helpline)}">Helista ${h(helpline)}</a>`
+      : `<span class="nav-phone num">Nõu: ${h(helpline)} (näidis)</span>`
+    : "";
+  const headerPhone = helpline && live
+    ? `<a class="header-phone num" href="${tel(helpline)}" aria-label="Helista ${h(helpline)}">${h(helpline)}</a>`
+    : "";
   header.innerHTML = `<div class="wrap header-row">
     <a class="brand" href="#leia-abi" data-nav="leia-abi">${wordmark}</a>
-    <nav id="navigation" class="main-nav ${store.menu ? "is-open" : ""}" aria-label="Peamenüü">${links}${helpline ? `<a class="nav-phone num" href="${tel(helpline)}">Helista ${h(helpline)}</a>` : ""}</nav>
+    <nav id="navigation" class="main-nav ${store.menu ? "is-open" : ""}" aria-label="Peamenüü">${links}${navPhone}</nav>
     <div class="header-actions">
-      ${helpline ? `<a class="header-phone num" href="${tel(helpline)}" aria-label="Helista ${h(helpline)}">${h(helpline)}</a>` : ""}
+      ${headerPhone}
       <button class="cart-header${count ? " has-items" : ""}" type="button" data-action="cart" aria-label="Ostukorv (${count})"><b class="w-long">Ostukorv</b><b class="w-short">Korv</b> <span aria-hidden="true">(${count})</span></button>
       <button class="menu-toggle" type="button" data-action="menu" aria-label="${store.menu ? "Sulge menüü" : "Ava menüü"}" aria-expanded="${store.menu}" aria-controls="navigation">${store.menu ? "Sulge" : "Menüü"}</button>
     </div>

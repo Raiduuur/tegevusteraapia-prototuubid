@@ -1,15 +1,18 @@
-// PROTOTYPE Variant B · Vastuvõtt (Nordic Founders' Monograph & Guided Care Sheet)
-// Tradition: Nordic practice handbook. Entry by WHO founded it & WHO needs help.
+// PROTOTYPE Variant B · Vastuvõtt (Cotton Rag, Wool & Rose-Clay — Founders' Welcome & Conversation)
+// Entry by WHO founded it (Terje & Kristel) & a calm one-by-one human conversation leading to a cotton care sheet.
 import { AUDIENCES, NEEDS_FITTING, SKA_AIDS_URL, TASKS, TOOL_TRY_NOTE, UNSURE, tasksFor } from "../data/finder";
 import type { Course, Product } from "../data/catalog";
 import { findPlace } from "../data/places";
 import {
-  data, finderMatches, helpline, live, nextOpenProviders, providerCovers,
+  data, finderMatches, helpline, nextOpenProviders, providerCovers,
   selectedFinderSlots, store, upcomingCourses, type DirectoryProvider, type Region, type VisitSlot,
 } from "../model";
 import { btn, euro, fullDate, h, nav } from "../ui";
 import { estoniaMapSvg } from "./directory";
-import { firstVisitRangeText, helplineDisplay, honestSlotButton, initialsPlate, priceRangeLabel } from "./prototype-home-a";
+import {
+  demoDisclosureText, emptyResultsMessage, firstVisitRangeText, helplineDisplay,
+  honestSlotButton, initialsPlate, priceRangeLabel, providerMatchesFormatAndPlace,
+} from "./prototype-home-a";
 
 const STARTERS = ["laps-pliiats", "ise-pesemine", "eakas-vannituba", "hooldaja-vahend", "asutus-koolitus"] as const;
 const MODES = [
@@ -32,7 +35,7 @@ function appointmentBookRow(person: DirectoryProvider, slots: VisitSlot[]): stri
       ${initialsPlate(person)}
       <div>
         <h4>${h(person.name)}</h4>
-        <p>${h(person.city)} · ${h(person.org)} · <span class="num">${priceRangeLabel(person, slots)} / ${person.visit.minutes} min</span></p>
+        <p>${h(person.city)} · ${h(person.org)} · <span class="num proto-nowrap">${priceRangeLabel(person, slots)} / ${person.visit.minutes}&nbsp;min</span></p>
       </div>
     </div>
     <div class="pb-appt-slots">
@@ -71,15 +74,18 @@ function careSheetCourses(courses: Course[]): string {
 }
 
 export function renderVariantBResults(): string {
-  const { audience, task } = store.finder;
+  const { audience, task, format, place } = store.finder;
   const matched = task ? finderMatches() : undefined;
-  // Filter by audience immediately even before a specific task is selected.
+  const hasFilter = Boolean(audience || (format && format !== "all") || place.trim());
+
+  // Respect audience, format, and place coverage immediately — never show unrelated therapists with empty slots.
   const rows = matched
     ? matched.providers.slice(0, 4).map((person) => ({ person, slots: selectedFinderSlots(person) }))
-    : audience
+    : hasFilter
       ? data.providers
-          .filter((p) => p.audiences.includes(audience))
+          .filter((p) => (!audience || p.audiences.includes(audience)) && providerMatchesFormatAndPlace(p))
           .map((person) => ({ person, slots: selectedFinderSlots(person) }))
+          .filter(({ slots }) => slots.length > 0 || !findPlace(place))
           .sort((a, b) => (a.slots[0]?.at ?? "9999").localeCompare(b.slots[0]?.at ?? "9999"))
           .slice(0, 4)
       : nextOpenProviders(3);
@@ -89,13 +95,13 @@ export function renderVariantBResults(): string {
 
   return `${videoBlocked ? `<p class="pb-callout">Selle toimingu puhul peab terapeut nägema tegelikku ruumi või liikumist — seetõttu pakume kohtumist kohapeal või koduvisiidina.</p>` : ""}
     ${matched ? `<blockquote class="pb-pullquote"><p>${h(matched.task.result)}</p></blockquote>` : ""}
-    <p class="pb-demo-note">${live ? "Kõigil loetletud tegevusterapeutidel on kehtiv kutsetunnistus Kutseregistrist ja isik kinnitatud." : "Näidisandmed · tegelikul lehel on terapeudi isik kinnitatud Smart-ID/Mobiil-ID-ga ja kutse kontrollitud Kutseregistrist. Iga aja juures on selle kohtumisviisi täpne hind."}</p>
+    <p class="pb-demo-note">${demoDisclosureText()}</p>
 
     ${store.availability === "loading" ? `<p class="pb-muted">Laadime vabu aegu.</p>`
       : store.availability === "stale" ? `<p class="pb-muted">Vabu aegu ei õnnestunud laadida. ${btn("Proovi uuesti", "retry-public", "", "text-button")}</p>`
       : rows.length
         ? `<div class="pb-appt-list">${rows.map(({ person, slots }) => appointmentBookRow(person, slots)).join("")}</div>`
-        : `<p class="pb-muted">Selle valikuga vabu aegu praegu ei leidu. Muutke sihtrühma, kohtumisviisi või piirkonda.</p>`}
+        : `<p class="pb-muted">${h(emptyResultsMessage())}</p>`}
 
     ${matched ? `<div class="pb-care-extras">${careSheetTools(matched.task.tools)}${careSheetCourses(matched.courses)}</div>` : ""}`;
 }
@@ -107,8 +113,8 @@ function appointmentBook(): string {
   return `<section class="pb-book" id="pb-vastuvotud" aria-labelledby="wizard-preview-title">
     <div class="pb-book-top">
       <div>
-        <p class="pb-chapter-tag">Vastuvõtuajad</p>
-        <h2 id="wizard-preview-title" tabindex="-1">${task ? "Teie olukorrale sobiv abi" : activeAudience ? `Terapeudid (${h(activeAudience.label.toLocaleLowerCase("et"))})` : "Lähimad vabad vastuvõtuajad"}</h2>
+        <p class="pb-chapter-eyebrow">Vastuvõtuajad</p>
+        <h2 id="wizard-preview-title" tabindex="-1">${task ? "Meie soovitus teie olukorraks" : activeAudience ? `Terapeudid (${h(activeAudience.label.toLocaleLowerCase("et"))})` : "Lähimad vabad vastuvõtuajad"}</h2>
       </div>
       <fieldset class="pb-sentence-filter">
         <legend>Kohtun meelsamini:</legend>
@@ -151,20 +157,26 @@ export function renderVariantB(): string {
   return `<div class="wrap proto-b">
     <section class="pb-foreword" aria-labelledby="page-title">
       <div class="pb-letter">
-        <p class="pb-kicker">Tegevusteraapia Keskus · Terje ja Kristel</p>
+        <div class="pb-founders-badge">
+          <span class="pb-medallion-pair" aria-hidden="true">
+            <span class="pb-medallion pb-medallion-t">T</span>
+            <span class="pb-medallion pb-medallion-k">K</span>
+          </span>
+          <p class="pb-eyebrow">Tere, meie oleme tegevusterapeudid <strong>Terje ja Kristel</strong></p>
+        </div>
         <h1 id="page-title" tabindex="-1">Kui igapäevane toiming on raske, <em>aitab tegevusterapeut.</em></h1>
         <p class="pb-letter-body">Meie töö algab alati ühest tavalisest asjast — kuidas laps saab kääridega lõigata, kuidas pärast haigust jälle ise süüa teha või kuidas eakas lähedane julgeb kodus vannituppa minna. Tasulisele vastuvõtule saab tulla ilma saatekirja ja diagnoosita.</p>
         <div class="pb-hero-actions">
-          <button type="button" class="button primary" data-proto-jump="#pb-vastuvotud">Vaata vabu aegu ↓</button>
-          <button type="button" class="text-button" data-proto-jump="#pb-intake-title">Aita mul sobiv abi valida</button>
+          <button type="button" class="button primary" data-proto-jump="#pb-intake-title">Vasta mõnele küsimusele ↓</button>
+          <button type="button" class="text-button" data-proto-jump="#pb-vastuvotud">Vaata kohe vabu aegu</button>
         </div>
-        <p class="pb-signature">Terje ja Kristel <span>tegevusterapeudid, keskuse asutajad</span></p>
       </div>
-      <aside class="pb-margin" aria-label="Oluline teada enne kohtumist">
+
+      <aside class="pb-margin-cushion" aria-label="Oluline teada enne kohtumist">
         <p class="pb-margin-title">Enne esimest kohtumist</p>
         <dl class="pb-margin-facts">
           <div><dt>Kestus ja hind</dt><dd class="num">${h(firstVisitRangeText())}</dd></div>
-          <div><dt>Saatekiri</dt><dd>Tasulisele vastuvõtule pole vaja</dd></div>
+          <div><dt>Saatekiri</dt><dd>Tasulisele vastuvõtule ei ole saatekirja vaja</dd></div>
           ${helpline ? `<div><dt>Nõu telefonil (E–R 9–17)</dt><dd>${helplineDisplay()}</dd></div>` : ""}
         </dl>
       </aside>
@@ -172,23 +184,23 @@ export function renderVariantB(): string {
 
     <section class="pb-conversation" aria-labelledby="pb-intake-title">
       <div class="pb-conv-head">
-        <p class="pb-chapter-tag">Vestluse algus</p>
-        <h2 id="pb-intake-title">Kellele te abi otsite?</h2>
-        ${activeAudience || activeTask ? `<p class="pb-summary-line">Valitud: <strong>${h(activeAudience?.label ?? "")}</strong>${activeTask ? ` · <em>${h(activeTask.label)}</em>` : ""} <button type="button" class="text-button" data-action="finder-reset">Alusta uuesti</button></p>` : ""}
+        <p class="pb-chapter-eyebrow">Vestluse algus</p>
+        <h2 id="pb-intake-title" tabindex="-1">Kellele te abi otsite?</h2>
+        ${activeAudience || activeTask ? `<p class="pb-summary-line">Valitud: <strong>${h(activeAudience?.label ?? "")}</strong>${activeTask ? ` · <em>${h(activeTask.label)}</em>` : ""} <button type="button" class="text-button" data-action="finder-reset">Muuda algusest</button></p>` : ""}
       </div>
 
       <fieldset class="pb-reading-list">
         <legend class="visually-hidden">Valige, kellele abi otsite</legend>
-        ${AUDIENCES.map((a, i) => `
-          <label class="pb-letter-choice${audience === a.id ? " is-picked" : ""}${i === AUDIENCES.length - 1 ? " is-wide" : ""}">
+        ${AUDIENCES.map((a) => `
+          <label class="pb-letter-choice${audience === a.id ? " is-picked" : ""}">
             <input type="radio" name="audience" value="${h(a.id)}"${audience === a.id ? " checked" : ""}>
+            <span class="pb-choice-dot" aria-hidden="true"></span>
             <span class="pb-choice-copy"><strong>${h(a.label)}</strong><small>${h(a.hint)}</small></span>
-            <span class="pb-choice-arrow" aria-hidden="true">${audience === a.id ? "✓" : "→"}</span>
           </label>`).join("")}
       </fieldset>
 
       <fieldset class="pb-tasks-flow">
-        <legend>${audience ? "Mis igapäevase toiminguga on praegu kõige raskem?" : "Või valige kohe üks sagedastest olukordadest:"}</legend>
+        <legend>${audience ? "Mis igapäevase toiminguga on praegu kõige raskem?" : "Või puudutage kohe üht sagedastest olukordadest:"}</legend>
         <div class="pb-task-lines">
           ${taskList.map((t) => `
             <label class="pb-task-choice${task === t.id ? " is-picked" : ""}">
@@ -207,7 +219,7 @@ export function renderVariantB(): string {
     ${appointmentBook()}
 
     <section class="pb-chapter" aria-labelledby="pb-ch2">
-      <p class="pb-chapter-tag">Esimene kohtumine</p>
+      <p class="pb-chapter-eyebrow">Esimene kohtumine</p>
       <div class="pb-essay-spread">
         <h2 id="pb-ch2">Rahulik vestlus ja koos proovimine.</h2>
         <div class="pb-essay-body">
@@ -219,17 +231,17 @@ export function renderVariantB(): string {
     </section>
 
     <section class="pb-chapter" aria-labelledby="pb-ch3">
-      <p class="pb-chapter-tag">Kus me töötame</p>
+      <p class="pb-chapter-eyebrow">Kus me töötame</p>
       <div class="pb-atlas-spread">
         <div class="pb-atlas-copy">
           <h2 id="pb-ch3">Tegevusterapeudid üle Eesti</h2>
           <p>Valige maakond kaardilt või linnade loetelust. Mõni terapeut võtab vastu mitmes maakonnas ja video teel, seega on piirkondade summa suurem kui terapeutide koguarv (${data.providers.length}).</p>
-          <p class="pb-town-index">
+          <div class="pb-town-index">
             ${TOWNS.map(([label, region]) => {
               const count = data.providers.filter((p) => providerCovers(p, region)).length;
               return `<button type="button" class="pb-town-link" data-action="directory-region" data-value="${h(region)}">${h(label)} <span class="num">(${count})</span></button>`;
-            }).join(" · ")}
-          </p>
+            }).join("")}
+          </div>
           <p>${btn(`Ava täiskaart ja kõik ${data.providers.length} terapeuti`, "directory-region", "all", "text-button")}</p>
         </div>
         <div class="pb-atlas-map">${estoniaMapSvg("all", { action: "home-region", counts: "all" })}</div>
@@ -237,7 +249,7 @@ export function renderVariantB(): string {
     </section>
 
     <section class="pb-chapter" aria-labelledby="pb-ch4">
-      <p class="pb-chapter-tag">Koolitused</p>
+      <p class="pb-chapter-eyebrow">Koolitused</p>
       <div class="pb-chapter-head">
         <div>
           <h2 id="pb-ch4">Koolitused asutustele ja lähedastele</h2>
@@ -263,7 +275,7 @@ export function renderVariantB(): string {
     </section>
 
     <section class="pb-chapter" aria-labelledby="pb-ch5">
-      <p class="pb-chapter-tag">Abivahendid</p>
+      <p class="pb-chapter-eyebrow">Abivahendid</p>
       <div class="pb-chapter-head">
         <div>
           <h2 id="pb-ch5">Terapeutide valitud abivahendid ja prinditavad lehed</h2>
@@ -271,19 +283,19 @@ export function renderVariantB(): string {
         </div>
         ${nav("e-pood", `Vaata kogu e-poodi (${data.products.length})`, "text-button")}
       </div>
-      <div class="pb-aids-cols">
-        ${aidsPicks.map((p) => `<article class="pb-aid-entry">
-          <div class="pb-aid-top">
+      <ul class="pb-aids-list">
+        ${aidsPicks.map((p) => `<li class="pb-aid-row">
+          <div class="pb-aid-main">
             <h3><button type="button" class="text-button pb-aid-name" data-action="open-product" data-value="${h(p.id)}">${h(p.name)}</button></h3>
-            <span class="num pb-aid-price">${euro(p.cents)}</span>
+            <p>${h(p.reason)}${p.digital ? " <em>(Prinditav A4 PDF-leht.)</em>" : ""}</p>
           </div>
-          <p>${h(p.reason)}${p.digital ? " <em>(Prinditav A4 PDF-leht.)</em>" : ""}</p>
-          <div class="pb-aid-links">
+          <div class="pb-aid-act">
+            <span class="num pb-aid-price">${euro(p.cents)}</span>
             ${btn("Lisa ostukorvi", "add-product", p.id, "text-button")}
             ${btn("Loe sobivusest", "open-product", p.id, "text-button")}
           </div>
-        </article>`).join("")}
-      </div>
+        </li>`).join("")}
+      </ul>
     </section>
 
     <section class="pb-invitation" aria-labelledby="pb-join">

@@ -9,10 +9,13 @@ import { renderVariantB, renderVariantBResults } from "./prototype-home-b";
 import { renderVariantC, renderVariantCResults } from "./prototype-home-c";
 
 const hasLocalMode = (format: string) => format === "kohal" || format === "kodu";
+const scrollBehavior = (): ScrollBehavior => (window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth");
 
 class InstantMatchFinder extends HTMLElement {
   #availabilityTimer?: number;
   #openGroup = "";
+  #selectedDay = "";
+  #cFiltersOpen = false;
   #body!: HTMLElement;
   #status!: HTMLElement;
 
@@ -53,17 +56,45 @@ class InstantMatchFinder extends HTMLElement {
       const id = groupBtn.dataset.protoGroup ?? "";
       const nextOpen = this.#openGroup === id ? "" : id;
       this.#openGroup = nextOpen;
+      // Always clear any previously chosen task when switching activity groups so tasks never bleed across groups.
       if (nextOpen === "ei-tea") {
         store.finder.task = "ei-tea";
-      } else if (nextOpen) {
-        // Clear any task that does not belong to the newly opened activity group.
-        const group = ACTIVITY_GROUPS.find((g) => g.id === nextOpen);
-        const picked = TASKS.find((t) => t.id === store.finder.task);
-        if (!group || !picked || !picked.tags.some((tag) => group.tags.includes(tag))) {
-          store.finder.task = "";
-        }
+      } else {
+        store.finder.task = "";
       }
-      this.#render(`button[data-proto-group="${CSS.escape(id)}"]`);
+      if (nextOpen) {
+        this.#render("#pa-dossier-title");
+        const cushion = this.querySelector<HTMLElement>(".pa-dossier");
+        cushion?.scrollIntoView({ behavior: scrollBehavior(), block: "nearest" });
+      } else {
+        const stoneSelector = `button.pa-stone[data-proto-group="${CSS.escape(id)}"]`;
+        this.#render(stoneSelector);
+        this.querySelector<HTMLElement>(stoneSelector)?.scrollIntoView({ behavior: scrollBehavior(), block: "nearest" });
+      }
+      return;
+    }
+
+    const filterToggle = target.closest<HTMLButtonElement>("[data-proto-toggle-filters]");
+    if (filterToggle) {
+      this.#cFiltersOpen = !this.#cFiltersOpen;
+      this.#render("[data-proto-toggle-filters]");
+      return;
+    }
+
+    const dayBtn = target.closest<HTMLButtonElement>("[data-proto-day]");
+    if (dayBtn) {
+      const strip = this.querySelector<HTMLElement>(".pc-day-strip");
+      const priorScrollLeft = strip?.scrollLeft ?? 0;
+      const iso = dayBtn.dataset.protoDay ?? "";
+      this.#selectedDay = iso === "all" || this.#selectedDay === iso ? "" : iso;
+      const focusKey = this.#selectedDay || "all";
+      this.#render(`button[data-proto-day="${CSS.escape(focusKey)}"]`);
+      const nextStrip = this.querySelector<HTMLElement>(".pc-day-strip");
+      if (nextStrip) {
+        nextStrip.scrollLeft = priorScrollLeft;
+        const activePebble = nextStrip.querySelector<HTMLElement>(`button[data-proto-day="${CSS.escape(focusKey)}"]`);
+        activePebble?.scrollIntoView({ behavior: "auto", inline: "nearest", block: "nearest" });
+      }
       return;
     }
 
@@ -71,8 +102,11 @@ class InstantMatchFinder extends HTMLElement {
     if (jump) {
       const selector = jump.dataset.protoJump;
       const dest = selector ? this.querySelector<HTMLElement>(selector) : null;
-      dest?.scrollIntoView({ behavior: "smooth", block: "start" });
-      dest?.querySelector<HTMLElement>("[tabindex='-1']")?.focus({ preventScroll: true });
+      if (dest) {
+        dest.scrollIntoView({ behavior: scrollBehavior(), block: "start" });
+        const focusTarget = dest.matches("[tabindex='-1']") ? dest : dest.querySelector<HTMLElement>("[tabindex='-1']");
+        focusTarget?.focus({ preventScroll: true });
+      }
     }
   };
 
@@ -82,6 +116,7 @@ class InstantMatchFinder extends HTMLElement {
 
     if (target instanceof HTMLSelectElement && target.dataset.protoSelect) {
       const kind = target.dataset.protoSelect;
+      this.#selectedDay = "";
       if (kind === "audience") {
         finder.audience = target.value as AudienceId | "";
         finder.task = "";
@@ -100,9 +135,11 @@ class InstantMatchFinder extends HTMLElement {
     if (target.name === "audience") {
       finder.audience = target.value as AudienceId;
       finder.task = "";
+      this.#selectedDay = "";
       focusSelector = `input[name="audience"][value="${CSS.escape(target.value)}"]`;
     } else if (target.name === "task") {
       finder.task = target.value;
+      this.#selectedDay = "";
       const picked = TASKS.find(({ id }) => id === target.value);
       if (!finder.audience && picked) {
         finder.audience = picked.audience;
@@ -110,6 +147,7 @@ class InstantMatchFinder extends HTMLElement {
       focusSelector = `input[name="task"][value="${CSS.escape(target.value)}"]`;
     } else if (target.name === "format") {
       finder.format = target.value as typeof finder.format;
+      this.#selectedDay = "";
       if (!hasLocalMode(finder.format)) {
         finder.place = "";
       }
@@ -123,6 +161,7 @@ class InstantMatchFinder extends HTMLElement {
     const target = event.target;
     if (!(target instanceof HTMLInputElement) || target.id !== "wizard-place") return;
     store.finder.place = target.value;
+    this.#selectedDay = "";
     // Update datalist & results container in place so typing never destroys the focused input or autocomplete popup.
     this.#syncDatalist();
     this.#updateResultsOnly();
@@ -151,7 +190,7 @@ class InstantMatchFinder extends HTMLElement {
     } else if (variant === "B") {
       container.innerHTML = renderVariantBResults();
     } else {
-      container.innerHTML = renderVariantCResults();
+      container.innerHTML = renderVariantCResults(this.#selectedDay);
     }
     this.#status.textContent = "Vabad ajad ja soovitused on uuendatud.";
   }
@@ -161,7 +200,7 @@ class InstantMatchFinder extends HTMLElement {
     const html = variant === "B"
       ? renderVariantB()
       : variant === "C"
-        ? renderVariantC()
+        ? renderVariantC(this.#selectedDay, this.#cFiltersOpen)
         : renderVariantA(this.#openGroup);
 
     this.#body.innerHTML = html;
@@ -170,7 +209,7 @@ class InstantMatchFinder extends HTMLElement {
     if (focusSelector) {
       this.querySelector<HTMLElement>(focusSelector)?.focus({ preventScroll: true });
     }
-    this.#status.textContent = store.finder.task || store.finder.audience ? "Vabad ajad ja soovitused on uuendatud." : "";
+    this.#status.textContent = store.finder.task || store.finder.audience || this.#selectedDay ? "Vabad ajad ja soovitused on uuendatud." : "";
   }
 }
 

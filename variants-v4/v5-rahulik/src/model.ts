@@ -7,7 +7,21 @@ import type { AudienceId, County, Format, Provider, ProviderKind } from "./data/
 export const live = import.meta.env.VITE_TTK_MODE === "live";
 const configuredPhone = String(import.meta.env.VITE_TTK_PHONE ?? "");
 export const helpline = live ? (/^\+372[\d ]{7,13}$/.test(configuredPhone) ? configuredPhone : "") : "+372 5555 0123";
-export const today = () => live ? new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Tallinn" }).format(new Date()) : "2026-11-25";
+const tallinnDate = new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Tallinn" });
+const DEMO_ANCHOR = "2026-11-25";
+const demoDayOffset = (): number => {
+  const realToday = tallinnDate.format(new Date());
+  const ms = Date.parse(`${realToday}T12:00Z`) - Date.parse(`${DEMO_ANCHOR}T12:00Z`);
+  return Math.max(0, Math.round(ms / 86_400_000));
+};
+const shiftIsoDate = (iso: string, days: number): string => {
+  if (!days) return iso;
+  const d = new Date(`${iso.slice(0, 10)}T12:00Z`);
+  d.setUTCDate(d.getUTCDate() + days);
+  return `${d.toISOString().slice(0, 10)}${iso.slice(10)}`;
+};
+const DEMO_SHIFT = live ? 0 : demoDayOffset();
+export const today = () => tallinnDate.format(new Date());
 export const FORMATS = { kohal: "Kohapeal", kodu: "Koduvisiit", video: "Videokõne", all: "Kõik kohtumisviisid" } as const;
 export const KINDS: Record<ProviderKind, string> = { uksik: "Üksikspetsialist", praksis: "Väike praksis", kliinik: "Suur kliinik" };
 export const REGIONS = {
@@ -39,11 +53,12 @@ export interface VisitSlot {
 export type DirectoryProvider = Omit<Provider, "slots" | "requestOnly">;
 type PublicData = { providers: DirectoryProvider[]; slots: VisitSlot[]; courses: Course[]; products: Product[]; generatedAt: string };
 export interface Staff { id: string; name: string; clearance: "verified"; provider: DirectoryProvider }
+const INITIAL_COURSES = COURSES.map((course) => ({ ...course, date: shiftIsoDate(course.date, DEMO_SHIFT) }));
 export const store = {
   view: "leia-abi" as View,
   finder: newFinder(),
   directory: { region: "all" as Region, audience: "all" as AudienceId | "all", kind: "all" as ProviderKind | "all", funding: "all" as Funding, week: false },
-  calendar: { month: live ? today().slice(0, 7) : "2026-12", audience: "Kõik" as TrainingAudience, selected: "kirjutamine" },
+  calendar: { month: live ? today().slice(0, 7) : (INITIAL_COURSES[0]?.date.slice(0, 7) ?? today().slice(0, 7)), audience: "Kõik" as TrainingAudience, selected: "kirjutamine" },
   shop: { category: "Kõik" as (typeof CATEGORIES)[number], more: false, query: "", pdf: false },
   cart: new Map<string, number>(),
   checkout: { bank: "", delivery: "", consent: false },
@@ -55,7 +70,7 @@ export const store = {
 const INITIAL_SLOTS = PROVIDERS.flatMap((provider) => provider.slots.map((slot, index): VisitSlot => {
   const format = provider.formats[index % provider.formats.length] ?? "kohal";
   return {
-    id: slot.id, providerId: provider.id, at: slot.at, format, minutes: provider.visit.minutes,
+    id: slot.id, providerId: provider.id, at: shiftIsoDate(slot.at, DEMO_SHIFT), format, minutes: provider.visit.minutes,
     cents: (provider.visit.price + (format === "kodu" && provider.id === "riin-saar" ? 15 : 0)) * 100,
     location: format === "video" ? "Veebis" : format === "kodu" ? "Teie juures" : provider.city,
     condition: format !== "kodu" && provider.id === "riin-saar" ? "Saatekiri pole vajalik." : provider.funding,
@@ -63,11 +78,11 @@ const INITIAL_SLOTS = PROVIDERS.flatMap((provider) => provider.slots.map((slot, 
   };
 }));
 export const data: PublicData = live ? { providers: [], slots: [], courses: [], products: [], generatedAt: "" }
-  : { providers: [...PROVIDERS], slots: INITIAL_SLOTS, courses: [...COURSES], products: PRODUCTS, generatedAt: "" };
+  : { providers: [...PROVIDERS], slots: INITIAL_SLOTS, courses: INITIAL_COURSES, products: PRODUCTS, generatedAt: "" };
 
 const tallinnTime = new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Tallinn", dateStyle: "short", timeStyle: "short" });
 export function localTimeNow(): string {
-  return live ? tallinnTime.format(new Date()).replace(" ", "T") : "2026-11-25T12:00";
+  return live ? tallinnTime.format(new Date()).replace(" ", "T") : `${today()}T08:00`;
 }
 export function weekEnd(): string {
   const day = new Date(`${today()}T12:00Z`);
