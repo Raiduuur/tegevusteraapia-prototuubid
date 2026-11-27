@@ -107,10 +107,9 @@
       list.innerHTML = "";
       need.specs.forEach(function (id) {
         var li = document.createElement("li");
-        var a = document.createElement("a");
-        a.href = "#eriala-" + id;
-        a.textContent = specNames[id];
-        li.appendChild(a);
+        var tag = document.createElement("span");
+        tag.textContent = specNames[id];
+        li.appendChild(tag);
         list.appendChild(li);
       });
       list.hidden = need.specs.length === 0;

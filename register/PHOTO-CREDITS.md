@@ -1,6 +1,6 @@
-# Photo credits — v6-register
+# Photo credits — v7-lehed
 
-Lifestyle photos are cropped to 4:5 (800×1000) for the "Millega sa abi vajad?" choice cards. The three assistive-device photos in the "Abivahendid" block are shown without prices, as examples only, with a visible credit line under them (needed for the CC BY-SA photo). This file is the credit record; the visible page does not label the photos as samples.
+Lifestyle photos are cropped to 4:5 (800×1000) for the "Millega sa abi vajad?" choice cards (index.html). The three assistive-device photos on abivahendid.html are shown without prices, as examples only, with a visible credit line under them (needed for the CC BY-SA photo). This file is the credit record; the visible page does not label the photos as samples.
 
 ## Choice cards
 

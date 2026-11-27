@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#F5F2EC">
+    <meta name="description" content="Kristel ja Terje aitavad leida abivahendeid söömiseks, riietumiseks ja koju. See ei ole e-pood: kirjuta, mis on raske.">
+    <title>Abivahendid · Tegevusteraapia Keskus</title>
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip" href="#sisu">Liigu sisu juurde</a>
+    <header class="site-header">
+      <div class="wrap header-row">
+        <a class="brand" href="index.html">Tegevusteraapia <span>Keskus</span></a>
+        <nav class="header-nav" aria-label="Peamenüü">
+          <a href="index.html">Abi otsijale</a>
+          <a href="terapeudile.html">Terapeudile</a>
+          <a href="keskustele.html">Keskustele</a>
+          <a href="abivahendid.html" aria-current="page">Abivahendid</a>
+        </nav>
+        <button type="button" class="menu-button" id="menu-button" aria-expanded="false" aria-controls="mobile-menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="menu-open" d="M4 7h16M4 12h16M4 17h16"/><path class="menu-close" d="M6 6l12 12M18 6L6 18"/></svg>
+          <span>Menüü</span>
+        </button>
+      </div>
+      <nav class="mobile-menu" id="mobile-menu" aria-label="Menüü" hidden>
+        <ul class="wrap">
+          <li><a href="index.html">Abi otsijale</a></li>
+          <li><a href="terapeudile.html">Terapeudile</a></li>
+          <li><a href="keskustele.html">Keskustele</a></li>
+          <li><a href="abivahendid.html" aria-current="page">Abivahendid</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="sisu">
+      <!-- 5. Abivahendid -->
+      <section class="band page-first" id="abivahendid" aria-labelledby="aids-title">
+        <div class="wrap join">
+          <div class="join-text">
+            <h1 id="aids-title">Abivahendid</h1>
+            <p class="lead">Platvormi asutajad Kristel ja Terje aitavad leida abivahendeid, mis teevad igapäevased toimetused lihtsamaks. Siin ei ole e-poodi. Kirjuta, mis on raske, ja nad soovitavad, mis võiks sobida.</p>
+            <ul class="aid-photos">
+              <li><figure><img src="photos/taldrik.jpg" alt="Valge kõrgema servaga kauss" width="800" height="1000" loading="lazy"><figcaption>Söömiseks</figcaption></figure></li>
+              <li><figure><img src="photos/nupukinnitaja.jpg" alt="Oranži varrega nööbikinnitaja peenikese metallkonksuga" width="800" height="1000" loading="lazy"><figcaption>Riietumiseks</figcaption></figure></li>
+              <li><figure><img class="contain" src="photos/haarats.jpg" alt="Pika varrega haarats sinise käepidemega" width="800" height="1000" loading="lazy"><figcaption>Koju</figcaption></figure></li>
+            </ul>
+            <p class="photo-credit">Fotod: MART PRODUCTION / Pexels; Mautpreller / Wikimedia Commons, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.et">CC BY-SA 4.0</a>; Simon Speed / Wikimedia Commons, CC0.</p>
+          </div>
+
+          <form novalidate class="join-panel js-preview-form" id="abivahendi-vorm" aria-labelledby="aids-form-title" data-note="Kristel või Terje võtab sinuga ühendust." data-again="Küsi veel midagi">
+            <h3 id="aids-form-title">Küsi abivahendi kohta</h3>
+            <div class="field-row">
+              <label>Nimi
+                <input type="text" name="nimi" autocomplete="name" required data-msg="Kirjuta oma nimi.">
+              </label>
+              <label>Telefon või e-post
+                <input type="text" name="kontakt" autocomplete="email" autocapitalize="off" spellcheck="false" required data-type="contact" data-msg="Kirjuta telefoninumber või e-posti aadress.">
+              </label>
+            </div>
+            <label>Mis on raske või mida otsid?
+              <textarea name="kysimus" rows="3" required data-msg="Kirjuta paari sõnaga, mida otsid."></textarea>
+            </label>
+            <button type="submit" class="button primary">Saada küsimus</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div>
+            <a class="brand" href="index.html">Tegevusteraapia <span>Keskus</span></a>
+            <p class="footer-about">Koht, kust leida tegevusterapeut oma murele ja piirkonnale. Platvormi algatasid Kristel ja Terje.</p>
+          </div>
+          <nav class="footer-col" aria-label="Abi otsijale">
+            <p class="footer-head">Abi otsijale</p>
+            <a href="index.html">Millega sa abi vajad?</a>
+            <a href="abivahendid.html">Abivahendid</a>
+          </nav>
+          <nav class="footer-col" aria-label="Terapeudile ja keskusele">
+            <p class="footer-head">Terapeudile ja keskusele</p>
+            <a href="terapeudile.html">Registreeru terapeudina</a>
+            <a href="keskustele.html">Registreeri keskus või filiaal</a>
+            <a href="koolitused.html">Koolitused ja tagasiside</a>
+          </nav>
+        </div>
+        <p class="footer-note">Eelvaade. Vormid ei saada praegu andmeid kuhugi.</p>
+      </div>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

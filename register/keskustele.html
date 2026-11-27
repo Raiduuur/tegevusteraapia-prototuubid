@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#F5F2EC">
+    <meta name="description" content="Tegevusteraapia keskus või filiaal, registreeri end, et inimesed leiaksid teid oma mure ja piirkonna järgi.">
+    <title>Keskustele · Tegevusteraapia Keskus</title>
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip" href="#sisu">Liigu sisu juurde</a>
+    <header class="site-header">
+      <div class="wrap header-row">
+        <a class="brand" href="index.html">Tegevusteraapia <span>Keskus</span></a>
+        <nav class="header-nav" aria-label="Peamenüü">
+          <a href="index.html">Abi otsijale</a>
+          <a href="terapeudile.html">Terapeudile</a>
+          <a href="keskustele.html" aria-current="page">Keskustele</a>
+          <a href="abivahendid.html">Abivahendid</a>
+        </nav>
+        <button type="button" class="menu-button" id="menu-button" aria-expanded="false" aria-controls="mobile-menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="menu-open" d="M4 7h16M4 12h16M4 17h16"/><path class="menu-close" d="M6 6l12 12M18 6L6 18"/></svg>
+          <span>Menüü</span>
+        </button>
+      </div>
+      <nav class="mobile-menu" id="mobile-menu" aria-label="Menüü" hidden>
+        <ul class="wrap">
+          <li><a href="index.html">Abi otsijale</a></li>
+          <li><a href="terapeudile.html">Terapeudile</a></li>
+          <li><a href="keskustele.html" aria-current="page">Keskustele</a></li>
+          <li><a href="abivahendid.html">Abivahendid</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="sisu">
+      <!-- 7. Keskustele ja filiaalidele -->
+      <section class="band page-first" id="keskustele" aria-labelledby="centre-title">
+        <div class="wrap join">
+          <div class="join-text">
+            <h1 id="centre-title">Keskustele ja filiaalidele</h1>
+            <p class="lead">Registreerida saab nii suurem keskus kui ka väike filiaal. Filiaal seotakse oma peakeskusega, et inimene näeks, kuhu ta pöördub.</p>
+            <ol class="join-steps">
+              <li><strong>Täidate vormi.</strong> Keskuse andmed ja erialad, millega tegelete.</li>
+              <li><strong>Esindaja kinnitab isiku</strong> Smart-ID või Mobiil-ID-ga.</li>
+              <li><strong>Kontrollime andmed üle</strong> ja küsime vajadusel lisa.</li>
+              <li><strong>Keskus ilmub lehele</strong> siis, kui olete sellega nõus. Inimesed leiavad teid oma mure ja piirkonna järgi.</li>
+            </ol>
+            <p class="join-note">Kui teil on mitu filiaali, täitke vorm iga filiaali kohta eraldi.</p>
+          </div>
+
+          <form novalidate class="join-panel js-preview-form" id="keskuse-vorm" data-note="Vaatame keskuse andmed üle ja võtame ühendust." data-again="Registreeri veel üks keskus või filiaal" aria-labelledby="centre-form-title">
+            <h3 id="centre-form-title">Keskuse registreerimine</h3>
+            <div class="id-box">
+              <p class="id-title">Keskuse esindaja isik <span class="soon">Tulekul</span></p>
+              <div class="id-buttons">
+                <button type="button" class="button secondary id-button" disabled aria-describedby="id-note-3">Smart-ID</button>
+                <button type="button" class="button secondary id-button" disabled aria-describedby="id-note-3">Mobiil-ID</button>
+              </div>
+              <p class="id-note" id="id-note-3">Isiku kinnitamine Smart-ID ja Mobiil-ID-ga lisandub peagi. Seni kontrollime andmed käsitsi üle.</p>
+            </div>
+            <label>Keskuse nimi
+              <input type="text" name="keskus" autocomplete="organization" required data-msg="Kirjuta keskuse nimi.">
+            </label>
+            <fieldset>
+              <legend>Tüüp</legend>
+              <div class="radio-row">
+                <label class="check-line"><input type="radio" name="tyyp" value="keskus" checked> Keskus</label>
+                <label class="check-line"><input type="radio" name="tyyp" value="filiaal"> Filiaal</label>
+              </div>
+            </fieldset>
+            <label id="peakeskus-field" hidden>Peakeskuse nimi
+              <input type="text" name="peakeskus" id="peakeskus" data-msg="Kirjuta peakeskuse nimi.">
+            </label>
+            <div class="field-row">
+              <label>Aadress
+                <input type="text" name="aadress" autocomplete="street-address" required data-msg="Kirjuta aadress.">
+              </label>
+              <label>Linn või vald
+                <input type="text" name="linn" autocomplete="address-level2" required data-msg="Kirjuta linn või vald.">
+              </label>
+            </div>
+            <fieldset data-required-group data-msg="Vali vähemalt üks eriala.">
+              <legend>Spetsialiseerumine <span class="optional">(võid valida mitu)</span></legend>
+              <div class="check-grid">
+                <label class="check-line"><input type="checkbox" name="eriala" value="lapsed"> Lapsed ja areng</label>
+                <label class="check-line"><input type="checkbox" name="eriala" value="taastusravi"> Taastusravi pärast insulti või traumat</label>
+                <label class="check-line"><input type="checkbox" name="eriala" value="eakad"> Eakad ja kodus toimetulek</label>
+                <label class="check-line"><input type="checkbox" name="eriala" value="kasi"> Käeteraapia</label>
+                <label class="check-line"><input type="checkbox" name="eriala" value="abivahendid"> Abivahendid ja kodu kohandamine</label>
+                <label class="check-line"><input type="checkbox" name="eriala" value="too"> Töövõime ja tööle naasmine</label>
+                <label class="check-line"><input type="checkbox" name="eriala" value="trauma"> Trauma-teadlik tegevusteraapia</label>
+              </div>
+            </fieldset>
+            <div class="field-row">
+              <label>Kontaktisik
+                <input type="text" name="kontaktisik" autocomplete="name" required data-msg="Kirjuta kontaktisiku nimi.">
+              </label>
+              <label>E-post
+                <input type="email" name="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required data-msg="Kirjuta e-posti aadress.">
+              </label>
+            </div>
+            <button type="submit" class="button primary">Saada keskuse andmed</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="band band-tight band-mist" aria-label="Veel">
+        <div class="wrap">
+          <p class="more-line">Tahad kuulda koolitustest või anda meile tagasisidet? <a href="koolitused.html">Koolitused ja tagasiside</a></p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div>
+            <a class="brand" href="index.html">Tegevusteraapia <span>Keskus</span></a>
+            <p class="footer-about">Koht, kust leida tegevusterapeut oma murele ja piirkonnale. Platvormi algatasid Kristel ja Terje.</p>
+          </div>
+          <nav class="footer-col" aria-label="Abi otsijale">
+            <p class="footer-head">Abi otsijale</p>
+            <a href="index.html">Millega sa abi vajad?</a>
+            <a href="abivahendid.html">Abivahendid</a>
+          </nav>
+          <nav class="footer-col" aria-label="Terapeudile ja keskusele">
+            <p class="footer-head">Terapeudile ja keskusele</p>
+            <a href="terapeudile.html">Registreeru terapeudina</a>
+            <a href="keskustele.html">Registreeri keskus või filiaal</a>
+            <a href="koolitused.html">Koolitused ja tagasiside</a>
+          </nav>
+        </div>
+        <p class="footer-note">Eelvaade. Vormid ei saada praegu andmeid kuhugi.</p>
+      </div>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
