@@ -59,25 +59,21 @@
     history.replaceState(null, "", "#" + id);
   });
 
-  /* ---------- "Millega sa abi vajad?" ---------- */
-  var specNames = {
-    lapsed: "Lapsed ja areng",
-    taastusravi: "Taastusravi",
-    eakad: "Eakad ja kodus toimetulek",
-    kasi: "Käeteraapia",
-    abivahendid: "Abivahendid ja kodu kohandamine",
-    too: "Töövõime ja tööle naasmine"
-  };
+  /* ---------- "Millega sa abi vajad?" ----------
+     Sisu põhineb Eesti Tegevusterapeutide Liidu rakendusjuhendil (2025): teraapia kolm suunda on
+     harjutamine, kohandamine (tegevus, keskkond, abivahendid) ja nõustamine (sh lähedased). */
   var needs = {
-    soomine: { label: "Söömine", specs: ["taastusravi", "eakad", "abivahendid"], text: "Kui söömine või toidu tegemine on muutunud raskeks, proovib tegevusterapeut koos sinuga uusi võtteid ja vahendeid, näiteks jämedama varrega lusikat või kõrgema servaga taldrikut. Lapse puhul aitab lastega töötav terapeut." },
-    riietumine: { label: "Riietumine", specs: ["taastusravi", "eakad"], text: "Kui nööbid, lukk, sokid või riidesse panek võtavad palju aega ja jõudu, harjutab terapeut sinuga väikeste sammude kaupa ja näitab lihtsamaid võtteid." },
-    kirjutamine: { label: "Kirjutamine", specs: ["kasi", "lapsed"], text: "Kui pliiatsit on raske hoida või käsi väsib kiiresti, aitab käega töötav tegevusterapeut. Kooliealise lapse puhul lastega töötav terapeut." },
-    kodu: { label: "Kodus toimetulek", specs: ["eakad", "abivahendid"], text: "Kui pesemine, köögis toimetamine või kodus liikumine on muutunud keeruliseks, vaatab terapeut koos sinuga, mida kodus muuta ja millised abivahendid aitaksid." },
-    laps: { label: "Lapse areng", specs: ["lapsed"], text: "Kui lapsel on raske mängida, süüa, riietuda, kirjutada või päeva rütmiga kaasa tulla, aitab lastega töötav tegevusterapeut. Ka vanem saab nõu, kuidas kodus edasi harjutada." },
-    kasi: { label: "Käsi ja sõrmed", specs: ["kasi"], text: "Kui käsi või sõrmed ei tööta nii nagu varem, näiteks pärast vigastust või operatsiooni, aitab käeteraapiaga tegelev tegevusterapeut." },
-    insult: { label: "Pärast insulti, vigastust või operatsiooni", specs: ["taastusravi"], text: "Pärast insulti, vigastust või operatsiooni aitab tegevusterapeut uuesti õppida igapäevaseid toiminguid: pesemist, riietumist, toidu tegemist." },
-    too: { label: "Tööle naasmine", specs: ["too"], text: "Kui pärast haigust või vigastust on raske tööle tagasi minna, vaatate terapeudiga koos, mida töö nõuab ja mida saab töökohal muuta." },
-    muu: { label: "Ei oska veel öelda", specs: [], title: "Leiame koos", text: "Pole hullu, kui sa ei oska veel öelda. Jäta kontakt ja kirjuta paari sõnaga, mis on raske. Räägime läbi ja leiame sobiva tegevusterapeudi." }
+    soomine: { label: "Söömine", tags: ["Harjutamine", "Tegevuse kohandamine", "Abivahendid"], text: "Kui söömine või toidu tegemine on muutunud raskeks, harjutatakse koos ja otsitakse viisi, kuidas tegevust sinu jaoks lihtsamaks teha. Vajadusel katsetatakse abivahendeid, näiteks jämedamat käepidet. Lapse söömisraskuste puhul vali „Lapse areng”." },
+    riietumine: { label: "Riietumine", tags: ["Harjutamine", "Abivahendid", "Tegevuse kohandamine"], text: "Kui nööbid, lukk, sokid või riidesse panek võtavad palju aega ja jõudu, harjutatakse väikeste sammude kaupa ja õpetatakse lihtsamaid võtteid. Abiks võivad olla näiteks soki jalga tõmbamise abivahend või nööbikinnitaja." },
+    kirjutamine: { label: "Kirjutamine ja käelised tegevused", tags: ["Käte harjutused", "Abivahendid", "Ergonoomika"], text: "Kui pliiatsit on raske hoida, käsi väsib kiiresti või peened liigutused ei õnnestu, vaadatakse, kuidas käsi töötab. Harjutatakse käelisi tegevusi ja vajadusel soovitatakse abivahendit või teistsugust töövõtet. Lapsel käib see mängu ja harjutuste kaudu." },
+    kodu: { label: "Kodus toimetulek", tags: ["Kodu kohandamine", "Abivahendid", "Lähedaste nõustamine"], text: "Kui pesemine, köögitööd või kodus liikumine on muutunud keeruliseks, vaadatakse koos üle, mida kodus muuta, ja õpetatakse abivahendite kasutamist. Nõu saavad ka lähedased." },
+    laps: { label: "Lapse areng", tags: ["Harjutamine mängu kaudu", "Lapsevanema nõustamine", "Kooli ja lasteaia päev"], text: "Kui lapsel on raske mängida, süüa, riietuda, kirjutada või kooli- ja lasteaiapäevaga toime tulla, vaadatakse koos, mis takistab ja kuidas oskusi arendada. Teraapia käib mängu ja praktiliste tegevuste kaudu ning vanem saab nõu, kuidas kodus jätkata." },
+    kasi: { label: "Käsi ja sõrmed", tags: ["Käte harjutused", "Liigesekaitse", "Abivahendid"], text: "Pärast käevigastust, operatsiooni või liigesehaiguse puhul (näiteks reuma, artroos, karpaalkanal) aitab käeteraapiaga tegelev terapeut: harjutused, vajadusel individuaalne ortoos, liigesekaitse ja käele säästlikumad töövõtted." },
+    insult: { label: "Pärast insulti või ajukahjustust", tags: ["Igapäevategevuste harjutamine", "Kodu kohandamine", "Lähedaste nõustamine"], text: "Pärast insulti, ajukahjustust või näiteks Parkinsoni tõve ja sclerosis multiplex'i puhul harjutatakse igapäevatoiminguid: pesemist, riietumist, söömist, toidu tegemist. Vaadatakse üle ka kodu ja nõustatakse lähedasi." },
+    kukkumine: { label: "Kukkumisoht ja turvalisus kodus", tags: ["Kodu turvalisus", "Abivahendid", "Lähedaste nõustamine"], text: "Kui kodus on kukkumise oht, tasakaal vääratab või turvaline liikumine on raske, vaadatakse koos kodu üle, soovitatakse muudatusi ja abivahendeid ning õpetatakse nende kasutamist. Nõu saavad ka lähedased." },
+    too: { label: "Töö ja ergonoomika", tags: ["Ergonoomika", "Töökoha kohandamine", "Energia säästmine"], text: "Kui töö kurnab käsi või keha või on pärast haigust või vigastust raske tööle naasta, vaadatakse koos, mida töö nõuab. Õpetatakse säästvaid töövõtteid ja soovitatakse, mida töökohal või tööülesannetes muuta." },
+    abivahend: { label: "Abivahend, ei tea, mis sobib", tags: ["Abivahendite tutvustamine", "Kasutamise õppimine"], link: true, text: "Tegevusterapeut aitab valida abivahendi, mis sinu olukorda päriselt sobib, ja õpetab seda kasutama. Vaata, milliseid vahendeid on näidispoes, või küsi Kristelilt ja Terjelt nõu." },
+    muu: { label: "Ei oska veel öelda", tags: [], title: "Leiame koos", text: "Pole hullu, kui sa ei oska veel öelda. Jäta kontakt ja kirjuta paari sõnaga, mis on raske. Räägime läbi, milline abi sulle sobiks." }
   };
   var needButtons = document.querySelectorAll("[data-need]");
   var guide = document.getElementById("juhis");
@@ -86,6 +82,7 @@
     var gChoice = document.getElementById("guide-choice");
     var gSpecs = document.getElementById("guide-specs");
     var gText = document.getElementById("guide-text");
+    var gLink = document.getElementById("guide-link");
     var needSelect = document.getElementById("abi-vajadus");
     needButtons.forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -97,9 +94,10 @@
         gChoice.textContent = need.label;
         gTitle.textContent = need.title || "Sellega aitab tegevusterapeut";
         gSpecs.innerHTML = "";
-        need.specs.forEach(function (s) { var li = document.createElement("li"); li.textContent = specNames[s]; gSpecs.appendChild(li); });
-        gSpecs.hidden = need.specs.length === 0;
+        need.tags.forEach(function (t) { var li = document.createElement("li"); li.textContent = t; gSpecs.appendChild(li); });
+        gSpecs.hidden = need.tags.length === 0;
         gText.textContent = need.text;
+        if (gLink) gLink.hidden = !need.link;
         if (needSelect) needSelect.value = key;
         guide.hidden = false;
         if (!reduceMotion) { guide.classList.remove("is-updated"); void guide.offsetWidth; guide.classList.add("is-updated"); }

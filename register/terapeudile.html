@@ -22,10 +22,17 @@
           <a href="abivahendid.html">Abivahendid</a>
           <a href="koolitused.html">Koolitused</a>
         </nav>
-        <button type="button" class="menu-button" id="menu-button" aria-expanded="false" aria-controls="mobile-menu">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="menu-open" d="M4 7h16M4 12h16M4 17h16"/><path class="menu-close" d="M6 6l12 12M18 6L6 18"/></svg>
-          <span>Menüü</span>
-        </button>
+        <div class="header-actions">
+          <button type="button" class="cart-button" data-cart-open aria-haspopup="dialog" aria-label="Ostukorv, tooteid: 0">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8h14l-1.2 11.2a1.5 1.5 0 0 1-1.5 1.3H7.7a1.5 1.5 0 0 1-1.5-1.3L5 8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+            <span class="cart-label">Ostukorv</span>
+            <span class="cart-count" data-cart-count aria-hidden="true">0</span>
+          </button>
+          <button type="button" class="menu-button" id="menu-button" aria-expanded="false" aria-controls="mobile-menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="menu-open" d="M4 7h16M4 12h16M4 17h16"/><path class="menu-close" d="M6 6l12 12M18 6L6 18"/></svg>
+            <span>Menüü</span>
+          </button>
+        </div>
       </div>
       <nav class="mobile-menu" id="mobile-menu" aria-label="Menüü" hidden>
         <ul class="wrap">
@@ -47,7 +54,7 @@
             <ol class="how">
               <li><strong>Täidad vormi.</strong><span>Märgid erialad ja piirkonna, kus töötad.</span></li>
               <li><strong>Kontrollime kvalifikatsiooni.</strong><span>Küsime kutsetunnistust või muud dokumenti, mis näitab, et sul on õigus tegevusterapeudina töötada.</span></li>
-              <li><strong>Võtame ühendust.</strong><span>Kui keegi sinu piirkonnas vajab sinu eriala abi, küsime enne sinult, kas saad teda aidata.</span></li>
+              <li><strong>Võtame ühendust.</strong><span>Kui keegi vajab just sinu eriala abi, edastab süsteem sulle tema mure ja kontakti. Sina annad temaga ise märku.</span></li>
             </ol>
             <p class="note"><strong>Profiile praegu avalikult ei näidata.</strong> Abi otsijad jätavad meile kontakti ja meie leiame neile sobiva terapeudi. Sinu nime, telefoni ja e-posti ei näe keegi teine.</p>
             <p class="more-line">Huvitavad koolitused? <a href="koolitused.html">Koolitused ja tagasiside</a></p>
@@ -86,7 +93,7 @@
               <fieldset data-required-group data-msg="Vali vähemalt üks eriala.">
                 <legend>Erialad <span class="optional">(võid valida mitu)</span></legend>
                 <div class="checks two">
-                  <label class="check"><input type="checkbox" name="eriala" value="lapsed"> Lapsed ja areng</label><label class="check"><input type="checkbox" name="eriala" value="taastusravi"> Taastusravi pärast insulti, vigastust või operatsiooni</label><label class="check"><input type="checkbox" name="eriala" value="eakad"> Eakad ja kodus toimetulek</label><label class="check"><input type="checkbox" name="eriala" value="kasi"> Käeteraapia</label><label class="check"><input type="checkbox" name="eriala" value="abivahendid"> Abivahendid ja kodu kohandamine</label><label class="check"><input type="checkbox" name="eriala" value="too"> Töövõime ja tööle naasmine</label><label class="check"><input type="checkbox" name="eriala" value="trauma"> Trauma-teadlik tegevusteraapia</label><label class="check"><input type="checkbox" name="eriala" value="muu" data-toggles="ter-muu-field"> Muu</label>
+                  <label class="check"><input type="checkbox" name="eriala" value="lapsed"> Lapsed ja areng (sh sensoorse integratsiooni raskused)</label><label class="check"><input type="checkbox" name="eriala" value="neuro"> Taastumine pärast insulti või ajukahjustust, Parkinsoni tõbi, sclerosis multiplex</label><label class="check"><input type="checkbox" name="eriala" value="kasi"> Käeteraapia: käetraumad, liigesehaigused, ortoosid</label><label class="check"><input type="checkbox" name="eriala" value="eakad"> Eakad: kodus toimetulek, kukkumiste ennetus, mäluraskused</label><label class="check"><input type="checkbox" name="eriala" value="too"> Töö ja ergonoomika: tööga seotud vigastused, tööle naasmine</label><label class="check"><input type="checkbox" name="eriala" value="abivahendid"> Abivahendid ja kodu kohandamine</label><label class="check"><input type="checkbox" name="eriala" value="muu" data-toggles="ter-muu-field"> Muu</label>
                 </div>
               </fieldset>
               <div class="field" id="ter-muu-field" hidden>
@@ -133,7 +140,8 @@
             <ul>
               <li><a href="index.html#valik">Millega sa abi vajad?</a></li>
               <li><a href="index.html#kontakt">Jäta kontakt</a></li>
-              <li><a href="abivahendid.html">Abivahendid</a></li>
+              <li><a href="abivahendid.html">Abivahendid (näidispood)</a></li>
+              <li><a href="abivahendid.html#nou">Küsi nõu abivahendite kohta</a></li>
             </ul>
           </nav>
           <nav class="footer-col" aria-labelledby="f-liitu">
@@ -160,6 +168,8 @@
       </div>
     </footer>
 
+    <script src="products.js"></script>
     <script src="app.js"></script>
+    <script src="shop.js"></script>
   </body>
 </html>

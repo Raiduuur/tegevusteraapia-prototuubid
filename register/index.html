@@ -22,10 +22,17 @@
           <a href="abivahendid.html">Abivahendid</a>
           <a href="koolitused.html">Koolitused</a>
         </nav>
-        <button type="button" class="menu-button" id="menu-button" aria-expanded="false" aria-controls="mobile-menu">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="menu-open" d="M4 7h16M4 12h16M4 17h16"/><path class="menu-close" d="M6 6l12 12M18 6L6 18"/></svg>
-          <span>Menüü</span>
-        </button>
+        <div class="header-actions">
+          <button type="button" class="cart-button" data-cart-open aria-haspopup="dialog" aria-label="Ostukorv, tooteid: 0">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8h14l-1.2 11.2a1.5 1.5 0 0 1-1.5 1.3H7.7a1.5 1.5 0 0 1-1.5-1.3L5 8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+            <span class="cart-label">Ostukorv</span>
+            <span class="cart-count" data-cart-count aria-hidden="true">0</span>
+          </button>
+          <button type="button" class="menu-button" id="menu-button" aria-expanded="false" aria-controls="mobile-menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="menu-open" d="M4 7h16M4 12h16M4 17h16"/><path class="menu-close" d="M6 6l12 12M18 6L6 18"/></svg>
+            <span>Menüü</span>
+          </button>
+        </div>
       </div>
       <nav class="mobile-menu" id="mobile-menu" aria-label="Menüü" hidden>
         <ul class="wrap">
@@ -43,7 +50,7 @@
         <div class="wrap">
           <div class="hero-head">
             <h1 id="valik" tabindex="-1">Millega sa abi vajad?</h1>
-            <p class="lead">Vali, mis on praegu raske. Näitame, milline tegevusterapeudi abi sobib. Siis jäta kontakt ja me võtame ise ühendust.</p>
+            <p class="lead">Vali, mis on praegu raske, ja jäta kontakt ühe korra. Sinu mure jõuab automaatselt nendeni, kes sellega aitavad. Sina ei pea otsima ega helistama.</p>
           </div>
 
           <div class="choices" role="group" aria-label="Vali, millega vajad abi">
@@ -65,7 +72,7 @@
             <button type="button" class="choice" data-need="kirjutamine" aria-pressed="false">
               <img class="choice-photo" src="photos/kirjutamine.jpg" alt="" width="800" height="1000" style="object-position:40% 60%">
               <span class="choice-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></svg></span>
-              <span class="choice-body"><span class="choice-label">Kirjutamine</span><span class="choice-hint">Pliiatsi hoidmine, käe väsimine</span></span>
+              <span class="choice-body"><span class="choice-label">Kirjutamine ja käed</span><span class="choice-hint">Pliiatsi hoidmine, käe väsimine</span></span>
             </button>
             <button type="button" class="choice" data-need="laps" aria-pressed="false">
               <img class="choice-photo" src="photos/laps.jpg" alt="" width="800" height="1000" style="object-position:50% 50%" loading="lazy">
@@ -82,8 +89,10 @@
           <div class="more-needs" role="group" aria-label="Veel valikuid">
             <span class="more-label" aria-hidden="true">Veel valikuid:</span>
             <button type="button" class="chip" data-need="kasi" aria-pressed="false">Käsi ja sõrmed</button>
-            <button type="button" class="chip" data-need="insult" aria-pressed="false">Pärast insulti, vigastust või operatsiooni</button>
-            <button type="button" class="chip" data-need="too" aria-pressed="false">Tööle naasmine</button>
+            <button type="button" class="chip" data-need="insult" aria-pressed="false">Pärast insulti või ajukahjustust</button>
+            <button type="button" class="chip" data-need="kukkumine" aria-pressed="false">Kukkumisoht kodus</button>
+            <button type="button" class="chip" data-need="too" aria-pressed="false">Töö ja ergonoomika</button>
+            <button type="button" class="chip" data-need="abivahend" aria-pressed="false">Abivahend, ei tea mis sobib</button>
           </div>
 
           <div class="guide" id="juhis" hidden>
@@ -93,7 +102,10 @@
               <ul class="guide-specs" id="guide-specs"></ul>
               <p class="guide-text" id="guide-text"></p>
             </div>
-            <a class="button primary" href="#kontakt">Jäta kontakt <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <div class="guide-actions">
+              <a class="button primary" href="#kontakt">Jäta kontakt <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a class="button secondary" id="guide-link" href="abivahendid.html" hidden>Vaata abivahendeid</a>
+            </div>
           </div>
         </div>
       </section>
@@ -102,7 +114,7 @@
         <div class="wrap">
           <div class="section-head">
             <h2 id="kuidas-title">Sina ei pea helistama. Meie võtame ühendust.</h2>
-            <p class="lead">Abi küsimine võib olla raske. Seepärast on siin ainult neli väikest sammu.</p>
+            <p class="lead">Abi küsimine võib olla raske. Seepärast on siin ainult neli väikest sammu ja sa ei pea ise terapeuti otsima.</p>
           </div>
           <ol class="steps">
             <li>
@@ -115,13 +127,22 @@
             </li>
             <li>
               <h3>Jäta oma kontakt.</h3>
-              <p>Nimi, telefon või e-post ja maakond. Muud pole vaja.</p>
+              <p>Nimi, telefon või e-post ja maakond. Jätad need ainult ühe korra.</p>
             </li>
             <li>
               <h3>Meie võtame ühendust.</h3>
-              <p>Helistame või kirjutame sulle ise ja leiame koos sobiva tegevusterapeudi.</p>
+              <p>Sinu murega tegelev terapeut annab ise sinuga ühendust.</p>
             </li>
           </ol>
+          <div class="flow" aria-labelledby="flow-title">
+            <h3 class="flow-title" id="flow-title">Mis sinu kontaktiga edasi juhtub</h3>
+            <ol class="flow-row">
+              <li><span class="flow-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="3.5" width="16" height="17" rx="3"/><path d="M8 9h8M8 13h8M8 17h4"/></svg></span><strong>Sinu valik ja kontakt</strong><span>Jätad need ühe korra.</span></li>
+              <li><span class="flow-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 12h4c2.5 0 3-6 6-6M11 12c2.5 0 3 6 6 6"/></svg></span><strong>Süsteem edastab</strong><span>Sinu mure jõuab automaatselt nendeni, kes just sellega tegelevad.</span></li>
+              <li><span class="flow-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 4h3l1.5 4-2 1.3a10 10 0 0 0 5.7 5.7l1.3-2 4 1.5v3a2 2 0 0 1-2.2 2A15 15 0 0 1 4.5 6.2 2 2 0 0 1 6.5 4z"/></svg></span><strong>Terapeut võtab ühendust</strong><span>Sa ei pea otsima ega helistama.</span></li>
+            </ol>
+            <p class="flow-note">Nii on süsteem mõeldud töötama. Platvorm alles käivitub, seega kindlat ooteaega me ei luba.</p>
+          </div>
         </div>
       </section>
 
@@ -129,16 +150,16 @@
         <div class="wrap join">
           <div class="join-text">
             <h2 id="kontakt-title" tabindex="-1">Jäta kontakt</h2>
-            <p class="lead">Kirjuta, kuidas sind kätte saab. Võtame ise ühendust ja räägime, milline abi sulle sobiks.</p>
+            <p class="lead">Kirjuta, kuidas sind kätte saab. Sa ei pea terapeuti ise otsima: sinu kontakt ja valik edastatakse neile, kes sellega aitavad.</p>
             <ul class="facts">
               <li>Võid kirjutada endale või oma lähedasele.</li>
-              <li>Ei pea teadma, mis eriala terapeuti vajad. Selle leiame koos.</li>
+              <li>Ei pea teadma, mis eriala terapeuti vajad. Süsteem edastab sinu mure sinna, kus sellega tegeletakse.</li>
               <li>Kui sinu piirkonnas veel sobivat terapeuti pole, ütleme seda ausalt.</li>
             </ul>
           </div>
           <div class="panel">
             <form novalidate class="form-grid js-preview-form" id="abi-vorm" aria-labelledby="abi-vorm-title"
-                  data-note="Võtame sinuga ühendust, et rääkida, milline abi sulle sobiks. Sina ei pea midagi rohkem tegema."
+                  data-note="Sinu murega tegelev terapeut võtab sinuga ühendust. Sina ei pea midagi rohkem tegema."
                   data-again="Täida uuesti">
               <h3 class="form-title visually-hidden" id="abi-vorm-title">Kontaktivorm</h3>
               <div class="field-row">
@@ -158,14 +179,14 @@
                 </div>
                 <div class="field">
                   <label for="abi-vajadus">Millega abi vajad? <span class="optional">(võib jätta)</span></label>
-                  <select id="abi-vajadus" name="vajadus"><option value="">Vali, kui tead</option><option value="soomine">Söömine</option><option value="riietumine">Riietumine</option><option value="kirjutamine">Kirjutamine</option><option value="kodu">Kodus toimetulek</option><option value="laps">Lapse areng</option><option value="kasi">Käsi ja sõrmed</option><option value="insult">Pärast insulti, vigastust või operatsiooni</option><option value="too">Tööle naasmine</option><option value="muu">Ei oska veel öelda</option></select>
+                  <select id="abi-vajadus" name="vajadus"><option value="">Vali, kui tead</option><option value="soomine">Söömine</option><option value="riietumine">Riietumine</option><option value="kirjutamine">Kirjutamine ja käelised tegevused</option><option value="kodu">Kodus toimetulek</option><option value="laps">Lapse areng</option><option value="kasi">Käsi ja sõrmed</option><option value="insult">Pärast insulti või ajukahjustust</option><option value="kukkumine">Kukkumisoht ja turvalisus kodus</option><option value="too">Töö ja ergonoomika</option><option value="abivahend">Abivahend, ei tea, mis sobib</option><option value="muu">Ei oska veel öelda</option></select>
                 </div>
               </div>
               <div class="field">
                 <label for="abi-kirjeldus">Mis on raske? <span class="optional">(võib jätta tühjaks)</span></label>
                 <textarea id="abi-kirjeldus" name="kirjeldus" rows="3"></textarea>
               </div>
-              <p class="privacy-line">Kasutame sinu andmeid ainult selleks, et sinuga ühendust võtta.<br>Privaatsustingimused <span class="pending">koostamisel</span></p>
+              <p class="privacy-line">Edastame sinu kontakti ja valiku ainult neile, kes võiksid aidata.<br>Privaatsustingimused <span class="pending">koostamisel</span></p>
               <div class="form-actions">
                 <button type="submit" class="button primary">Saada kontakt</button>
               </div>
@@ -198,7 +219,8 @@
             <ul>
               <li><a href="index.html#valik">Millega sa abi vajad?</a></li>
               <li><a href="index.html#kontakt">Jäta kontakt</a></li>
-              <li><a href="abivahendid.html">Abivahendid</a></li>
+              <li><a href="abivahendid.html">Abivahendid (näidispood)</a></li>
+              <li><a href="abivahendid.html#nou">Küsi nõu abivahendite kohta</a></li>
             </ul>
           </nav>
           <nav class="footer-col" aria-labelledby="f-liitu">
@@ -225,6 +247,8 @@
       </div>
     </footer>
 
+    <script src="products.js"></script>
     <script src="app.js"></script>
+    <script src="shop.js"></script>
   </body>
 </html>

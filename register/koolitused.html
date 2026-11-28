@@ -22,10 +22,17 @@
           <a href="abivahendid.html">Abivahendid</a>
           <a href="koolitused.html" aria-current="page">Koolitused</a>
         </nav>
-        <button type="button" class="menu-button" id="menu-button" aria-expanded="false" aria-controls="mobile-menu">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="menu-open" d="M4 7h16M4 12h16M4 17h16"/><path class="menu-close" d="M6 6l12 12M18 6L6 18"/></svg>
-          <span>Menüü</span>
-        </button>
+        <div class="header-actions">
+          <button type="button" class="cart-button" data-cart-open aria-haspopup="dialog" aria-label="Ostukorv, tooteid: 0">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8h14l-1.2 11.2a1.5 1.5 0 0 1-1.5 1.3H7.7a1.5 1.5 0 0 1-1.5-1.3L5 8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+            <span class="cart-label">Ostukorv</span>
+            <span class="cart-count" data-cart-count aria-hidden="true">0</span>
+          </button>
+          <button type="button" class="menu-button" id="menu-button" aria-expanded="false" aria-controls="mobile-menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="menu-open" d="M4 7h16M4 12h16M4 17h16"/><path class="menu-close" d="M6 6l12 12M18 6L6 18"/></svg>
+            <span>Menüü</span>
+          </button>
+        </div>
       </div>
       <nav class="mobile-menu" id="mobile-menu" aria-label="Menüü" hidden>
         <ul class="wrap">
@@ -127,7 +134,8 @@
             <ul>
               <li><a href="index.html#valik">Millega sa abi vajad?</a></li>
               <li><a href="index.html#kontakt">Jäta kontakt</a></li>
-              <li><a href="abivahendid.html">Abivahendid</a></li>
+              <li><a href="abivahendid.html">Abivahendid (näidispood)</a></li>
+              <li><a href="abivahendid.html#nou">Küsi nõu abivahendite kohta</a></li>
             </ul>
           </nav>
           <nav class="footer-col" aria-labelledby="f-liitu">
@@ -154,6 +162,8 @@
       </div>
     </footer>
 
+    <script src="products.js"></script>
     <script src="app.js"></script>
+    <script src="shop.js"></script>
   </body>
 </html>
