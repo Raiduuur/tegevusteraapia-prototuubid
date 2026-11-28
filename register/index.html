@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#F5F2EC">
-    <meta name="description" content="Leia tegevusterapeut oma murele. Vali, mis on raske, ja jäta kontakt. Sina ei pea helistama, meie võtame ühendust.">
+    <meta name="description" content="Vali, mis on raske, ja jäta kontakt. Sina ei pea helistama: meie võtame ühendust ja leiame koos sobiva tegevusterapeudi.">
     <title>Tegevusteraapia Keskus</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="styles.css">
   </head>
@@ -13,12 +14,13 @@
     <a class="skip" href="#sisu">Liigu sisu juurde</a>
     <header class="site-header">
       <div class="wrap header-row">
-        <a class="brand" href="index.html">Tegevusteraapia <span>Keskus</span></a>
+        <a class="brand" href="index.html"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="16" fill="#23496D"/><path d="M19 21h26M32 21v24" fill="none" stroke="#F5F2EC" stroke-width="7" stroke-linecap="round"/><circle cx="45" cy="44" r="4.5" fill="#E9B79B"/></svg><span>Tegevusteraapia <span>Keskus</span></span></a>
         <nav class="header-nav" aria-label="Peamenüü">
           <a href="index.html" aria-current="page">Abi otsijale</a>
           <a href="terapeudile.html">Terapeudile</a>
           <a href="keskustele.html">Keskustele</a>
           <a href="abivahendid.html">Abivahendid</a>
+          <a href="koolitused.html">Koolitused</a>
         </nav>
         <button type="button" class="menu-button" id="menu-button" aria-expanded="false" aria-controls="mobile-menu">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="menu-open" d="M4 7h16M4 12h16M4 17h16"/><path class="menu-close" d="M6 6l12 12M18 6L6 18"/></svg>
@@ -31,142 +33,154 @@
           <li><a href="terapeudile.html">Terapeudile</a></li>
           <li><a href="keskustele.html">Keskustele</a></li>
           <li><a href="abivahendid.html">Abivahendid</a></li>
+          <li><a href="koolitused.html">Koolitused</a></li>
         </ul>
       </nav>
     </header>
 
-    <main id="sisu">
-      <!-- 1. Abi otsijale -->
-      <section class="intro" aria-labelledby="page-title">
+    <main id="sisu" tabindex="-1">
+      <section class="hero" aria-labelledby="valik">
         <div class="wrap">
-          <h1 id="page-title">Millega sa abi vajad?</h1>
-          <p class="lead">Vali, mis on praegu raske. Näitame, milline tegevusterapeut sobib ja mis edasi saab.</p>
+          <div class="hero-head">
+            <h1 id="valik" tabindex="-1">Millega sa abi vajad?</h1>
+            <p class="lead">Vali, mis on praegu raske. Näitame, milline tegevusterapeudi abi sobib. Siis jäta kontakt ja me võtame ise ühendust.</p>
+          </div>
 
           <div class="choices" role="group" aria-label="Vali, millega vajad abi">
-            <button type="button" class="choice" data-need="soomine" aria-pressed="false" aria-controls="choice-result">
-              <img class="choice-photo" src="photos/soomine.jpg" alt="" width="800" height="1000">
-              <span class="choice-body">
-                <span class="choice-label">Söömine</span>
-                <span class="choice-hint">Lusika hoidmine, toidu tegemine</span>
-              </span>
+            <button type="button" class="choice" data-need="kodu" aria-pressed="false">
+              <img class="choice-photo" src="photos/kodu.jpg" alt="" width="800" height="1000" style="object-position:50% 45%">
+              <span class="choice-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></svg></span>
+              <span class="choice-body"><span class="choice-label">Kodus toimetulek</span><span class="choice-hint">Pesemine, köök, liikumine kodus</span></span>
             </button>
-            <button type="button" class="choice" data-need="riietumine" aria-pressed="false" aria-controls="choice-result">
-              <img class="choice-photo" src="photos/riietumine.jpg" alt="" width="800" height="1000">
-              <span class="choice-body">
-                <span class="choice-label">Riietumine</span>
-                <span class="choice-hint">Nööbid, lukud, paelad</span>
-              </span>
+            <button type="button" class="choice" data-need="soomine" aria-pressed="false">
+              <img class="choice-photo" src="photos/soomine.jpg" alt="" width="800" height="1000" style="object-position:50% 40%">
+              <span class="choice-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></svg></span>
+              <span class="choice-body"><span class="choice-label">Söömine</span><span class="choice-hint">Lusikas, tass, toidu tegemine</span></span>
             </button>
-            <button type="button" class="choice" data-need="kirjutamine" aria-pressed="false" aria-controls="choice-result">
-              <img class="choice-photo" src="photos/kirjutamine.jpg" alt="" width="800" height="1000">
-              <span class="choice-body">
-                <span class="choice-label">Kirjutamine</span>
-                <span class="choice-hint">Pliiatsi hoidmine, käe väsimine</span>
-              </span>
+            <button type="button" class="choice" data-need="riietumine" aria-pressed="false">
+              <img class="choice-photo" src="photos/riietumine.jpg" alt="" width="800" height="1000" style="object-position:50% 45%">
+              <span class="choice-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></svg></span>
+              <span class="choice-body"><span class="choice-label">Riietumine</span><span class="choice-hint">Nööbid, lukud, sokid</span></span>
             </button>
-            <button type="button" class="choice" data-need="kodu" aria-pressed="false" aria-controls="choice-result">
-              <img class="choice-photo" src="photos/kodu.jpg" alt="" width="800" height="1000">
-              <span class="choice-body">
-                <span class="choice-label">Kodus toimetulek</span>
-                <span class="choice-hint">Liikumine, pesemine, kodu turvalisus</span>
-              </span>
+            <button type="button" class="choice" data-need="kirjutamine" aria-pressed="false">
+              <img class="choice-photo" src="photos/kirjutamine.jpg" alt="" width="800" height="1000" style="object-position:40% 60%">
+              <span class="choice-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></svg></span>
+              <span class="choice-body"><span class="choice-label">Kirjutamine</span><span class="choice-hint">Pliiatsi hoidmine, käe väsimine</span></span>
             </button>
-            <button type="button" class="choice" data-need="laps" aria-pressed="false" aria-controls="choice-result">
-              <img class="choice-photo" src="photos/laps.jpg" alt="" width="800" height="1000">
-              <span class="choice-body">
-                <span class="choice-label">Lapse areng</span>
-                <span class="choice-hint">Mäng, kool, päeva rütm</span>
-              </span>
+            <button type="button" class="choice" data-need="laps" aria-pressed="false">
+              <img class="choice-photo" src="photos/laps.jpg" alt="" width="800" height="1000" style="object-position:50% 50%" loading="lazy">
+              <span class="choice-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></svg></span>
+              <span class="choice-body"><span class="choice-label">Lapse areng</span><span class="choice-hint">Mäng, kool, päeva rütm</span></span>
             </button>
-            <button type="button" class="choice" data-need="muu" aria-pressed="false" aria-controls="choice-result">
-              <img class="choice-photo" src="photos/muu.jpg" alt="" width="800" height="1000">
-              <span class="choice-body">
-                <span class="choice-label">Ei oska veel öelda</span>
-                <span class="choice-hint">Aitame valida koos</span>
-              </span>
+            <button type="button" class="choice" data-need="muu" aria-pressed="false">
+              <img class="choice-photo" src="photos/muu.jpg" alt="" width="800" height="1000" style="object-position:50% 50%" loading="lazy">
+              <span class="choice-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></svg></span>
+              <span class="choice-body"><span class="choice-label">Ei oska veel öelda</span><span class="choice-hint">Leiame koos</span></span>
             </button>
           </div>
 
           <div class="more-needs" role="group" aria-label="Veel valikuid">
-            <span class="more-label">Veel:</span>
-            <button type="button" class="chip" data-need="kasi" aria-pressed="false" aria-controls="choice-result">Käsi ja sõrmed</button>
-            <button type="button" class="chip" data-need="insult" aria-pressed="false" aria-controls="choice-result">Pärast insulti või traumat</button>
-            <button type="button" class="chip" data-need="too" aria-pressed="false" aria-controls="choice-result">Tööle naasmine</button>
+            <span class="more-label" aria-hidden="true">Veel valikuid:</span>
+            <button type="button" class="chip" data-need="kasi" aria-pressed="false">Käsi ja sõrmed</button>
+            <button type="button" class="chip" data-need="insult" aria-pressed="false">Pärast insulti, vigastust või operatsiooni</button>
+            <button type="button" class="chip" data-need="too" aria-pressed="false">Tööle naasmine</button>
           </div>
 
-          <div class="choice-result" id="choice-result" hidden>
-            <div class="result-text">
-              <h2 class="result-title" id="result-title" tabindex="-1" aria-live="polite">Sulle võiks sobida</h2>
-              <ul class="result-specs" id="result-specs"></ul>
-              <p id="result-text"></p>
-              <p class="result-honest">Jäta kontakt ja meie võtame sinuga ühendust, kui sinu piirkonnas on sobiv tegevusterapeut. Sina ei pea ise helistama. Platvorm alles käivitub, nii et terapeute siin veel näha ei ole.</p>
+          <div class="guide" id="juhis" hidden>
+            <div>
+              <p class="guide-kicker" id="guide-kicker">Sinu valik: <span id="guide-choice"></span></p>
+              <h2 id="guide-title" tabindex="-1">Sellega aitab</h2>
+              <ul class="guide-specs" id="guide-specs"></ul>
+              <p class="guide-text" id="guide-text"></p>
             </div>
-            <form novalidate class="contact-form js-preview-form" id="abi-vorm" data-note="Võtame sinuga ühendust, kui sinu piirkonnas on sobiv tegevusterapeut. Sina ei pea midagi rohkem tegema." data-again="Saada uus kontakt" aria-labelledby="abi-vorm-title">
-              <h3 id="abi-vorm-title">Jäta kontakt</h3>
-              <input type="hidden" name="vajadus" id="abi-vajadus">
+            <a class="button primary" href="#kontakt">Jäta kontakt <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="band band-sand" id="kuidas" aria-labelledby="kuidas-title">
+        <div class="wrap">
+          <div class="section-head">
+            <h2 id="kuidas-title">Sina ei pea helistama. Meie võtame ühendust.</h2>
+            <p class="lead">Abi küsimine võib olla raske. Seepärast on siin ainult neli väikest sammu.</p>
+          </div>
+          <ol class="steps">
+            <li>
+              <h3>Võta hetk.</h3>
+              <p>Juba see, et oled siin, on samm edasi. Kõike ei pea kohe teadma ega oskama nimetada.</p>
+            </li>
+            <li>
+              <h3>Vali, mis on raske.</h3>
+              <p>Üks valik on täiesti piisav. Kui ei oska öelda, vali „Ei oska veel öelda”.</p>
+            </li>
+            <li>
+              <h3>Jäta oma kontakt.</h3>
+              <p>Nimi, telefon või e-post ja maakond. Muud pole vaja.</p>
+            </li>
+            <li>
+              <h3>Meie võtame ühendust.</h3>
+              <p>Helistame või kirjutame sulle ise ja leiame koos sobiva tegevusterapeudi.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="band" id="kontakt" aria-labelledby="kontakt-title">
+        <div class="wrap join">
+          <div class="join-text">
+            <h2 id="kontakt-title" tabindex="-1">Jäta kontakt</h2>
+            <p class="lead">Kirjuta, kuidas sind kätte saab. Võtame ise ühendust ja räägime, milline abi sulle sobiks.</p>
+            <ul class="facts">
+              <li>Võid kirjutada endale või oma lähedasele.</li>
+              <li>Ei pea teadma, mis eriala terapeuti vajad. Selle leiame koos.</li>
+              <li>Kui sinu piirkonnas veel sobivat terapeuti pole, ütleme seda ausalt.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <form novalidate class="form-grid js-preview-form" id="abi-vorm" aria-labelledby="abi-vorm-title"
+                  data-note="Võtame sinuga ühendust, et rääkida, milline abi sulle sobiks. Sina ei pea midagi rohkem tegema."
+                  data-again="Täida uuesti">
+              <h3 class="form-title visually-hidden" id="abi-vorm-title">Kontaktivorm</h3>
               <div class="field-row">
-                <label>Nimi
-                  <input type="text" name="nimi" autocomplete="name" required data-msg="Kirjuta oma nimi.">
-                </label>
-                <label>Telefon või e-post
-                  <input type="text" name="kontakt" autocomplete="email" autocapitalize="off" spellcheck="false" required data-type="contact" data-msg="Kirjuta telefoninumber või e-posti aadress.">
-                </label>
+                <div class="field">
+                  <label for="abi-nimi">Nimi</label>
+                  <input type="text" id="abi-nimi" name="nimi" autocomplete="name" required data-msg="Kirjuta oma nimi.">
+                </div>
+                <div class="field">
+                  <label for="abi-kontakt">Telefon või e-post</label>
+                  <input type="text" id="abi-kontakt" name="kontakt" autocomplete="email" autocapitalize="off" spellcheck="false" required data-type="contact" data-msg="Kirjuta telefoninumber või e-posti aadress.">
+                </div>
               </div>
-              <label>Maakond
-                <select name="maakond" required data-msg="Vali maakond.">
-                  <option value="">Vali maakond</option>
-                  <option>Harjumaa</option><option>Hiiumaa</option><option>Ida-Virumaa</option><option>Jõgevamaa</option><option>Järvamaa</option><option>Läänemaa</option><option>Lääne-Virumaa</option><option>Põlvamaa</option><option>Pärnumaa</option><option>Raplamaa</option><option>Saaremaa</option><option>Tartumaa</option><option>Valgamaa</option><option>Viljandimaa</option><option>Võrumaa</option>
-                </select>
-              </label>
-              <label><span>Mis on raske? <span class="optional">(võid jätta tühjaks)</span></span>
-                <textarea name="kirjeldus" rows="2"></textarea>
-              </label>
-              <button type="submit" class="button primary">Saada</button>
+              <div class="field-row">
+                <div class="field">
+                  <label for="abi-maakond">Maakond</label>
+                  <select id="abi-maakond" name="maakond" required data-msg="Vali maakond."><option value="">Vali maakond</option><option>Harjumaa</option><option>Hiiumaa</option><option>Ida-Virumaa</option><option>Jõgevamaa</option><option>Järvamaa</option><option>Läänemaa</option><option>Lääne-Virumaa</option><option>Põlvamaa</option><option>Pärnumaa</option><option>Raplamaa</option><option>Saaremaa</option><option>Tartumaa</option><option>Valgamaa</option><option>Viljandimaa</option><option>Võrumaa</option></select>
+                </div>
+                <div class="field">
+                  <label for="abi-vajadus">Millega abi vajad? <span class="optional">(võib jätta)</span></label>
+                  <select id="abi-vajadus" name="vajadus"><option value="">Vali, kui tead</option><option value="soomine">Söömine</option><option value="riietumine">Riietumine</option><option value="kirjutamine">Kirjutamine</option><option value="kodu">Kodus toimetulek</option><option value="laps">Lapse areng</option><option value="kasi">Käsi ja sõrmed</option><option value="insult">Pärast insulti, vigastust või operatsiooni</option><option value="too">Tööle naasmine</option><option value="muu">Ei oska veel öelda</option></select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="abi-kirjeldus">Mis on raske? <span class="optional">(võib jätta tühjaks)</span></label>
+                <textarea id="abi-kirjeldus" name="kirjeldus" rows="3"></textarea>
+              </div>
+              <p class="privacy-line">Kasutame sinu andmeid ainult selleks, et sinuga ühendust võtta.<br>Privaatsustingimused <span class="pending">koostamisel</span></p>
+              <div class="form-actions">
+                <button type="submit" class="button primary">Saada kontakt</button>
+              </div>
             </form>
           </div>
         </div>
       </section>
 
-      <!-- 2. Teekond: kuidas abi sinuni jõuab -->
-      <section class="band band-mist" id="kuidas" aria-labelledby="journey-title">
-        <div class="wrap journey">
-          <div class="journey-intro">
-            <h2 id="journey-title">Kuidas abi sinuni jõuab</h2>
-            <p class="lead">Sina ei pea helistama. Meie võtame ühendust.</p>
-          </div>
-          <ol class="steps steps-4">
-            <li>
-              <span class="step-num num" aria-hidden="true">1</span>
-              <h3>Võta hetk.</h3>
-              <p>Juba see, et siin oled, on esimene samm. Kõike ei pea kohe teadma.</p>
-            </li>
-            <li>
-              <span class="step-num num" aria-hidden="true">2</span>
-              <h3>Vali, mis on raske.</h3>
-              <p>Üks valik lehe alguses on täiesti piisav. Kui ei oska öelda, vali „Ei oska veel öelda”.</p>
-            </li>
-            <li>
-              <span class="step-num num" aria-hidden="true">3</span>
-              <h3>Jäta oma kontakt.</h3>
-              <p>Nimi, telefon või e-post ja maakond. Rohkem pole vaja.</p>
-            </li>
-            <li>
-              <span class="step-num num" aria-hidden="true">4</span>
-              <h3>Meie võtame ühendust.</h3>
-              <p>Kui sinu piirkonnas on sobiv tegevusterapeut, võtame sinuga ise ühendust ja lepime koos kokku esimese kohtumise.</p>
-            </li>
-          </ol>
-          <p class="journey-note">Platvorm alles käivitub, nii et sobiva terapeudi leidmine võib võtta veidi aega.</p>
-        </div>
-      </section>
-
-      <section class="band band-tight" aria-labelledby="links-title">
+      <section class="band band-tight band-sand" aria-labelledby="veel-title">
         <div class="wrap">
-          <h2 id="links-title" class="visually-hidden">Veel lehti</h2>
-          <ul class="page-links">
-            <li><a href="terapeudile.html"><strong>Oled tegevusterapeut?</strong><span>Registreeru ja leia tööd või kliente</span></a></li>
-            <li><a href="keskustele.html"><strong>Keskus või filiaal?</strong><span>Registreeri oma keskus</span></a></li>
-            <li><a href="abivahendid.html"><strong>Abivahendid</strong><span>Kristel ja Terje aitavad sobiva leida</span></a></li>
+          <h2 id="veel-title" class="visually-hidden">Veel lehti</h2>
+          <ul class="cards">
+            <li><a class="card-link" href="terapeudile.html"><span class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="7.5" r="3.5"/><path d="M5 20c.6-3.8 3.4-6 7-6s6.4 2.2 7 6"/></svg></span><span class="card-title">Oled tegevusterapeut?</span><span class="card-text">Anna teada, et soovid liituda. Ootame iga eriala terapeute.</span><span class="card-more">Terapeudile <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+            <li><a class="card-link" href="keskustele.html"><span class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20V9.5L12 4l8 5.5V20"/><path d="M9.5 20v-5.5h5V20"/><path d="M3 20h18"/></svg></span><span class="card-title">Keskus või filiaal?</span><span class="card-text">Registreeri keskus, et saaksime teie piirkonna inimesed teie juurde suunata.</span><span class="card-more">Keskustele <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+            <li><a class="card-link" href="abivahendid.html"><span class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 3v7a2 2 0 0 0 2 2v9"/><path d="M5 3v5M9 3v5"/><path d="M16.5 21V3c2 1 3 3.5 3 7 0 1.6-1 2.6-3 2.6"/></svg></span><span class="card-title">Abivahendid</span><span class="card-text">Kristel ja Terje aitavad leida vahendi, mis teeb igapäevase toimetuleku lihtsamaks.</span><span class="card-more">Abivahendid <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
           </ul>
         </div>
       </section>
@@ -176,22 +190,38 @@
       <div class="wrap">
         <div class="footer-grid">
           <div>
-            <a class="brand" href="index.html">Tegevusteraapia <span>Keskus</span></a>
-            <p class="footer-about">Koht, kust leida tegevusterapeut oma murele ja piirkonnale. Platvormi algatasid Kristel ja Terje.</p>
+            <a class="brand" href="index.html"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="16" fill="#23496D"/><path d="M19 21h26M32 21v24" fill="none" stroke="#F5F2EC" stroke-width="7" stroke-linecap="round"/><circle cx="45" cy="44" r="4.5" fill="#E9B79B"/></svg><span>Tegevusteraapia <span>Keskus</span></span></a>
+            <p class="footer-about">Aitame inimesel jõuda sobiva tegevusterapeudini. Sina jätad kontakti, meie võtame ühendust. Platvormi algatasid Kristel ja Terje.</p>
           </div>
-          <nav class="footer-col" aria-label="Abi otsijale">
-            <p class="footer-head">Abi otsijale</p>
-            <a href="index.html">Millega sa abi vajad?</a>
-            <a href="abivahendid.html">Abivahendid</a>
+          <nav class="footer-col" aria-labelledby="f-abi">
+            <p class="footer-head" id="f-abi">Abi otsijale</p>
+            <ul>
+              <li><a href="index.html#valik">Millega sa abi vajad?</a></li>
+              <li><a href="index.html#kontakt">Jäta kontakt</a></li>
+              <li><a href="abivahendid.html">Abivahendid</a></li>
+            </ul>
           </nav>
-          <nav class="footer-col" aria-label="Terapeudile ja keskusele">
-            <p class="footer-head">Terapeudile ja keskusele</p>
-            <a href="terapeudile.html">Registreeru terapeudina</a>
-            <a href="keskustele.html">Registreeri keskus või filiaal</a>
-            <a href="koolitused.html">Koolitused ja tagasiside</a>
+          <nav class="footer-col" aria-labelledby="f-liitu">
+            <p class="footer-head" id="f-liitu">Liitu</p>
+            <ul>
+              <li><a href="terapeudile.html">Terapeudile</a></li>
+              <li><a href="keskustele.html">Keskusele või filiaalile</a></li>
+              <li><a href="koolitused.html">Koolitused</a></li>
+              <li><a href="koolitused.html#tagasiside">Tagasiside</a></li>
+            </ul>
           </nav>
+          <div>
+            <p class="footer-head">Andmed</p>
+            <ul class="footer-org">
+              <li>Organisatsioon <span class="pending">lisamisel</span></li>
+              <li>Registrikood <span class="pending">lisamisel</span></li>
+              <li>Aadress <span class="pending">lisamisel</span></li>
+              <li>E-post <span class="pending">lisamisel</span></li>
+              <li>Privaatsustingimused <span class="pending">koostamisel</span></li>
+            </ul>
+          </div>
         </div>
-        <p class="footer-note">Eelvaade. Vormid ei saada praegu andmeid kuhugi.</p>
+        <p class="footer-bottom">See on eelvaade. Vormid ei saada andmeid kuhugi ja midagi ei salvestata.</p>
       </div>
     </footer>
 

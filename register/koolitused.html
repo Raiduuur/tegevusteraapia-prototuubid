@@ -6,6 +6,7 @@
     <meta name="theme-color" content="#F5F2EC">
     <meta name="description" content="Koolitused tegevusterapeutidele ja keskustele on tulekul. Jäta e-post või saada meile tagasisidet.">
     <title>Koolitused ja tagasiside · Tegevusteraapia Keskus</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="styles.css">
   </head>
@@ -13,12 +14,13 @@
     <a class="skip" href="#sisu">Liigu sisu juurde</a>
     <header class="site-header">
       <div class="wrap header-row">
-        <a class="brand" href="index.html">Tegevusteraapia <span>Keskus</span></a>
+        <a class="brand" href="index.html"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="16" fill="#23496D"/><path d="M19 21h26M32 21v24" fill="none" stroke="#F5F2EC" stroke-width="7" stroke-linecap="round"/><circle cx="45" cy="44" r="4.5" fill="#E9B79B"/></svg><span>Tegevusteraapia <span>Keskus</span></span></a>
         <nav class="header-nav" aria-label="Peamenüü">
           <a href="index.html">Abi otsijale</a>
           <a href="terapeudile.html">Terapeudile</a>
           <a href="keskustele.html">Keskustele</a>
           <a href="abivahendid.html">Abivahendid</a>
+          <a href="koolitused.html" aria-current="page">Koolitused</a>
         </nav>
         <button type="button" class="menu-button" id="menu-button" aria-expanded="false" aria-controls="mobile-menu">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="menu-open" d="M4 7h16M4 12h16M4 17h16"/><path class="menu-close" d="M6 6l12 12M18 6L6 18"/></svg>
@@ -31,68 +33,84 @@
           <li><a href="terapeudile.html">Terapeudile</a></li>
           <li><a href="keskustele.html">Keskustele</a></li>
           <li><a href="abivahendid.html">Abivahendid</a></li>
+          <li><a href="koolitused.html" aria-current="page">Koolitused</a></li>
         </ul>
       </nav>
     </header>
 
-    <main id="sisu">
-      <!-- 8. Koolitused -->
-      <section class="band page-first" id="koolitused" aria-labelledby="training-title">
+    <main id="sisu" tabindex="-1">
+      <section class="band page-top" aria-labelledby="koo-title">
         <div class="wrap join">
           <div class="join-text">
-            <h1 id="training-title">Koolitused <span class="soon">Tulekul</span></h1>
-            <p class="lead">Tahame korraldada koolitusi tegevusterapeutidele ja keskuste meeskondadele. Teemad paneme kokku koos nendega, kes liituvad, et need oleksid päriselt vajalikud.</p>
-            <p class="join-note">Kuupäevi ja teemasid veel ei ole. Jäta oma e-post ja anname teada, kui esimesed koolitused on paigas.</p>
+            <p class="eyebrow"><span class="soon">Tulekul</span></p>
+            <h1 id="koo-title">Koolitused</h1>
+            <p class="lead">Tahame korraldada koolitusi tegevusterapeutidele ja keskuste meeskondadele. Teemad paneme kokku koos nendega, kes liituvad.</p>
+            <p>Kuupäevi ja teemasid veel ei ole. Jäta oma e-post ja anname teada, kui esimesed koolitused on paigas.</p>
           </div>
-          <form novalidate class="join-panel js-preview-form" id="koolituse-vorm" aria-labelledby="training-form-title" data-note="Anname sulle teada, kui esimesed koolitused on paigas." data-again="Täida uuesti">
-            <h3 id="training-form-title">Anna teada, et oled huvitatud</h3>
-            <div class="field-row">
-              <label>Nimi
-                <input type="text" name="nimi" autocomplete="name" required data-msg="Kirjuta oma nimi.">
-              </label>
-              <label>E-post
-                <input type="email" name="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required data-msg="Kirjuta e-posti aadress.">
-              </label>
-            </div>
-            <fieldset data-required-group data-msg="Vali üks variant.">
-              <legend>Kes sa oled?</legend>
-              <div class="radio-row">
-                <label class="check-line"><input type="radio" name="roll" value="terapeut"> Tegevusterapeut</label>
-                <label class="check-line"><input type="radio" name="roll" value="keskus"> Keskuse esindaja</label>
+          <div class="panel">
+            <form novalidate class="form-grid js-preview-form" id="koolituse-vorm" aria-labelledby="koo-form-title"
+                  data-note="Anname sulle teada, kui esimesed koolitused on paigas." data-again="Täida uuesti">
+              <h2 class="form-title" id="koo-form-title">Anna teada, et oled huvitatud</h2>
+              <div class="field-row">
+                <div class="field">
+                  <label for="koo-nimi">Nimi</label>
+                  <input type="text" id="koo-nimi" name="nimi" autocomplete="name" required data-msg="Kirjuta oma nimi.">
+                </div>
+                <div class="field">
+                  <label for="koo-email">E-post</label>
+                  <input type="email" id="koo-email" name="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required data-msg="Kirjuta e-posti aadress.">
+                </div>
               </div>
-            </fieldset>
-            <label><span>Mis teemad sind huvitavad? <span class="optional">(ei ole kohustuslik)</span></span>
-              <textarea name="teemad" rows="2"></textarea>
-            </label>
-            <button type="submit" class="button primary">Jäta e-post</button>
-          </form>
+              <fieldset data-required-group data-msg="Vali üks variant.">
+                <legend>Kes sa oled?</legend>
+                <div class="checks inline">
+                  <label class="check"><input type="radio" name="roll" value="terapeut"> Tegevusterapeut</label>
+                  <label class="check"><input type="radio" name="roll" value="keskus"> Keskuse esindaja</label>
+                </div>
+              </fieldset>
+              <div class="field">
+                <label for="koo-teemad">Mis teemad sind huvitavad? <span class="optional">(võib jätta)</span></label>
+                <textarea id="koo-teemad" name="teemad" rows="3"></textarea>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="button primary">Jäta e-post</button>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
 
-      <!-- 9. Tagasiside -->
-      <section class="band band-mist" id="tagasiside" aria-labelledby="feedback-title">
+      <section class="band band-sand" id="tagasiside" aria-labelledby="tag-title">
         <div class="wrap join">
           <div class="join-text">
-            <h2 id="feedback-title">Tagasiside</h2>
-            <p class="lead">Oled tegevusterapeut või keskuse esindaja? Kirjuta, mis on segane, mis jääb puudu või mida võiks teha teisiti.</p>
+            <h2 id="tag-title" tabindex="-1">Tagasiside</h2>
+            <p class="lead">Leht on alles valmimas. Kirjuta, mis on segane, mis jääb puudu või mida võiks teha teisiti.</p>
           </div>
-          <form novalidate class="join-panel js-preview-form" id="tagasiside-vorm" aria-labelledby="feedback-form-title" data-note="Iga kiri aitab lehte paremaks teha." data-again="Saada veel tagasisidet">
-            <h3 id="feedback-form-title">Saada tagasiside</h3>
-            <fieldset data-required-group data-msg="Vali üks variant.">
-              <legend>Kirjutan kui</legend>
-              <div class="radio-row">
-                <label class="check-line"><input type="radio" name="roll" value="terapeut"> Tegevusterapeut</label>
-                <label class="check-line"><input type="radio" name="roll" value="keskus"> Keskuse esindaja</label>
+          <div class="panel">
+            <form novalidate class="form-grid js-preview-form" id="tagasiside-vorm" aria-labelledby="tag-form-title"
+                  data-note="Loeme iga kirja läbi." data-again="Saada veel tagasisidet">
+              <h3 class="form-title" id="tag-form-title">Saada tagasiside</h3>
+              <fieldset data-required-group data-msg="Vali üks variant.">
+                <legend>Kirjutan kui</legend>
+                <div class="checks inline">
+                  <label class="check"><input type="radio" name="roll" value="abi"> Abi otsija või lähedane</label>
+                  <label class="check"><input type="radio" name="roll" value="terapeut"> Tegevusterapeut</label>
+                  <label class="check"><input type="radio" name="roll" value="keskus"> Keskuse esindaja</label>
+                </div>
+              </fieldset>
+              <div class="field">
+                <label for="tag-tekst">Sinu tagasiside</label>
+                <textarea id="tag-tekst" name="tagasiside" rows="4" required data-msg="Kirjuta oma tagasiside."></textarea>
               </div>
-            </fieldset>
-            <label>Sinu tagasiside
-              <textarea name="tagasiside" rows="4" required data-msg="Kirjuta oma tagasiside."></textarea>
-            </label>
-            <label><span>E-post <span class="optional">(kui soovid vastust)</span></span>
-              <input type="email" name="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false">
-            </label>
-            <button type="submit" class="button primary">Saada tagasiside</button>
-          </form>
+              <div class="field">
+                <label for="tag-email">E-post <span class="optional">(kui soovid vastust)</span></label>
+                <input type="email" id="tag-email" name="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false">
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="button primary">Saada tagasiside</button>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
     </main>
@@ -101,22 +119,38 @@
       <div class="wrap">
         <div class="footer-grid">
           <div>
-            <a class="brand" href="index.html">Tegevusteraapia <span>Keskus</span></a>
-            <p class="footer-about">Koht, kust leida tegevusterapeut oma murele ja piirkonnale. Platvormi algatasid Kristel ja Terje.</p>
+            <a class="brand" href="index.html"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="16" fill="#23496D"/><path d="M19 21h26M32 21v24" fill="none" stroke="#F5F2EC" stroke-width="7" stroke-linecap="round"/><circle cx="45" cy="44" r="4.5" fill="#E9B79B"/></svg><span>Tegevusteraapia <span>Keskus</span></span></a>
+            <p class="footer-about">Aitame inimesel jõuda sobiva tegevusterapeudini. Sina jätad kontakti, meie võtame ühendust. Platvormi algatasid Kristel ja Terje.</p>
           </div>
-          <nav class="footer-col" aria-label="Abi otsijale">
-            <p class="footer-head">Abi otsijale</p>
-            <a href="index.html">Millega sa abi vajad?</a>
-            <a href="abivahendid.html">Abivahendid</a>
+          <nav class="footer-col" aria-labelledby="f-abi">
+            <p class="footer-head" id="f-abi">Abi otsijale</p>
+            <ul>
+              <li><a href="index.html#valik">Millega sa abi vajad?</a></li>
+              <li><a href="index.html#kontakt">Jäta kontakt</a></li>
+              <li><a href="abivahendid.html">Abivahendid</a></li>
+            </ul>
           </nav>
-          <nav class="footer-col" aria-label="Terapeudile ja keskusele">
-            <p class="footer-head">Terapeudile ja keskusele</p>
-            <a href="terapeudile.html">Registreeru terapeudina</a>
-            <a href="keskustele.html">Registreeri keskus või filiaal</a>
-            <a href="koolitused.html">Koolitused ja tagasiside</a>
+          <nav class="footer-col" aria-labelledby="f-liitu">
+            <p class="footer-head" id="f-liitu">Liitu</p>
+            <ul>
+              <li><a href="terapeudile.html">Terapeudile</a></li>
+              <li><a href="keskustele.html">Keskusele või filiaalile</a></li>
+              <li><a href="koolitused.html">Koolitused</a></li>
+              <li><a href="koolitused.html#tagasiside">Tagasiside</a></li>
+            </ul>
           </nav>
+          <div>
+            <p class="footer-head">Andmed</p>
+            <ul class="footer-org">
+              <li>Organisatsioon <span class="pending">lisamisel</span></li>
+              <li>Registrikood <span class="pending">lisamisel</span></li>
+              <li>Aadress <span class="pending">lisamisel</span></li>
+              <li>E-post <span class="pending">lisamisel</span></li>
+              <li>Privaatsustingimused <span class="pending">koostamisel</span></li>
+            </ul>
+          </div>
         </div>
-        <p class="footer-note">Eelvaade. Vormid ei saada praegu andmeid kuhugi.</p>
+        <p class="footer-bottom">See on eelvaade. Vormid ei saada andmeid kuhugi ja midagi ei salvestata.</p>
       </div>
     </footer>
 

@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#F5F2EC">
-    <meta name="description" content="Kristel ja Terje aitavad leida abivahendeid söömiseks, riietumiseks ja koju. See ei ole e-pood: kirjuta, mis on raske.">
+    <meta name="description" content="Kristel ja Terje aitavad leida abivahendi, mis teeb igapäevase toimetuleku lihtsamaks. See ei ole e-pood.">
     <title>Abivahendid · Tegevusteraapia Keskus</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="styles.css">
   </head>
@@ -13,12 +14,13 @@
     <a class="skip" href="#sisu">Liigu sisu juurde</a>
     <header class="site-header">
       <div class="wrap header-row">
-        <a class="brand" href="index.html">Tegevusteraapia <span>Keskus</span></a>
+        <a class="brand" href="index.html"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="16" fill="#23496D"/><path d="M19 21h26M32 21v24" fill="none" stroke="#F5F2EC" stroke-width="7" stroke-linecap="round"/><circle cx="45" cy="44" r="4.5" fill="#E9B79B"/></svg><span>Tegevusteraapia <span>Keskus</span></span></a>
         <nav class="header-nav" aria-label="Peamenüü">
           <a href="index.html">Abi otsijale</a>
           <a href="terapeudile.html">Terapeudile</a>
           <a href="keskustele.html">Keskustele</a>
           <a href="abivahendid.html" aria-current="page">Abivahendid</a>
+          <a href="koolitused.html">Koolitused</a>
         </nav>
         <button type="button" class="menu-button" id="menu-button" aria-expanded="false" aria-controls="mobile-menu">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="menu-open" d="M4 7h16M4 12h16M4 17h16"/><path class="menu-close" d="M6 6l12 12M18 6L6 18"/></svg>
@@ -31,40 +33,50 @@
           <li><a href="terapeudile.html">Terapeudile</a></li>
           <li><a href="keskustele.html">Keskustele</a></li>
           <li><a href="abivahendid.html" aria-current="page">Abivahendid</a></li>
+          <li><a href="koolitused.html">Koolitused</a></li>
         </ul>
       </nav>
     </header>
 
-    <main id="sisu">
-      <!-- 5. Abivahendid -->
-      <section class="band page-first" id="abivahendid" aria-labelledby="aids-title">
+    <main id="sisu" tabindex="-1">
+      <section class="band page-top" aria-labelledby="av-title">
         <div class="wrap join">
           <div class="join-text">
-            <h1 id="aids-title">Abivahendid</h1>
-            <p class="lead">Platvormi asutajad Kristel ja Terje aitavad leida abivahendeid, mis teevad igapäevased toimetused lihtsamaks. Siin ei ole e-poodi. Kirjuta, mis on raske, ja nad soovitavad, mis võiks sobida.</p>
-            <ul class="aid-photos">
-              <li><figure><img src="photos/taldrik.jpg" alt="Valge kõrgema servaga kauss" width="800" height="1000" loading="lazy"><figcaption>Söömiseks</figcaption></figure></li>
-              <li><figure><img src="photos/nupukinnitaja.jpg" alt="Oranži varrega nööbikinnitaja peenikese metallkonksuga" width="800" height="1000" loading="lazy"><figcaption>Riietumiseks</figcaption></figure></li>
-              <li><figure><img class="contain" src="photos/haarats.jpg" alt="Pika varrega haarats sinise käepidemega" width="800" height="1000" loading="lazy"><figcaption>Koju</figcaption></figure></li>
+            <h1 id="av-title">Abivahendid</h1>
+            <p class="lead">Õige abivahend võib teha igapäevase toimetuleku palju lihtsamaks. Kristel ja Terje aitavad aru saada, mis võiks sinu olukorras sobida.</p>
+            <p>Me ei müü abivahendeid. Kirjuta, mis on raske, ja saad nõu: milline vahend võiks aidata ja kust seda küsida.</p>
+            <ul class="aid-list">
+              <li><strong>Söömiseks</strong><span>Jämedama varrega lusikas, kõrge servaga taldrik, libisemiskindel alus.</span></li>
+              <li><strong>Riietumiseks</strong><span>Nööbikinnitaja, sokipaneja, pika varrega kingalusikas.</span></li>
+              <li><strong>Koju</strong><span>Haarats, vannipink, käetoed.</span></li>
             </ul>
-            <p class="photo-credit">Fotod: MART PRODUCTION / Pexels; Mautpreller / Wikimedia Commons, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.et">CC BY-SA 4.0</a>; Simon Speed / Wikimedia Commons, CC0.</p>
+            <p class="note">Paljusid abivahendeid saab Eestis ka riigi soodustusega. Kristel ja Terje aitavad aru saada, kust alustada.</p>
           </div>
 
-          <form novalidate class="join-panel js-preview-form" id="abivahendi-vorm" aria-labelledby="aids-form-title" data-note="Kristel või Terje võtab sinuga ühendust." data-again="Küsi veel midagi">
-            <h3 id="aids-form-title">Küsi abivahendi kohta</h3>
-            <div class="field-row">
-              <label>Nimi
-                <input type="text" name="nimi" autocomplete="name" required data-msg="Kirjuta oma nimi.">
-              </label>
-              <label>Telefon või e-post
-                <input type="text" name="kontakt" autocomplete="email" autocapitalize="off" spellcheck="false" required data-type="contact" data-msg="Kirjuta telefoninumber või e-posti aadress.">
-              </label>
-            </div>
-            <label>Mis on raske või mida otsid?
-              <textarea name="kysimus" rows="3" required data-msg="Kirjuta paari sõnaga, mida otsid."></textarea>
-            </label>
-            <button type="submit" class="button primary">Saada küsimus</button>
-          </form>
+          <div class="panel">
+            <form novalidate class="form-grid js-preview-form" id="abivahendi-vorm" aria-labelledby="av-form-title"
+                  data-note="Kristel või Terje võtab sinuga ühendust." data-again="Küsi veel midagi">
+              <h2 class="form-title" id="av-form-title">Küsi nõu</h2>
+              <div class="field-row">
+                <div class="field">
+                  <label for="av-nimi">Nimi</label>
+                  <input type="text" id="av-nimi" name="nimi" autocomplete="name" required data-msg="Kirjuta oma nimi.">
+                </div>
+                <div class="field">
+                  <label for="av-kontakt">Telefon või e-post</label>
+                  <input type="text" id="av-kontakt" name="kontakt" autocomplete="email" autocapitalize="off" spellcheck="false" required data-type="contact" data-msg="Kirjuta telefoninumber või e-posti aadress.">
+                </div>
+              </div>
+              <div class="field">
+                <label for="av-kysimus">Mis on raske või mida otsid?</label>
+                <textarea id="av-kysimus" name="kysimus" rows="4" required data-msg="Kirjuta paari sõnaga, mis on raske."></textarea>
+              </div>
+              <p class="privacy-line">Privaatsustingimused <span class="pending">koostamisel</span></p>
+              <div class="form-actions">
+                <button type="submit" class="button primary">Saada küsimus</button>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
     </main>
@@ -73,22 +85,38 @@
       <div class="wrap">
         <div class="footer-grid">
           <div>
-            <a class="brand" href="index.html">Tegevusteraapia <span>Keskus</span></a>
-            <p class="footer-about">Koht, kust leida tegevusterapeut oma murele ja piirkonnale. Platvormi algatasid Kristel ja Terje.</p>
+            <a class="brand" href="index.html"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="16" fill="#23496D"/><path d="M19 21h26M32 21v24" fill="none" stroke="#F5F2EC" stroke-width="7" stroke-linecap="round"/><circle cx="45" cy="44" r="4.5" fill="#E9B79B"/></svg><span>Tegevusteraapia <span>Keskus</span></span></a>
+            <p class="footer-about">Aitame inimesel jõuda sobiva tegevusterapeudini. Sina jätad kontakti, meie võtame ühendust. Platvormi algatasid Kristel ja Terje.</p>
           </div>
-          <nav class="footer-col" aria-label="Abi otsijale">
-            <p class="footer-head">Abi otsijale</p>
-            <a href="index.html">Millega sa abi vajad?</a>
-            <a href="abivahendid.html">Abivahendid</a>
+          <nav class="footer-col" aria-labelledby="f-abi">
+            <p class="footer-head" id="f-abi">Abi otsijale</p>
+            <ul>
+              <li><a href="index.html#valik">Millega sa abi vajad?</a></li>
+              <li><a href="index.html#kontakt">Jäta kontakt</a></li>
+              <li><a href="abivahendid.html">Abivahendid</a></li>
+            </ul>
           </nav>
-          <nav class="footer-col" aria-label="Terapeudile ja keskusele">
-            <p class="footer-head">Terapeudile ja keskusele</p>
-            <a href="terapeudile.html">Registreeru terapeudina</a>
-            <a href="keskustele.html">Registreeri keskus või filiaal</a>
-            <a href="koolitused.html">Koolitused ja tagasiside</a>
+          <nav class="footer-col" aria-labelledby="f-liitu">
+            <p class="footer-head" id="f-liitu">Liitu</p>
+            <ul>
+              <li><a href="terapeudile.html">Terapeudile</a></li>
+              <li><a href="keskustele.html">Keskusele või filiaalile</a></li>
+              <li><a href="koolitused.html">Koolitused</a></li>
+              <li><a href="koolitused.html#tagasiside">Tagasiside</a></li>
+            </ul>
           </nav>
+          <div>
+            <p class="footer-head">Andmed</p>
+            <ul class="footer-org">
+              <li>Organisatsioon <span class="pending">lisamisel</span></li>
+              <li>Registrikood <span class="pending">lisamisel</span></li>
+              <li>Aadress <span class="pending">lisamisel</span></li>
+              <li>E-post <span class="pending">lisamisel</span></li>
+              <li>Privaatsustingimused <span class="pending">koostamisel</span></li>
+            </ul>
+          </div>
         </div>
-        <p class="footer-note">Eelvaade. Vormid ei saada praegu andmeid kuhugi.</p>
+        <p class="footer-bottom">See on eelvaade. Vormid ei saada andmeid kuhugi ja midagi ei salvestata.</p>
       </div>
     </footer>
 
